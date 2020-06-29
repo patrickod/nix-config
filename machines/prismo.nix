@@ -252,7 +252,7 @@
 
     # configure Looking Glass working file
     systemd.tmpfiles.rules = [
-    "f /dev/shm/looking-glass 0660 alex qemu-libvirtd -"
+    "f /dev/shm/looking-glass 0660 patrickod qemu-libvirtd -"
     ];
 
     # This value determines the NixOS release from which the default
