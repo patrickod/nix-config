@@ -37,14 +37,14 @@
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
+      dhcp
       emacs
       git
-      looking-glass-client
-      magic-wormhole
+      hwloc
       pciutils
       prometheus-node-exporter
-      scream-receivers
       silver-searcher
+      sqlite
       vim
       wget
       xorg.xdpyinfo
@@ -63,6 +63,9 @@
 
     # Enable U2F token support
     hardware.u2f.enable = true;
+
+    # Enable bluetooth
+    hardware.bluetooth.enable = true;
 
     # Enable the X11 windowing system.
     services.xserver = {
@@ -171,15 +174,17 @@
         pkgs.httpie
         pkgs.hwloc
         pkgs.jq
+        pkgs.magic-wormhole
         pkgs.maim
         pkgs.nix-prefetch-github
         pkgs.pavucontrol
         pkgs.scrot
+        pkgs.silver-searcher
         pkgs.slack
         pkgs.spotify
+        pkgs.vlc
         pkgs.weechat
         pkgs.xclip
-        pkgs.vlc
       ] ;
       programs.git = {
         enable = true;
