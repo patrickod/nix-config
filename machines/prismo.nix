@@ -48,6 +48,7 @@
       vim
       wget
       xorg.xdpyinfo
+      usbutils
     ];
 
     # configure default editor
@@ -82,8 +83,9 @@
         Option	"UseEdidDpi" "false"
       '';
       screenSection = ''
+        Option         "metamodes" "2560x1440 +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
         SubSection "Display"
-        Modes "2560x1440"
+          Modes "2560x1440"
         EndSubSection
       '';
 
@@ -160,6 +162,8 @@
       extraGroups = [ "wheel" "libvirtd" "docker" ]; # Enable ‘sudo’ for the user.
     };
 
+    programs.ssh.startAgent = true;
+
     # Configure home-manager with user packages
     home-manager.users.patrickod = { pkgs, ... }: {
       home.packages = [
@@ -174,6 +178,7 @@
         pkgs.httpie
         pkgs.hwloc
         pkgs.jq
+        pkgs.keychain
         pkgs.magic-wormhole
         pkgs.maim
         pkgs.nix-prefetch-github
@@ -184,6 +189,7 @@
         pkgs.spotify
         pkgs.vlc
         pkgs.weechat
+        pkgs.wireguard
         pkgs.xclip
       ] ;
       programs.git = {
@@ -213,6 +219,7 @@
         brightness.night = "0.7";
         tray = true;
       };
+
 
       home.sessionVariables = {
         BROWSER = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
