@@ -16,20 +16,6 @@
       qemu
     ];
 
-
-    nesting.clone = [
-      {
-        boot.loader.grub.configurationName = "flr";
-        boot.kernelPatches = [
-          {
-            name = "flr";
-            patch = builtins.fetchurl
-                    "https://gist.githubusercontent.com/patrickod/ef7808cb018764967526dc51a4caebfb/raw/e56fa9d91fd18370193f2d7c32ebeb634ab5e14e/asus-flr.patch";
-          }
-        ];
-      }
-    ];
-
     # configure GRUB
     boot.loader = {
       efi.canTouchEfiVariables = false;
@@ -67,7 +53,7 @@
         "10de:10f8" = "0000:05:00.1";
         "10de:1ad8" = "0000:05:00.2";
         "10de:1ad9" = "0000:05:00.3";
-        "1022:149c" = "0000:0c:00.3";
+        "1912:0014" = "0000:07:00.0";
       };
     };
 
