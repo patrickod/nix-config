@@ -7,6 +7,33 @@
      <home-manager/nixos>
     ];
 
+    nixpkgs.overlays = [
+      (self: super: {
+        linuxPackages_latest = super.linuxPackages_latest.extend (self: super: {
+          nvidiaPackages = super.nvidiaPackages // {
+            stable = super.nvidiaPackages.stable.overrideAttrs (attrs: {
+              patches = [
+                (pkgs.fetchpatch {
+                  name = "nvidia-kernel-5.7.patch";
+                  url = "https://gitlab.com/snippets/1965550/raw";
+                  sha256 = "03iwxhkajk65phc0h5j7v4gr4fjj6mhxdn04pa57am5qax8i2g9w";
+                })
+              ];
+
+              passthru = {
+                settings = pkgs.callPackage (import <nixpkgs/pkgs/os-specific/linux/nvidia-x11/settings.nix> self.nvidiaPackages.stable "15psxvd65wi6hmxmd2vvsp2v0m07axw613hb355nh15r1dpkr3ma") {
+                  withGtk2 = true;
+                  withGtk3 = false;
+                };
+
+                persistenced = pkgs.lib.mapNullable (hash: pkgs.callPackage (import <nixpkgs/pkgs/os-specific/linux/nvidia-x11/persistenced.nix> self.nvidiaPackages.stable hash) { }) "13izz9p2kg9g38gf57g3s2sw7wshp1i9m5pzljh9v82c4c22x1fw";
+              };
+            });
+          };
+        });
+      })
+    ];
+
     # allow use of non-free packages
     nixpkgs.config.allowUnfree = true;
 
@@ -45,25 +72,28 @@
       prometheus-node-exporter
       silver-searcher
       sqlite
+      usbutils
       vim
       wget
       xorg.xdpyinfo
-      usbutils
     ];
+
 
     # configure default editor
     services.emacs.enable = true;
     environment.variables = {
       EDITOR = "emacsclient -c";
       VISUAL = "emacsclient -c";
+      LIBVIRT_DEFAULT_URI = "qemu:///system";
     };
 
     # Enable sound.
     sound.enable = true;
     hardware.pulseaudio.enable = true;
-
-    # Enable U2F token support
-    hardware.u2f.enable = true;
+    hardware.pulseaudio.extraConfig = ''
+      # Local QEMU socket
+      load-module module-native-protocol-unix auth-anonymous=1 socket=/tmp/pulse
+    '';
 
     # Enable bluetooth
     hardware.bluetooth.enable = true;
@@ -177,16 +207,21 @@
         pkgs.htop
         pkgs.httpie
         pkgs.hwloc
+        pkgs.iftop
+        pkgs.iotop
         pkgs.jq
         pkgs.keychain
         pkgs.magic-wormhole
         pkgs.maim
         pkgs.nix-prefetch-github
         pkgs.pavucontrol
+        pkgs.pigz
+        pkgs.restic
         pkgs.scrot
         pkgs.silver-searcher
         pkgs.slack
         pkgs.spotify
+        pkgs.unzip
         pkgs.vlc
         pkgs.weechat
         pkgs.wireguard
@@ -226,31 +261,37 @@
       };
     };
 
+    # Configure NFS mounts
+    fileSystems."/mnt/backups" = {
+      device = "alexandria.lan:/mnt/alexandria/backups";
+      fsType = "nfs";
+      options = ["x-systemd.automount" "noauto"];
+    };
 
     # Configure KVM
     virtualisation.libvirtd = {
-    enable = true;
-    qemuOvmf = true;
-    qemuRunAsRoot = false;
-    onBoot = "ignore";
-    onShutdown = "shutdown";
-    qemuVerbatimConfig = ''
-    cgroup_device_acl = [
-      "/dev/null",
-      "/dev/full",
-      "/dev/zero",
-      "/dev/random",
-      "/dev/urandom",
-      "/dev/ptmx",
-      "/dev/kvm",
-      "/dev/kqemu",
-      "/dev/rtc",
-      "/dev/hpet",
-      "/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse",
-      "/dev/input/by-id/usb-Kinesis_Freestyle_Edge_Keyboard_223606797749-if01-event-kbd",
-    ]
-    namespaces = []
-    '';
+      enable = true;
+      qemuOvmf = true;
+      qemuRunAsRoot = false;
+      onBoot = "ignore";
+      onShutdown = "shutdown";
+      qemuVerbatimConfig = ''
+        cgroup_device_acl = [
+          "/dev/null",
+          "/dev/full",
+          "/dev/zero",
+          "/dev/random",
+          "/dev/urandom",
+          "/dev/ptmx",
+          "/dev/kvm",
+          "/dev/kqemu",
+          "/dev/rtc",
+          "/dev/hpet",
+          "/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse",
+          "/dev/input/by-id/usb-Kinesis_Freestyle_Edge_Keyboard_223606797749-if01-event-kbd",
+        ]
+        namespaces = []
+      '';
     };
     users.users.qemu-libvirtd.extraGroups = ["input"];
 
@@ -259,7 +300,7 @@
 
     # configure Looking Glass working file
     systemd.tmpfiles.rules = [
-    "f /dev/shm/looking-glass 0660 patrickod qemu-libvirtd -"
+      "f /dev/shm/looking-glass 0660 patrickod qemu-libvirtd -"
     ];
 
     # This value determines the NixOS release from which the default
