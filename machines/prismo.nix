@@ -198,6 +198,7 @@
     home-manager.users.patrickod = { pkgs, ... }: {
       home.packages = [
         pkgs.awscli
+        pkgs.arduino-core
         pkgs.discord
         pkgs.docker
         pkgs.firecracker
@@ -294,6 +295,13 @@
       '';
     };
     users.users.qemu-libvirtd.extraGroups = ["input"];
+
+    # udev rules for programming keyboard
+    services.udev.extraRules = ''
+      # For Kaleidoscope/Keyboardio
+      SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2300", SYMLINK+="model01", ENV{ID_MM_DEVICE_IGNORE}:="1", ENV{ID_MM_CANDIDATE}:="0", TAG+="uaccess", TAG+="seat"
+      SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2301", SYMLINK+="model01", ENV{ID_MM_DEVICE_IGNORE}:="1", ENV{ID_MM_CANDIDATE}:="0", TAG+="uaccess", TAG+="seat"
+    '';
 
     # configure docker on host
     virtualisation.docker.enable = true;
