@@ -38,6 +38,7 @@
     # $ nix search wget
     environment.systemPackages = with pkgs; [
       dhcp
+      direnv
       emacs
       git
       hwloc
@@ -74,9 +75,9 @@
     # Enable the X11 windowing system.
     services.xserver = {
       enable = true;
-      layout = "us";
-      xkbVariant = "dvorak";
-      xkbOptions = "caps:escape";
+      layout = "us,us";
+      xkbVariant = ",dvorak";
+      xkbOptions = "caps:escape,grp:shifts_toggle";
       videoDrivers = ["nvidia"];
       monitorSection = ''
         DisplaySize 598 366
@@ -172,6 +173,7 @@
       home.packages = [
         pkgs.awscli
         pkgs.arduino-core
+        pkgs.bundix
         pkgs.discord
         pkgs.docker
         pkgs.firecracker
@@ -191,6 +193,7 @@
         pkgs.pavucontrol
         pkgs.pigz
         pkgs.restic
+        pkgs.rust-analyzer
         pkgs.scrot
         pkgs.silver-searcher
         pkgs.slack
@@ -210,12 +213,15 @@
         enable = true;
         history.extended = true;
         oh-my-zsh = {
-        enable = true;
+          enable = true;
           theme = "dallas";
           plugins = [
             "git"
           ];
         };
+        initExtra = ''
+          eval "$(direnv hook zsh)"
+        '';
       };
       programs.urxvt = {
         enable = true;
@@ -278,6 +284,9 @@
 
     # configure docker on host
     virtualisation.docker.enable = true;
+
+    # enable lorri nix/direnv replacement
+    services.lorri.enable = true;
 
     # configure Looking Glass working file
     systemd.tmpfiles.rules = [
