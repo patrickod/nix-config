@@ -17,25 +17,19 @@
      nginx
      javascript
      html
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     ;; auto-completion
-     ;; better-defaults
      ansible
      auto-completion
      emacs-lisp
      git
      go
+     nixos
+     lsp
      markdown
      org
      puppet
      python
      react
-     (ruby :variables
-           ruby-version-manager 'rbenv)
+     ruby
      ruby-on-rails
      rust
      shell-scripts
@@ -43,14 +37,7 @@
      terraform
      version-control
      yaml
-     ;; git
-     ;; markdown
-     ;; org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     ;; syntax-checking
-     )
+   )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
