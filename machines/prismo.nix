@@ -52,7 +52,6 @@
       xorg.xdpyinfo
     ];
 
-
     # configure default editor
     services.emacs.enable = true;
     environment.variables = {
@@ -75,8 +74,7 @@
     # Enable the X11 windowing system.
     services.xserver = {
       enable = true;
-      layout = "us,us";
-      xkbVariant = ",dvorak";
+      xkbVariant = "dvorak,us";
       xkbOptions = "caps:escape,grp:shifts_toggle";
       videoDrivers = ["nvidia"];
       monitorSection = ''
@@ -151,7 +149,7 @@
           i3-gaps
           i3blocks
         ];
-        };
+      };
     };
 
     fonts.fonts = with pkgs; [
@@ -239,6 +237,19 @@
       home.sessionVariables = {
         BROWSER = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
       };
+
+      home.file.".emacs.d" = {
+        source = builtins.fetchGit {
+          url = "https://github.com/syl20bnr/spacemacs";
+          ref = "develop";
+        };
+        recursive = true;
+      };
+      home.file.".spacemacs".source = ../dotfiles/spacemacs;
+
+      ## i3 status & keybinding configuration
+      xdg.configFile."i3/status.toml".source = ../dotfiles/i3status-rs.toml;
+      xdg.configFile."i3/config".source = ../dotfiles/i3-config;
     };
 
     # Configure NFS mounts
