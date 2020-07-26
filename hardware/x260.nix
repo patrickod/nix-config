@@ -38,4 +38,19 @@
 
   nix.maxJobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+
+  # enable backlight functionality on finn hardware
+  hardware.acpilight.enable = true;
+  programs.light.enable = true;
+
+  # upower battery configuration
+  services.upower.enable = true;
+
+  # trackpoint
+  hardware.trackpoint = {
+    enable = true;
+    emulateWheel = true;
+  };
+
+
 }

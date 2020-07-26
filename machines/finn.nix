@@ -51,20 +51,11 @@
     xorg.xdpyinfo
   ];
 
-
   # configure default editor
   services.emacs.enable = true;
   environment.variables = {
     EDITOR = "emacsclient -c";
     VISUAL = "emacsclient -c";
-  };
-
-  hardware.acpilight.enable = true;
-
-  # trackpoint
-  hardware.trackpoint = {
-    enable = true;
-    emulateWheel = true;
   };
 
   # Enable sound.
@@ -77,8 +68,7 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    layout = "us,us";
-    xkbVariant = ",dvorak";
+    xkbVariant = "dvorak";
     xkbOptions = "caps:escape,grp:shifts_toggle";
     desktopManager = {
       xterm.enable = false;
@@ -225,6 +215,19 @@
     home.sessionVariables = {
       BROWSER = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
     };
+
+    home.file.".emacs.d" = {
+    source = builtins.fetchGit {
+      url = "https://github.com/syl20bnr/spacemacs";
+      ref = "develop";
+    };
+    recursive = true;
+    };
+    home.file.".spacemacs".source = ../dotfiles/spacemacs;
+
+    ## i3 status & keybinding configuration
+    xdg.configFile."i3/status.toml".source = ../dotfiles/i3status-rs.finn.toml;
+    xdg.configFile."i3/config".source = ../dotfiles/i3-config;
   };
 
   # Configure KVM
@@ -244,4 +247,3 @@
   system.stateVersion = "20.03"; # Did you read the comment?
 
 }
-
