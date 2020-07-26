@@ -79,4 +79,11 @@
     ];
 
     nix.maxJobs = lib.mkDefault 24;
+    nix.extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+    '';
+    environment.pathsToLink = [
+      "/share/nix-direnv"
+    ];
 }

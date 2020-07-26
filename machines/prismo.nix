@@ -7,33 +7,6 @@
      <home-manager/nixos>
     ];
 
-    nixpkgs.overlays = [
-      (self: super: {
-        linuxPackages_latest = super.linuxPackages_latest.extend (self: super: {
-          nvidiaPackages = super.nvidiaPackages // {
-            stable = super.nvidiaPackages.stable.overrideAttrs (attrs: {
-              patches = [
-                (pkgs.fetchpatch {
-                  name = "nvidia-kernel-5.7.patch";
-                  url = "https://gitlab.com/snippets/1965550/raw";
-                  sha256 = "03iwxhkajk65phc0h5j7v4gr4fjj6mhxdn04pa57am5qax8i2g9w";
-                })
-              ];
-
-              passthru = {
-                settings = pkgs.callPackage (import <nixpkgs/pkgs/os-specific/linux/nvidia-x11/settings.nix> self.nvidiaPackages.stable "15psxvd65wi6hmxmd2vvsp2v0m07axw613hb355nh15r1dpkr3ma") {
-                  withGtk2 = true;
-                  withGtk3 = false;
-                };
-
-                persistenced = pkgs.lib.mapNullable (hash: pkgs.callPackage (import <nixpkgs/pkgs/os-specific/linux/nvidia-x11/persistenced.nix> self.nvidiaPackages.stable hash) { }) "13izz9p2kg9g38gf57g3s2sw7wshp1i9m5pzljh9v82c4c22x1fw";
-              };
-            });
-          };
-        });
-      })
-    ];
-
     # allow use of non-free packages
     nixpkgs.config.allowUnfree = true;
 
@@ -65,6 +38,7 @@
     # $ nix search wget
     environment.systemPackages = with pkgs; [
       dhcp
+      direnv
       emacs
       git
       hwloc
@@ -77,7 +51,6 @@
       wget
       xorg.xdpyinfo
     ];
-
 
     # configure default editor
     services.emacs.enable = true;
@@ -101,9 +74,8 @@
     # Enable the X11 windowing system.
     services.xserver = {
       enable = true;
-      layout = "us";
-      xkbVariant = "dvorak";
-      xkbOptions = "caps:escape";
+      xkbVariant = "dvorak,us";
+      xkbOptions = "caps:escape,grp:shifts_toggle";
       videoDrivers = ["nvidia"];
       monitorSection = ''
         DisplaySize 598 366
@@ -177,7 +149,7 @@
           i3-gaps
           i3blocks
         ];
-        };
+      };
     };
 
     fonts.fonts = with pkgs; [
@@ -198,6 +170,8 @@
     home-manager.users.patrickod = { pkgs, ... }: {
       home.packages = [
         pkgs.awscli
+        pkgs.arduino-core
+        pkgs.bundix
         pkgs.discord
         pkgs.docker
         pkgs.firecracker
@@ -217,6 +191,7 @@
         pkgs.pavucontrol
         pkgs.pigz
         pkgs.restic
+        pkgs.rust-analyzer
         pkgs.scrot
         pkgs.silver-searcher
         pkgs.slack
@@ -236,12 +211,15 @@
         enable = true;
         history.extended = true;
         oh-my-zsh = {
-        enable = true;
+          enable = true;
           theme = "dallas";
           plugins = [
             "git"
           ];
         };
+        initExtra = ''
+          eval "$(direnv hook zsh)"
+        '';
       };
       programs.urxvt = {
         enable = true;
@@ -259,6 +237,19 @@
       home.sessionVariables = {
         BROWSER = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
       };
+
+      home.file.".emacs.d" = {
+        source = builtins.fetchGit {
+          url = "https://github.com/syl20bnr/spacemacs";
+          ref = "develop";
+        };
+        recursive = true;
+      };
+      home.file.".spacemacs".source = ../dotfiles/spacemacs;
+
+      ## i3 status & keybinding configuration
+      xdg.configFile."i3/status.toml".source = ../dotfiles/i3status-rs.toml;
+      xdg.configFile."i3/config".source = ../dotfiles/i3-config;
     };
 
     # Configure NFS mounts
@@ -295,8 +286,18 @@
     };
     users.users.qemu-libvirtd.extraGroups = ["input"];
 
+    # udev rules for programming keyboard
+    services.udev.extraRules = ''
+      # For Kaleidoscope/Keyboardio
+      SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2300", SYMLINK+="model01", ENV{ID_MM_DEVICE_IGNORE}:="1", ENV{ID_MM_CANDIDATE}:="0", TAG+="uaccess", TAG+="seat"
+      SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2301", SYMLINK+="model01", ENV{ID_MM_DEVICE_IGNORE}:="1", ENV{ID_MM_CANDIDATE}:="0", TAG+="uaccess", TAG+="seat"
+    '';
+
     # configure docker on host
     virtualisation.docker.enable = true;
+
+    # enable lorri nix/direnv replacement
+    services.lorri.enable = true;
 
     # configure Looking Glass working file
     systemd.tmpfiles.rules = [
