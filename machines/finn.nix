@@ -148,8 +148,8 @@
   # Configure home-manager with user packages
   home-manager.users.patrickod = { pkgs, ... }: {
     home.packages = [
-      pkgs.awscli
       pkgs.arduino-core
+      pkgs.awscli
       pkgs.bundix
       pkgs.discord
       pkgs.docker
@@ -159,6 +159,7 @@
       pkgs.google-chrome-beta
       pkgs.htop
       pkgs.httpie
+      pkgs.hue-cli
       pkgs.hwloc
       pkgs.iftop
       pkgs.iotop
@@ -243,6 +244,12 @@
 
   # enable lorri nix/direnv replacement
   services.lorri.enable = true;
+
+  networking.firewall.enable = false;
+  # # allow inbound TCP 1400 for Sonos hardware
+  # networking.firewall.allowedTCPPortRanges = [
+  #   { from = 1399; to = 1410; }
+  # ];
 
   system.stateVersion = "20.03"; # Did you read the comment?
 

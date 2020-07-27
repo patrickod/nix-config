@@ -42,7 +42,8 @@
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '(handlebars-mode
+   dotspacemacs-additional-packages '(direnv
+                                      handlebars-mode
                                       mediawiki
                                       ox-reveal
                                       gist
@@ -84,19 +85,14 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(monokai
-                         leuven
-                         solarized-light
-                         solarized-dark
-                         spacemacs-light
-                         spacemacs-dark
-                         zenburn)
+   dotspacemacs-themes '(gruvbox-dark-medium
+                         gruvbox-light-medium)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Deja Vu Sans Mono"
-                               :size 11
+                               :size 12
                                :weight normal
                                :width normal
                                :anti-alias nil
@@ -171,6 +167,7 @@ before layers configuration."
    ;; specified with an installed package.
    ;; Not used for now.
    dotspacemacs-default-package-repository nil
+   dotspacemacs-mode-line-theme '(spacemacs)
    )
   ;; User initialization goes here
   (setq org-agenda-files (list "~/org/work.org"
@@ -186,7 +183,9 @@ before layers configuration."
 layers configuration."
   ;; Inherit proper SSH and GPG agent information from the environment
   (keychain-refresh-environment)
-  (setq ansible::vault-password-file "~/.vault-password")
+  (use-package direnv
+    :config
+    (direnv-mode))
   (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
 )
 
