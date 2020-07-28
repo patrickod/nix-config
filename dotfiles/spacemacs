@@ -184,9 +184,7 @@ before layers configuration."
 layers configuration."
   ;; Inherit proper SSH and GPG agent information from the environment
   (keychain-refresh-environment)
-  (use-package direnv
-    :config
-    (direnv-mode))
+  (direnv-mode)
   (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
 )
 

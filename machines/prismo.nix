@@ -158,13 +158,14 @@
       font-awesome
     ];
 
-    # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.patrickod = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "libvirtd" "docker" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "libvirtd" "docker" ];
+      shell = pkgs.zsh;
     };
 
     programs.ssh.startAgent = true;
+    programs.zsh.enable = true;
 
     # Configure home-manager with user packages
     home-manager.users.patrickod = { pkgs, ... }: {
@@ -212,7 +213,7 @@
         history.extended = true;
         oh-my-zsh = {
           enable = true;
-          theme = "dallas";
+          theme = "dieter";
           plugins = [
             "git"
           ];
@@ -232,7 +233,6 @@
         brightness.night = "0.7";
         tray = true;
       };
-
 
       home.sessionVariables = {
         BROWSER = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
