@@ -74,8 +74,8 @@
     # Enable the X11 windowing system.
     services.xserver = {
       enable = true;
-      xkbVariant = "dvorak,us";
-      xkbOptions = "caps:escape,grp:shifts_toggle";
+      layout = "dvorak";
+      xkbOptions = "caps:escape";
       videoDrivers = ["nvidia"];
       monitorSection = ''
         DisplaySize 598 366
@@ -90,9 +90,17 @@
           Modes "2560x1440"
         EndSubSection
       '';
+      inputClassSections = [''
+        Identifier "keyboardio"
+        MatchIsKeyboard "on"
+        MatchProduct "Keyboardio"
+
+        Option "XkbLayout" "us"
+      ''];
 
       desktopManager = {
         xterm.enable = false;
+        wallpaper.mode = "fill";
       };
 
       displayManager = {
@@ -186,6 +194,7 @@
         pkgs.iotop
         pkgs.jq
         pkgs.keychain
+        pkgs.kicad
         pkgs.magic-wormhole
         pkgs.maim
         pkgs.nix-prefetch-github
@@ -207,6 +216,9 @@
         enable = true;
         userName = "Patrick O'Doherty";
         userEmail = "p@trickod.com";
+        extraConfig = {
+          pull.ff = "only";
+        };
       };
       programs.zsh = {
         enable = true;
