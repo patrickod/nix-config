@@ -96,6 +96,13 @@
         MatchProduct "Keyboardio"
 
         Option "XkbLayout" "us"
+      ''
+      ''
+        Identifier "advantage"
+        MatchIsKeyboard "on"
+        MatchProduct "05f3"
+
+        Option "XkbLayout" "us"
       ''];
 
       desktopManager = {
