@@ -190,6 +190,7 @@
         pkgs.bundix
         pkgs.discord
         pkgs.docker
+        pkgs.docker-compose
         pkgs.firecracker
         pkgs.gist
         pkgs.go
