@@ -57,4 +57,4 @@ block = "sound"
 [[block]]
 block = "time"
 interval = 60
-format = "%d/%m/%y %R"
+format = "%B %d %Y %R"
