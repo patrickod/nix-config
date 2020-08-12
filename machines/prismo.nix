@@ -74,8 +74,8 @@
     # Enable the X11 windowing system.
     services.xserver = {
       enable = true;
-      xkbVariant = "dvorak,us";
-      xkbOptions = "caps:escape,grp:shifts_toggle";
+      layout = "dvorak";
+      xkbOptions = "caps:escape";
       videoDrivers = ["nvidia"];
       monitorSection = ''
         DisplaySize 598 366
@@ -90,9 +90,24 @@
           Modes "2560x1440"
         EndSubSection
       '';
+      inputClassSections = [''
+        Identifier "keyboardio"
+        MatchIsKeyboard "on"
+        MatchProduct "Keyboardio"
+
+        Option "XkbLayout" "us"
+      ''
+      ''
+        Identifier "advantage"
+        MatchIsKeyboard "on"
+        MatchProduct "05f3"
+
+        Option "XkbLayout" "us"
+      ''];
 
       desktopManager = {
         xterm.enable = false;
+        wallpaper.mode = "fill";
       };
 
       displayManager = {
@@ -158,13 +173,14 @@
       font-awesome
     ];
 
-    # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.patrickod = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "libvirtd" "docker" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "libvirtd" "docker" ];
+      shell = pkgs.zsh;
     };
 
     programs.ssh.startAgent = true;
+    programs.zsh.enable = true;
 
     # Configure home-manager with user packages
     home-manager.users.patrickod = { pkgs, ... }: {
@@ -174,6 +190,7 @@
         pkgs.bundix
         pkgs.discord
         pkgs.docker
+        pkgs.docker-compose
         pkgs.firecracker
         pkgs.gist
         pkgs.go
@@ -185,6 +202,7 @@
         pkgs.iotop
         pkgs.jq
         pkgs.keychain
+        pkgs.kicad
         pkgs.magic-wormhole
         pkgs.maim
         pkgs.nix-prefetch-github
@@ -206,13 +224,16 @@
         enable = true;
         userName = "Patrick O'Doherty";
         userEmail = "p@trickod.com";
+        extraConfig = {
+          pull.ff = "only";
+        };
       };
       programs.zsh = {
         enable = true;
         history.extended = true;
         oh-my-zsh = {
           enable = true;
-          theme = "dallas";
+          theme = "dieter";
           plugins = [
             "git"
           ];
@@ -232,7 +253,6 @@
         brightness.night = "0.7";
         tray = true;
       };
-
 
       home.sessionVariables = {
         BROWSER = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";

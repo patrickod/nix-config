@@ -12,20 +12,21 @@
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
-     php
-     csv
-     nginx
-     javascript
-     html
      ansible
      auto-completion
+     csv
      emacs-lisp
      git
+     github
      go
-     nixos
+     html
+     javascript
      lsp
      markdown
+     nginx
+     nixos
      org
+     php
      puppet
      python
      react
@@ -33,8 +34,8 @@
      ruby-on-rails
      rust
      shell-scripts
-     themes-megapack
      terraform
+     themes-megapack
      version-control
      yaml
    )
@@ -183,9 +184,7 @@ before layers configuration."
 layers configuration."
   ;; Inherit proper SSH and GPG agent information from the environment
   (keychain-refresh-environment)
-  (use-package direnv
-    :config
-    (direnv-mode))
+  (direnv-mode)
   (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
 )
 
