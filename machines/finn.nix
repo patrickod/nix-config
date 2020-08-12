@@ -148,8 +148,10 @@
   # Configure home-manager with user packages
   home-manager.users.patrickod = { pkgs, ... }: {
     home.packages = [
+      pkgs.acpi
       pkgs.arduino-core
       pkgs.awscli
+      pkgs.axoloti
       pkgs.bundix
       pkgs.discord
       pkgs.docker
@@ -165,8 +167,10 @@
       pkgs.iotop
       pkgs.jq
       pkgs.keychain
+      pkgs.kicad-small
       pkgs.magic-wormhole
       pkgs.maim
+      pkgs.nixops
       pkgs.nix-prefetch-github
       pkgs.pavucontrol
       pkgs.pigz
