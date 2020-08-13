@@ -166,6 +166,7 @@
         pkgs.magic-wormhole
         pkgs.maim
         pkgs.nix-prefetch-github
+        pkgs.nixops
         pkgs.pavucontrol
         pkgs.pigz
         pkgs.restic
