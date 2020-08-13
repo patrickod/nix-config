@@ -24,6 +24,9 @@
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = false;
 
+  # remotely accessible by SSH
+  services.openssh.enable = true;
+
   system.stateVersion = "20.03"; # Did you read the comment?
 
 }
