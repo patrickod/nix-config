@@ -153,7 +153,9 @@
         pkgs.discord
         pkgs.docker
         pkgs.docker-compose
+        pkgs.esphome
         pkgs.firecracker
+        pkgs.firefox
         pkgs.gist
         pkgs.go
         pkgs.google-chrome-beta
@@ -164,11 +166,13 @@
         pkgs.iotop
         pkgs.jq
         pkgs.keychain
+        pkgs.kicad-unstable
         pkgs.magic-wormhole
         pkgs.maim
-        pkgs.nix-prefetch-github
         pkgs.nixops
+        pkgs.nix-prefetch-github
         pkgs.pavucontrol
+        pkgs.pcmanfm
         pkgs.pigz
         pkgs.restic
         pkgs.rust-analyzer
