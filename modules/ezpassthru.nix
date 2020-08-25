@@ -21,7 +21,10 @@ in
 
   config = mkIf cfg.enable {
     boot.kernelModules = [ "kvm-amd" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
-    boot.extraModprobeConfig = "options vfio-pci ids=${builtins.concatStringsSep "," (builtins.attrNames cfg.PCIs)}";
+    boot.extraModprobeConfig = ''
+      options vfio-pci ids=${builtins.concatStringsSep "," (builtins.attrNames cfg.PCIs)}
+      options kvm_amd nested=1
+    '';
 
     boot.postBootCommands = ''
     DEVS="${builtins.concatStringsSep " " (builtins.attrValues cfg.PCIs)}"

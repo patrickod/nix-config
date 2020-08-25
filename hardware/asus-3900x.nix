@@ -72,6 +72,11 @@
       fsType = "vfat";
     };
 
+    fileSystems."/mnt/guests" = {
+      device = "/dev/disk/by-uuid/05cd9a3f-b54a-46cf-9b71-573b6bd9114f";
+      fsType = "btrfs";
+    };
+
     swapDevices = [
       {
         device = "/dev/disk/by-uuid/e43f8b57-5651-4881-960d-9524d805b97c";
