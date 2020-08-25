@@ -23,8 +23,10 @@
       hwloc
       pciutils
       prometheus-node-exporter
+      pv
       silver-searcher
       sqlite
+      systool
       usbutils
       vim
       wget
@@ -153,6 +155,8 @@
         pkgs.discord
         pkgs.docker
         pkgs.docker-compose
+        pkgs.eagle
+        pkgs.esphome
         pkgs.firecracker
         pkgs.gist
         pkgs.go
@@ -168,6 +172,7 @@
         pkgs.maim
         pkgs.nix-prefetch-github
         pkgs.nixops
+        pkgs.nix-query-tree-viewer
         pkgs.pavucontrol
         pkgs.pigz
         pkgs.restic
@@ -176,6 +181,7 @@
         pkgs.silver-searcher
         pkgs.slack
         pkgs.spotify
+        pkgs.terraform
         pkgs.unzip
         pkgs.vlc
         pkgs.weechat
