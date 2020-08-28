@@ -73,7 +73,7 @@
     };
 
     fileSystems."/mnt/guests" = {
-      device = "/dev/disk/by-uuid/05cd9a3f-b54a-46cf-9b71-573b6bd9114f";
+      device = "/dev/prismo-vm-vg/guest-roots";
       fsType = "btrfs";
     };
 
