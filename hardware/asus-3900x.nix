@@ -38,7 +38,7 @@
     boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
     boot.initrd.kernelModules = [ "dm-snapshot" ];
 
-    boot.kernelPackages = pkgs.linuxPackages_57;
+    boot.kernelPackages = pkgs.linuxPackages_5_7;
     boot.kernelParams = ["amd_iommu=on" "iommu=pt" "pcie_aspm=off" "hugepages=8192"];
     boot.kernelModules = [ "kvm-amd" "vfio-pci" ];
     boot.extraModulePackages = [ ];
