@@ -33,6 +33,8 @@
       xorg.xdpyinfo
     ];
 
+    services.gnome3.gnome-keyring.enable = true;
+
     # configure default editor
     services.emacs.enable = true;
     environment.variables = {
@@ -168,6 +170,7 @@
         pkgs.iotop
         pkgs.jq
         pkgs.keychain
+        pkgs.kicad-unstable
         pkgs.magic-wormhole
         pkgs.maim
         pkgs.gnome3.nautilus
@@ -185,6 +188,7 @@
         pkgs.terraform
         pkgs.unzip
         pkgs.vlc
+        pkgs.vscode
         pkgs.weechat
         pkgs.wireguard
         pkgs.xclip
