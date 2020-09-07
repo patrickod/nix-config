@@ -16,18 +16,6 @@
       qemu
     ];
 
-    specialisation."usbfix" = {
-      inheritParentConfig = true;
-      configuration = {
-        boot.kernelPatches = [
-          {
-            name = "usbfix";
-            patch = builtins.fetchurl "https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb.git/patch/?id=d66a57be2f9a315fc10d0f524f670fec903e0fb4";
-          }
-        ];
-      };
-    };
-
     # configure GRUB
     boot.loader = {
       efi.canTouchEfiVariables = false;
