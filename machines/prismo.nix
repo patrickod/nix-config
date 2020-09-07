@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -7,6 +7,13 @@
      <home-manager/nixos>
      ../users/patrickod.nix
     ];
+
+  nix.systemFeatures = ["big-parallel" "benchmark" "nixos-test" "kvm" "gccarch-znver2"];
+  nixpkgs.localSystem.system = builtins.currentSystem;
+  nixpkgs.localSystem.platform = lib.systems.platforms.pc64 // {
+    gcc.arch = "znver2";
+    gcc.tune = "znver2";
+  };
 
   # hostname + networking setup
   networking.hostName = "prismo"; # Define your hostname.
