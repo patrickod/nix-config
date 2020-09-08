@@ -160,6 +160,7 @@
         pkgs.eagle
         pkgs.esphome
         pkgs.firecracker
+        pkgs.firefox
         pkgs.gist
         pkgs.go
         pkgs.google-chrome-beta
@@ -177,7 +178,10 @@
         pkgs.nixops
         pkgs.nix-prefetch-github
         pkgs.nix-query-tree-viewer
+        pkgs.nixops
+        pkgs.nix-prefetch-github
         pkgs.pavucontrol
+        pkgs.pcmanfm
         pkgs.pigz
         pkgs.restic
         pkgs.scrot

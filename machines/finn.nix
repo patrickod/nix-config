@@ -27,6 +27,9 @@
   # remotely accessible by SSH
   services.openssh.enable = true;
 
+  # disable firewall as device never roams from home
+  networking.firewall.enable = false;
+
   system.stateVersion = "20.03"; # Did you read the comment?
 
 }
