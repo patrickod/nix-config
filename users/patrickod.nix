@@ -180,12 +180,10 @@
         pkgs.pavucontrol
         pkgs.pigz
         pkgs.restic
-        pkgs.rust-analyzer
         pkgs.scrot
         pkgs.silver-searcher
         pkgs.slack
         pkgs.spotify
-        pkgs.terraform
         pkgs.unzip
         pkgs.vlc
         pkgs.vscode
