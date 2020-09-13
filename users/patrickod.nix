@@ -183,6 +183,7 @@
         pkgs.pavucontrol
         pkgs.pcmanfm
         pkgs.pigz
+        pkgs.probe-run
         pkgs.restic
         pkgs.scrot
         pkgs.silver-searcher
