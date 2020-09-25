@@ -185,6 +185,7 @@
         pkgs.pigz
         pkgs.probe-run
         pkgs.restic
+        pkgs.rustup
         pkgs.scrot
         pkgs.silver-searcher
         pkgs.slack
@@ -216,6 +217,7 @@
         };
         initExtra = ''
           eval "$(direnv hook zsh)"
+          export PATH=$HOME/.cargo/bin:$PATH
         '';
       };
       programs.urxvt = {
