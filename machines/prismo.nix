@@ -88,6 +88,49 @@
   };
   users.users.qemu-libvirtd.extraGroups = ["input"];
 
+  # Configure dynamic hugepages for Win10-steam VM
+  # TODO: abstract VM name & hugepage configurations for multi-VM work|gaming
+  systemd.services.libvirtd.preStart = ''
+    mkdir -p /var/lib/libvirt/hooks/win10-steam/{prepare/begin,release/end}
+    chmod 755 /var/lib/libvirt/hooks/win10-steam/{prepare/begin,release/end}
+
+    cat >/var/lib/libvirt/hooks/win10-steam/prepare/begin/alloc_hugepages.sh <<EOF
+      HUGEPAGES=8192
+
+      echo "Allocating hugepages..."
+      echo \$HUGEPAGES > /proc/sys/vm/nr_hugepages
+      ALLOC_PAGES=\$(cat /proc/sys/vm/nr_hugepages)
+
+      TRIES=0
+      while (( \$ALLOC_PAGES != \$HUGEPAGES && \$TRIES < 1000 ))
+      do
+          echo 1 > /proc/sys/vm/compact_memory            ## defrag ram
+          echo 8192 > /proc/sys/vm/nr_hugepages
+          ALLOC_PAGES=\$(cat /proc/sys/vm/nr_hugepages)
+          echo "Succesfully allocated \$ALLOC_PAGES / \$HUGEPAGES"
+          let TRIES+=1
+      done
+
+      if [ "\$ALLOC_PAGES" -ne "\$HUGEPAGES" ]
+      then
+          echo "Not able to allocate all hugepages. Reverting..."
+          echo 0 > /proc/sys/vm/nr_hugepages
+          exit 1
+      fi
+    EOF
+
+    cat >/var/lib/libvirt/hooks/win10-steam/release/end/dealloc_hugepages.sh <<EOF
+      echo 0 > /proc/sys/vm/nr_hugepages
+    EOF
+
+    chmod +x /var/lib/libvirt/hooks/win10-steam/prepare/begin/alloc_hugepages.sh
+    chmod +x /var/lib/libvirt/hooks/win10-steam/release/end/dealloc_hugepages.sh
+  '';
+  systemd.services.libvirt.path = with pkgs; [
+    bash
+    gawk
+  ];
+
   # configure Looking Glass working file
   systemd.tmpfiles.rules = [
     "f /dev/shm/looking-glass 0660 patrickod qemu-libvirtd -"

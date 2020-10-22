@@ -14,6 +14,7 @@
     environment.systemPackages = with pkgs; [
       virtmanager
       qemu
+      ntfs3g
     ];
 
     # configure GRUB
@@ -39,7 +40,7 @@
     boot.initrd.kernelModules = [ "dm-snapshot" ];
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
-    boot.kernelParams = ["amd_iommu=on" "iommu=pt" "pcie_aspm=off" "hugepages=8192"];
+    boot.kernelParams = ["amd_iommu=on" "iommu=pt" "pcie_aspm=off"];
     boot.kernelModules = [ "kvm-amd" "vfio-pci" ];
     boot.extraModulePackages = [ ];
 
