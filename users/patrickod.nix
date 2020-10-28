@@ -159,8 +159,7 @@
         pkgs.docker-compose
         pkgs.eagle
         pkgs.esphome
-        pkgs.firecracker
-        pkgs.firefox
+        pkgs.flyctl
         pkgs.gist
         pkgs.go
         pkgs.google-chrome-beta
