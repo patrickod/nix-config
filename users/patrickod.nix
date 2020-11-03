@@ -42,6 +42,7 @@
       VISUAL = "emacsclient -c";
       LIBVIRT_DEFAULT_URI = "qemu:///system";
       NIXPKGS = "/home/patrickod/code/nixpkgs";
+      TERM = "xterm-256color";
     };
 
     # Enable sound.
