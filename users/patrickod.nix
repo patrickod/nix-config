@@ -236,6 +236,19 @@
         BROWSER = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
       };
 
+      programs.ssh = {
+        matchBlocks = {
+          "betty.patrickod.com" = {
+            user = "root";
+          };
+          "g1-*" = {
+            user = "root";
+            certificateFile = "~/.ssh/iocoop-cert.pub";
+            proxyCommand = "ssh manage1.scl.iocoop.org nc %h %p";
+          };
+        };
+      };
+
       home.file.".emacs.d" = {
         source = builtins.fetchGit {
           url = "https://github.com/syl20bnr/spacemacs";
