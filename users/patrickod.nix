@@ -42,7 +42,6 @@
       VISUAL = "emacsclient -c";
       LIBVIRT_DEFAULT_URI = "qemu:///system";
       NIXPKGS = "/home/patrickod/code/nixpkgs";
-      TERM = "xterm-256color";
     };
 
     # Enable sound.
@@ -218,10 +217,14 @@
         initExtra = ''
           eval "$(direnv hook zsh)"
           export PATH=$HOME/.cargo/bin:$PATH
+          export TERM=xterm-256color
+          eval `keychain --eval id_ed25519 iocoop`
         '';
       };
       programs.urxvt = {
         enable = true;
+        transparent = true;
+        shading = 20;
       };
       services.redshift = {
         enable = true;
@@ -237,6 +240,7 @@
       };
 
       programs.ssh = {
+        enable = true;
         matchBlocks = {
           "betty.patrickod.com" = {
             user = "root";
