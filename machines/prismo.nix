@@ -55,9 +55,15 @@
     '';
   };
 
-  # Configure NFS mounts
+  # Configure NFS mounts for backups & photos
   fileSystems."/mnt/backups" = {
     device = "alexandria.lan:/mnt/alexandria/backups";
+    fsType = "nfs";
+    options = ["x-systemd.automount" "noauto"];
+  };
+
+  fileSystems."/mnt/photos" = {
+    device = "alexandria.lan:/mnt/alexandria/photos";
     fsType = "nfs";
     options = ["x-systemd.automount" "noauto"];
   };
@@ -83,6 +89,7 @@
         "/dev/hpet",
         "/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse",
         "/dev/input/by-id/usb-Kinesis_Freestyle_Edge_Keyboard_223606797749-if01-event-kbd",
+        "/dev/input/by-id/usb-04d9_USB-HID_Keyboard-event-kbd",
       ]
       namespaces = []
     '';

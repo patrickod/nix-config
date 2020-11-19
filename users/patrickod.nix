@@ -151,7 +151,6 @@
     home-manager.users.patrickod = { pkgs, ... }: {
       home.packages = [
         pkgs.arduino-core
-        pkgs.awscli
         pkgs.axoloti
         pkgs.bundix
         pkgs.discord
