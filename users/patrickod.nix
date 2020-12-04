@@ -140,7 +140,7 @@
 
     users.users.patrickod = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "libvirtd" "docker" "dialout"];
+      extraGroups = [ "wheel" "libvirtd" "docker" "dialout"]; # permit sudo,virsh,docker,serial
       shell = pkgs.zsh;
     };
 
@@ -150,8 +150,7 @@
     # Configure home-manager with user packages
     home-manager.users.patrickod = { pkgs, ... }: {
       home.packages = [
-        pkgs.arduino-core
-        pkgs.axoloti
+        pkgs.arduino
         pkgs.bundix
         pkgs.discord
         pkgs.docker

@@ -61,9 +61,13 @@
     fsType = "nfs";
     options = ["x-systemd.automount" "noauto"];
   };
-
   fileSystems."/mnt/photos" = {
     device = "alexandria.lan:/mnt/alexandria/photos";
+    fsType = "nfs";
+    options = ["x-systemd.automount" "noauto"];
+  };
+  fileSystems."/mnt/media" = {
+    device = "alexandria.lan:/mnt/alexandria/media";
     fsType = "nfs";
     options = ["x-systemd.automount" "noauto"];
   };
