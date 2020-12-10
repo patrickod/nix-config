@@ -150,8 +150,10 @@
     # Configure home-manager with user packages
     home-manager.users.patrickod = { pkgs, ... }: {
       home.packages = [
-        pkgs.arduino
-        pkgs.bundix
+        pkgs.arduino-core
+        pkgs.awscli
+        pkgs.axoloti
+        pkgs.cargo-generate
         pkgs.discord
         pkgs.docker
         pkgs.docker-compose
@@ -180,7 +182,7 @@
         pkgs.pavucontrol
         pkgs.pcmanfm
         pkgs.pigz
-        pkgs.probe-run
+        # pkgs.probe-run
         pkgs.restic
         pkgs.rustup
         pkgs.scrot
