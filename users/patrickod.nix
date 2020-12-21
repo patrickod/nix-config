@@ -265,6 +265,9 @@
       ## TODO: migrate to home-manager i3 configuration management
       xdg.configFile."i3/status.toml".source = ../dotfiles/i3status-rs.toml;
       xdg.configFile."i3/config".source = ../dotfiles/i3-config;
+
+      # configure nixpkgs to allow unfree etc...
+      home.file.".config/nixpkgs/config.nix".source = ../dotfiles/nixpkgs-config.nix;
     };
 
     # udev rules for programming keyboard & axoloti
@@ -276,7 +279,7 @@
       # For Axoloti
       SUBSYSTEM=="usb", ATTR{idVendor}=="16c0", ATTR{idProduct}=="0442", OWNER="patrickod", GROUP="users"
 
-      # For Adafruit EdgeBadge & PyGamer HF2
+      # Adafruit Feathers
       ATTRS{idVendor}=="239a", ENV{ID_MM_DEVICE_IGNORE}="1"
       SUBSYSTEM=="usb", ATTRS{idVendor}=="239a", MODE="0666"
       SUBSYSTEM=="tty", ATTRS{idVendor}=="239a", MODE="0666"
