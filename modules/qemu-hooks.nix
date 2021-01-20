@@ -78,9 +78,13 @@ in {
             mkdir -p /var/lib/libvirt/hooks
             mkdir -p /var/lib/libvirt/hooks/qemu.d/win10-steam/prepare/begin
             mkdir -p /var/lib/libvirt/hooks/qemu.d/win10-steam/release/end
+            mkdir -p /var/lib/libvirt/hooks/qemu.d/win10-intercom/prepare/begin
+            mkdir -p /var/lib/libvirt/hooks/qemu.d/win10-intercom/release/end
             ln -sf ${qemuHook} /var/lib/libvirt/hooks/qemu
             ln -sf ${win10Setup} /var/lib/libvirt/hooks/qemu.d/win10-steam/prepare/begin/start.sh
             ln -sf ${win10Teardown} /var/lib/libvirt/hooks/qemu.d/win10-steam/release/end/revert.sh
+            ln -sf ${win10Setup} /var/lib/libvirt/hooks/qemu.d/win10-intercom/prepare/begin/start.sh
+            ln -sf ${win10Teardown} /var/lib/libvirt/hooks/qemu.d/win10-intercom/release/end/revert.sh
         '';
     };
 }
