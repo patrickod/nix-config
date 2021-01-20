@@ -156,9 +156,9 @@
         pkgs.docker
         pkgs.docker-compose
         pkgs.eagle
-        pkgs.esphome
         pkgs.flyctl
         pkgs.gist
+        pkgs.gnome3.nautilus
         pkgs.go
         pkgs.google-chrome-beta
         pkgs.htop
@@ -171,12 +171,12 @@
         pkgs.kicad-unstable
         pkgs.magic-wormhole
         pkgs.maim
-        pkgs.gnome3.nautilus
+        pkgs.nix-index
         pkgs.nixops
+        pkgs.nix-prefetch-github
         pkgs.nix-prefetch-github
         pkgs.nix-query-tree-viewer
-        pkgs.nixops
-        pkgs.nix-prefetch-github
+        pkgs.patchelf
         pkgs.pavucontrol
         pkgs.pcmanfm
         pkgs.pigz
@@ -214,7 +214,6 @@
         };
         initExtra = ''
           eval "$(direnv hook zsh)"
-          export PATH=$HOME/.cargo/bin:$PATH
           export TERM=xterm-256color
           eval `keychain --eval id_ed25519 iocoop`
         '';
