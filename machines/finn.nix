@@ -9,6 +9,7 @@
       <home-manager/nixos>
       ../users/patrickod.nix
       ../modules/musnix
+      ../modules/strangeparts-wireguard.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -33,6 +34,10 @@
 
   # realtime audio
   musnix.enable = true;
+
+  # enable bluetooth HW and audio support
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   system.stateVersion = "20.03"; # Did you read the comment?
 }
