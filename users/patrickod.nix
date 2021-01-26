@@ -250,13 +250,15 @@
         };
       };
 
-      home.file.".emacs.d" = {
-        source = builtins.fetchGit {
-          url = "https://github.com/syl20bnr/spacemacs";
-          ref = "develop";
-        };
-        recursive = true;
-      };
+      # 2021-01-23 removed due to RO directory breaking emacs ELC compilation
+      # home.file.".emacs.d" = {
+      #   source = builtins.fetchGit {
+      #     url = "https://github.com/syl20bnr/spacemacs";
+      #     ref = "develop";
+      #     rev = "ba9e0afa34c97b310456d4352ec582d73411902b";
+      #   };
+      #   recursive = true;
+      # };
       home.file.".spacemacs".source = ../dotfiles/spacemacs;
 
       ## i3 status & keybinding configuration
