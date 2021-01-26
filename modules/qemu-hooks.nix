@@ -32,7 +32,7 @@ let
     '';
 
     win10Setup = pkgs.writeShellScript "win10_setup" ''
-        HUGEPAGES=8192
+        HUGEPAGES=12288
 
         echo "Allocating hugepages..."
         echo $HUGEPAGES > /proc/sys/vm/nr_hugepages
@@ -42,7 +42,7 @@ let
         while (( "$ALLOC_PAGES" != "$HUGEPAGES" && $TRIES < 1000 ))
         do
             echo 1 > /proc/sys/vmmcompact_memory            ## defrag ram
-            echo 8192 > /proc/sys/vm/nr_hugepages
+            echo $HUGEPAGES > /proc/sys/vm/nr_hugepages
             ALLOC_PAGES="$(cat /proc/sys/vm/nr_hugepages)"
             echo "Succesfully allocated $ALLOC_PAGES / $HUGEPAGES"
             let TRIES+=1
@@ -76,15 +76,15 @@ in {
         preStart = ''
             mkdir -p /var/lib/libvirt/vbios
             mkdir -p /var/lib/libvirt/hooks
-            mkdir -p /var/lib/libvirt/hooks/qemu.d/win10-steam/prepare/begin
-            mkdir -p /var/lib/libvirt/hooks/qemu.d/win10-steam/release/end
-            mkdir -p /var/lib/libvirt/hooks/qemu.d/win10-intercom/prepare/begin
-            mkdir -p /var/lib/libvirt/hooks/qemu.d/win10-intercom/release/end
+            mkdir -p /var/lib/libvirt/hooks/qemu.d/win10-{steam,intercom,vr}/{prepare/begin,release/end}
+
             ln -sf ${qemuHook} /var/lib/libvirt/hooks/qemu
-            ln -sf ${win10Setup} /var/lib/libvirt/hooks/qemu.d/win10-steam/prepare/begin/start.sh
-            ln -sf ${win10Teardown} /var/lib/libvirt/hooks/qemu.d/win10-steam/release/end/revert.sh
-            ln -sf ${win10Setup} /var/lib/libvirt/hooks/qemu.d/win10-intercom/prepare/begin/start.sh
-            ln -sf ${win10Teardown} /var/lib/libvirt/hooks/qemu.d/win10-intercom/release/end/revert.sh
+            for dest in /var/lib/libvirt/hooks/qemu.d/win10-{steam,intercom,vr}/prepare/begin/start.sh; do
+              ln -sf ${win10Setup} $dest
+            done
+            for dest in /var/lib/libvirt/hooks/qemu.d/win10-{steam,intercom,vr}/release/end/revert.sh; do
+              ln -sf ${win10Teardown} $dest
+            done
         '';
     };
 }
