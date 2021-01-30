@@ -140,7 +140,7 @@
 
     users.users.patrickod = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "libvirtd" "docker" "dialout"]; # permit sudo,virsh,docker,serial
+      extraGroups = [ "wheel" "libvirtd" "docker" "dialout" "audio"];
       shell = pkgs.zsh;
     };
 
@@ -152,7 +152,6 @@
       home.packages = [
         pkgs.arduino-core
         pkgs.awscli
-        pkgs.axoloti
         pkgs.cargo-generate
         pkgs.discord
         pkgs.docker
@@ -182,7 +181,6 @@
         pkgs.pavucontrol
         pkgs.pcmanfm
         pkgs.pigz
-        # pkgs.probe-run
         pkgs.restic
         pkgs.rustup
         pkgs.scrot

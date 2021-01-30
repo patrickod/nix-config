@@ -8,6 +8,7 @@
       ../secrets.nix
       <home-manager/nixos>
       ../users/patrickod.nix
+      ../modules/musnix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -30,6 +31,8 @@
   # disable firewall as device never roams from home
   networking.firewall.enable = false;
 
-  system.stateVersion = "20.03"; # Did you read the comment?
+  # realtime audio
+  musnix.enable = true;
 
+  system.stateVersion = "20.03"; # Did you read the comment?
 }
