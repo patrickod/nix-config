@@ -172,6 +172,7 @@
       iotop
       jq
       keychain
+      kicad-unstable
       magic-wormhole
       maim
       nixfmt
