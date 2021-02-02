@@ -14,12 +14,13 @@
     systemctl suspend
   '';
 
-  nix.systemFeatures = ["big-parallel" "benchmark" "nixos-test" "kvm" "gccarch-znver2"];
+  nix.systemFeatures =
+    [ "big-parallel" "benchmark" "nixos-test" "kvm" "gccarch-znver2" ];
 
   # hostname + networking setup
   networking.hostName = "prismo"; # Define your hostname.
   networking.useDHCP = false;
-  networking.bridges.br0.interfaces = ["enp6s0"];
+  networking.bridges.br0.interfaces = [ "enp6s0" ];
   networking.interfaces.br0.useDHCP = true;
 
   # remotely accessible by SSH
@@ -39,7 +40,7 @@
 
   # Enable the X11 windowing system.
   services.xserver = {
-    videoDrivers = ["nvidia"];
+    videoDrivers = [ "nvidia" ];
     monitorSection = ''
       DisplaySize 598 366
       Option "PreferredMode" "2560x1440"
@@ -59,17 +60,17 @@
   fileSystems."/mnt/backups" = {
     device = "alexandria.lan:/mnt/alexandria/backups";
     fsType = "nfs";
-    options = ["x-systemd.automount" "noauto"];
+    options = [ "x-systemd.automount" "noauto" ];
   };
   fileSystems."/mnt/photos" = {
     device = "alexandria.lan:/mnt/alexandria/photos";
     fsType = "nfs";
-    options = ["x-systemd.automount" "noauto"];
+    options = [ "x-systemd.automount" "noauto" ];
   };
   fileSystems."/mnt/media" = {
     device = "alexandria.lan:/mnt/alexandria/media";
     fsType = "nfs";
-    options = ["x-systemd.automount" "noauto"];
+    options = [ "x-systemd.automount" "noauto" ];
   };
 
   # Configure KVM
@@ -98,12 +99,11 @@
       namespaces = []
     '';
   };
-  users.users.qemu-libvirtd.extraGroups = ["input"];
+  users.users.qemu-libvirtd.extraGroups = [ "input" ];
 
   # configure Looking Glass working file
-  systemd.tmpfiles.rules = [
-    "f /dev/shm/looking-glass 0660 patrickod qemu-libvirtd -"
-  ];
+  systemd.tmpfiles.rules =
+    [ "f /dev/shm/looking-glass 0660 patrickod qemu-libvirtd -" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

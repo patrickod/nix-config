@@ -2,12 +2,11 @@
 
 { config, lib, pkgs, ... }:
 with lib;
-let
-  cfg = config.services.ezpassthru;
-in
-{
+let cfg = config.services.ezpassthru;
+in {
   options.services.ezpassthru = {
-    enable = mkEnableOption "Enable simple VM PCI passthrough config (NOTE: this is only for ppl with a primary AMD/Intel, and a non-primary NVidia)";
+    enable = mkEnableOption
+      "Enable simple VM PCI passthrough config (NOTE: this is only for ppl with a primary AMD/Intel, and a non-primary NVidia)";
 
     PCIs = mkOption {
       description = "The ID pairs of your PCI devices to passthrough";
@@ -20,16 +19,19 @@ in
   };
 
   config = mkIf cfg.enable {
-    boot.kernelModules = [ "kvm-amd" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
+    boot.kernelModules =
+      [ "kvm-amd" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
     boot.extraModprobeConfig = ''
-      options vfio-pci ids=${builtins.concatStringsSep "," (builtins.attrNames cfg.PCIs)}
+      options vfio-pci ids=${
+        builtins.concatStringsSep "," (builtins.attrNames cfg.PCIs)
+      }
     '';
 
     boot.postBootCommands = ''
-    DEVS="${builtins.concatStringsSep " " (builtins.attrValues cfg.PCIs)}"
-    for DEV in $DEVS; do
-      echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
-    done
+      DEVS="${builtins.concatStringsSep " " (builtins.attrValues cfg.PCIs)}"
+      for DEV in $DEVS; do
+        echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
+      done
     '';
   };
 }
