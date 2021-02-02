@@ -1,60 +1,61 @@
 { config, pkgs, ... }:
 
 {
-    # allow use of non-free packages
-    nixpkgs.config.allowUnfree = true;
+  # allow use of non-free packages
+  nixpkgs.config.allowUnfree = true;
 
-    i18n.defaultLocale = "en_US.UTF-8";
-    console = {
-      font = "Lat2-Terminus16";
-      keyMap = "dvorak";
-    };
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "dvorak";
+  };
 
-    time.timeZone = "America/Los_Angeles";
-    time.hardwareClockInLocalTime = true;
+  time.timeZone = "America/Los_Angeles";
+  time.hardwareClockInLocalTime = true;
 
-    # List packages installed in system profile. To search, run:
-    # $ nix search wget
-    environment.systemPackages = with pkgs; [
-      dhcp
-      direnv
-      emacs
-      git
-      hwloc
-      pciutils
-      prometheus-node-exporter
-      pv
-      silver-searcher
-      sqlite
-      systool
-      usbutils
-      vim
-      wget
-      xorg.xdpyinfo
-    ];
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    dhcp
+    direnv
+    emacs
+    git
+    hwloc
+    pciutils
+    prometheus-node-exporter
+    pv
+    silver-searcher
+    sqlite
+    systool
+    usbutils
+    vim
+    wget
+    xorg.xdpyinfo
+  ];
 
-    services.gnome3.gnome-keyring.enable = true;
+  services.gnome3.gnome-keyring.enable = true;
 
-    # configure default editor
-    services.emacs.enable = true;
-    environment.variables = {
-      EDITOR = "emacsclient -c";
-      VISUAL = "emacsclient -c";
-      LIBVIRT_DEFAULT_URI = "qemu:///system";
-      NIXPKGS = "/home/patrickod/code/nixpkgs";
-    };
+  # configure default editor
+  services.emacs.enable = true;
+  environment.variables = {
+    EDITOR = "emacsclient -c";
+    VISUAL = "emacsclient -c";
+    LIBVIRT_DEFAULT_URI = "qemu:///system";
+    NIXPKGS = "/home/patrickod/code/nixpkgs";
+  };
 
-    # Enable sound.
-    sound.enable = true;
-    hardware.pulseaudio.enable = true;
+  # Enable sound.
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
-    # Enable the X11 windowing system.
-    services.xserver = {
-      enable = true;
-      layout = "dvorak";
-      xkbOptions = "caps:escape";
+  # Enable the X11 windowing system.
+  services.xserver = {
+    enable = true;
+    layout = "dvorak";
+    xkbOptions = "caps:escape";
 
-      inputClassSections = [''
+    inputClassSections = [
+      ''
         Identifier "keyboardio"
         MatchIsKeyboard "on"
         MatchProduct "Keyboardio"
@@ -68,25 +69,27 @@
 
         Option "XkbLayout" "us"
 
-      ''];
+      ''
+    ];
 
-      desktopManager = {
-        xterm.enable = false;
-        wallpaper.mode = "fill";
+    desktopManager = {
+      xterm.enable = false;
+      wallpaper.mode = "fill";
+    };
+
+    displayManager = {
+      defaultSession = "none+i3";
+
+      lightdm = {
+        enable = true;
+        greeter.enable = false;
+        autoLogin.enable = true;
+        autoLogin.user = "patrickod";
       };
 
-      displayManager = {
-        defaultSession = "none+i3";
-
-        lightdm = {
-          enable = true;
-          greeter.enable = false;
-          autoLogin.enable = true;
-          autoLogin.user = "patrickod";
-        };
-
-        sessionCommands = ''
-          ${pkgs.xorg.xrdb}/bin/xrdb -merge <${pkgs.writeText "Xresources" ''
+      sessionCommands = ''
+        ${pkgs.xorg.xrdb}/bin/xrdb -merge <${
+          pkgs.writeText "Xresources" ''
             ! hard contrast: *background: #1d2021
             *background: #282828
             ! soft contrast: *background: #32302f
@@ -115,171 +118,167 @@
             ! LightGrey + White
             *color7:  #a89984
             *color15: #ebdbb2
-          ''}
-        '';
-      };
-
-      windowManager.i3 = {
-        enable = true;
-        package = pkgs.i3-gaps;
-        extraPackages = with pkgs; [
-          rofi
-          i3status-rust
-          i3lock-fancy
-          i3-gaps
-          i3blocks
-        ];
-      };
+          ''
+        }
+      '';
     };
 
-    fonts.fonts = with pkgs; [
-      source-code-pro
-      proggyfonts
-      font-awesome
+    windowManager.i3 = {
+      enable = true;
+      package = pkgs.i3-gaps;
+      extraPackages = with pkgs; [
+        rofi
+        i3status-rust
+        i3lock-fancy
+        i3-gaps
+        i3blocks
+      ];
+    };
+  };
+
+  fonts.fonts = with pkgs; [ source-code-pro proggyfonts font-awesome ];
+
+  users.users.patrickod = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "libvirtd"
+      "docker"
+      "dialout"
+    ]; # permit sudo,virsh,docker,serial
+    shell = pkgs.zsh;
+  };
+
+  programs.ssh.startAgent = true;
+  programs.zsh.enable = true;
+
+  # Configure home-manager with user packages
+  home-manager.users.patrickod = { pkgs, ... }: {
+    home.packages = [
+      pkgs.arduino
+      pkgs.bundix
+      pkgs.discord
+      pkgs.eagle
+      pkgs.flyctl
+      pkgs.gist
+      pkgs.gnome3.nautilus
+      pkgs.go
+      pkgs.google-chrome-beta
+      pkgs.htop
+      pkgs.httpie
+      pkgs.hwloc
+      pkgs.iftop
+      pkgs.iotop
+      pkgs.jq
+      pkgs.keychain
+      pkgs.kicad-unstable
+      pkgs.magic-wormhole
+      pkgs.maim
+      pkgs.nix-index
+      pkgs.nixops
+      pkgs.nix-prefetch-github
+      pkgs.nix-prefetch-github
+      pkgs.nix-query-tree-viewer
+      pkgs.patchelf
+      pkgs.pavucontrol
+      pkgs.pcmanfm
+      pkgs.pigz
+      pkgs.probe-run
+      pkgs.restic
+      pkgs.rustup
+      pkgs.scrot
+      pkgs.silver-searcher
+      pkgs.slack
+      pkgs.spotify
+      pkgs.unzip
+      pkgs.vlc
+      pkgs.vscode
+      pkgs.weechat
+      pkgs.wireguard
+      pkgs.xclip
     ];
-
-    users.users.patrickod = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" "libvirtd" "docker" "dialout"]; # permit sudo,virsh,docker,serial
-      shell = pkgs.zsh;
+    programs.git = {
+      enable = true;
+      userName = "Patrick O'Doherty";
+      userEmail = "p@trickod.com";
+      extraConfig = { pull.ff = "only"; };
+    };
+    programs.zsh = {
+      enable = true;
+      history.extended = true;
+      oh-my-zsh = {
+        enable = true;
+        theme = "dieter";
+        plugins = [ "git" ];
+      };
+      initExtra = ''
+        eval "$(direnv hook zsh)"
+        export TERM=xterm-256color
+        eval `keychain --eval id_ed25519 iocoop`
+      '';
+    };
+    programs.urxvt = {
+      enable = true;
+      transparent = true;
+      shading = 20;
+    };
+    services.redshift = {
+      enable = true;
+      latitude = "37.7749";
+      longitude = "-122.4194";
+      brightness.day = "1";
+      brightness.night = "0.7";
+      tray = true;
     };
 
-    programs.ssh.startAgent = true;
-    programs.zsh.enable = true;
-
-    # Configure home-manager with user packages
-    home-manager.users.patrickod = { pkgs, ... }: {
-      home.packages = [
-        pkgs.arduino
-        pkgs.bundix
-        pkgs.discord
-        pkgs.eagle
-        pkgs.flyctl
-        pkgs.gist
-        pkgs.gnome3.nautilus
-        pkgs.go
-        pkgs.google-chrome-beta
-        pkgs.htop
-        pkgs.httpie
-        pkgs.hwloc
-        pkgs.iftop
-        pkgs.iotop
-        pkgs.jq
-        pkgs.keychain
-        pkgs.kicad-unstable
-        pkgs.magic-wormhole
-        pkgs.maim
-        pkgs.nix-index
-        pkgs.nixops
-        pkgs.nix-prefetch-github
-        pkgs.nix-prefetch-github
-        pkgs.nix-query-tree-viewer
-        pkgs.patchelf
-        pkgs.pavucontrol
-        pkgs.pcmanfm
-        pkgs.pigz
-        pkgs.probe-run
-        pkgs.restic
-        pkgs.rustup
-        pkgs.scrot
-        pkgs.silver-searcher
-        pkgs.slack
-        pkgs.spotify
-        pkgs.unzip
-        pkgs.vlc
-        pkgs.vscode
-        pkgs.weechat
-        pkgs.wireguard
-        pkgs.xclip
-      ] ;
-      programs.git = {
-        enable = true;
-        userName = "Patrick O'Doherty";
-        userEmail = "p@trickod.com";
-        extraConfig = {
-          pull.ff = "only";
-        };
-      };
-      programs.zsh = {
-        enable = true;
-        history.extended = true;
-        oh-my-zsh = {
-          enable = true;
-          theme = "dieter";
-          plugins = [
-            "git"
-          ];
-        };
-        initExtra = ''
-          eval "$(direnv hook zsh)"
-          export TERM=xterm-256color
-          eval `keychain --eval id_ed25519 iocoop`
-        '';
-      };
-      programs.urxvt = {
-        enable = true;
-        transparent = true;
-        shading = 20;
-      };
-      services.redshift = {
-        enable = true;
-        latitude = "37.7749";
-        longitude = "-122.4194";
-        brightness.day = "1";
-        brightness.night = "0.7";
-        tray = true;
-      };
-
-      home.sessionVariables = {
-        BROWSER = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
-      };
-
-      programs.ssh = {
-        enable = true;
-        matchBlocks = {
-          "betty.patrickod.com" = {
-            user = "root";
-          };
-          "g1-*" = {
-            user = "root";
-            certificateFile = "~/.ssh/iocoop-cert.pub";
-            proxyCommand = "ssh manage1.scl.iocoop.org nc %h %p";
-          };
-        };
-      };
-
-      # 2021-01-23 removed due to RO directory breaking emacs ELC compilation
-      # home.file.".emacs.d" = {
-      #   source = builtins.fetchGit {
-      #     url = "https://github.com/syl20bnr/spacemacs";
-      #     ref = "develop";
-      #     rev = "ba9e0afa34c97b310456d4352ec582d73411902b";
-      #   };
-      #   recursive = true;
-      # };
-      home.file.".spacemacs".source = ../dotfiles/spacemacs;
-
-      ## i3 status & keybinding configuration
-      ## TODO: migrate to home-manager i3 configuration management
-      xdg.configFile."i3/status.toml".source = ../dotfiles/i3status-rs.toml;
-      xdg.configFile."i3/config".source = ../dotfiles/i3-config;
+    home.sessionVariables = {
+      BROWSER = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
     };
 
-    # udev rules for programming keyboard & axoloti
-    services.udev.extraRules = ''
-      # For Kaleidoscope/Keyboardio
-      SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2300", SYMLINK+="model01", ENV{ID_MM_DEVICE_IGNORE}:="1", ENV{ID_MM_CANDIDATE}:="0", TAG+="uaccess", TAG+="seat"
-      SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2301", SYMLINK+="model01", ENV{ID_MM_DEVICE_IGNORE}:="1", ENV{ID_MM_CANDIDATE}:="0", TAG+="uaccess", TAG+="seat"
+    programs.ssh = {
+      enable = true;
+      matchBlocks = {
+        "betty.patrickod.com" = { user = "root"; };
+        "g1-*" = {
+          user = "root";
+          certificateFile = "~/.ssh/iocoop-cert.pub";
+          proxyCommand = "ssh manage1.scl.iocoop.org nc %h %p";
+        };
+      };
+    };
 
-      # For Axoloti
-      SUBSYSTEM=="usb", ATTR{idVendor}=="16c0", ATTR{idProduct}=="0442", OWNER="patrickod", GROUP="users"
+    # 2021-01-23 removed due to RO directory breaking emacs ELC compilation
+    # home.file.".emacs.d" = {
+    #   source = builtins.fetchGit {
+    #     url = "https://github.com/syl20bnr/spacemacs";
+    #     ref = "develop";
+    #     rev = "ba9e0afa34c97b310456d4352ec582d73411902b";
+    #   };
+    #   recursive = true;
+    # };
+    home.file.".spacemacs".source = ../dotfiles/spacemacs;
 
-      # For Adafruit EdgeBadge & PyGamer HF2
-      ATTRS{idVendor}=="239a", ENV{ID_MM_DEVICE_IGNORE}="1"
-      SUBSYSTEM=="usb", ATTRS{idVendor}=="239a", MODE="0666"
-      SUBSYSTEM=="tty", ATTRS{idVendor}=="239a", MODE="0666"
-    '';
+    ## i3 status & keybinding configuration
+    ## TODO: migrate to home-manager i3 configuration management
+    xdg.configFile."i3/status.toml".source = ../dotfiles/i3status-rs.toml;
+    xdg.configFile."i3/config".source = ../dotfiles/i3-config;
+  };
 
-    # enable lorri nix/direnv replacement
-    services.lorri.enable = true;
+  # udev rules for programming keyboard & axoloti
+  services.udev.extraRules = ''
+    # For Kaleidoscope/Keyboardio
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2300", SYMLINK+="model01", ENV{ID_MM_DEVICE_IGNORE}:="1", ENV{ID_MM_CANDIDATE}:="0", TAG+="uaccess", TAG+="seat"
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2301", SYMLINK+="model01", ENV{ID_MM_DEVICE_IGNORE}:="1", ENV{ID_MM_CANDIDATE}:="0", TAG+="uaccess", TAG+="seat"
+
+    # For Axoloti
+    SUBSYSTEM=="usb", ATTR{idVendor}=="16c0", ATTR{idProduct}=="0442", OWNER="patrickod", GROUP="users"
+
+    # For Adafruit EdgeBadge & PyGamer HF2
+    ATTRS{idVendor}=="239a", ENV{ID_MM_DEVICE_IGNORE}="1"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="239a", MODE="0666"
+    SUBSYSTEM=="tty", ATTRS{idVendor}=="239a", MODE="0666"
+  '';
+
+  # enable lorri nix/direnv replacement
+  services.lorri.enable = true;
 }
