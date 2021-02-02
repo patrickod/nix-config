@@ -1,6 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 
 {
+  nixpkgs.overlays = [ (import ../overlays/systemd.nix) ];
+
   imports = [
     ../hardware/asus-3900x.nix
     ../secrets.nix
@@ -8,11 +10,6 @@
     ../users/patrickod.nix
     ../modules/qemu-hooks.nix
   ];
-
-  # change power button to suspend
-  services.acpid.powerEventCommands = ''
-    systemctl suspend
-  '';
 
   nix.systemFeatures =
     [ "big-parallel" "benchmark" "nixos-test" "kvm" "gccarch-znver2" ];

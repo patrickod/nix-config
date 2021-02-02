@@ -16,7 +16,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    bluez
     dhcp
     direnv
     emacs
@@ -35,6 +34,9 @@
   ];
 
   services.gnome3.gnome-keyring.enable = true;
+
+  # enable lorri nix/direnv replacement
+  services.lorri.enable = true;
 
   # configure default editor
   services.emacs.enable = true;
@@ -151,52 +153,48 @@
 
   # Configure home-manager with user packages
   home-manager.users.patrickod = { pkgs, ... }: {
-    home.packages = with pkgs; [
-      arduino-core
-      awscli
-      cargo-generate
-      discord
-      docker
-      docker-compose
-      eagle
-      esphome
-      flyctl
-      gist
-      gnome3.nautilus
-      go
-      google-chrome-beta
-      htop
-      httpie
-      hwloc
-      iftop
-      iotop
-      jq
-      keychain
-      kicad-unstable
-      magic-wormhole
-      maim
-      nixfmt
-      nixops
-      nixops
-      nix-prefetch-github
-      nix-prefetch-github
-      nix-query-tree-viewer
-      pavucontrol
-      pcmanfm
-      pigz
-      restic
-      rustup
-      scrot
-      silver-searcher
-      slack
-      spotify
-      unzip
-      urxvt_font_size
-      vlc
-      vscode
-      weechat
-      wireguard
-      xclip
+    home.packages = [
+      pkgs.arduino
+      pkgs.bundix
+      pkgs.discord
+      pkgs.eagle
+      pkgs.flyctl
+      pkgs.gist
+      pkgs.gnome3.nautilus
+      pkgs.go
+      pkgs.google-chrome-beta
+      pkgs.htop
+      pkgs.httpie
+      pkgs.hwloc
+      pkgs.iftop
+      pkgs.iotop
+      pkgs.jq
+      pkgs.keychain
+      pkgs.kicad-unstable
+      pkgs.magic-wormhole
+      pkgs.maim
+      pkgs.nix-index
+      pkgs.nixops
+      pkgs.nix-prefetch-github
+      pkgs.nix-prefetch-github
+      pkgs.nix-query-tree-viewer
+      pkgs.patchelf
+      pkgs.pavucontrol
+      pkgs.pcmanfm
+      pkgs.pigz
+      pkgs.probe-run
+      pkgs.restic
+      pkgs.rustup
+      pkgs.scrot
+      pkgs.silver-searcher
+      pkgs.slack
+      pkgs.spotify
+      pkgs.unzip
+      pkgs.vlc
+      pkgs.vscode
+      pkgs.weechat
+      pkgs.wireguard
+      pkgs.xclip
     ];
     programs.git = {
       enable = true;
@@ -214,7 +212,6 @@
       };
       initExtra = ''
         eval "$(direnv hook zsh)"
-        export PATH=$HOME/.cargo/bin:$PATH
         export TERM=xterm-256color
         eval `keychain --eval id_ed25519 iocoop`
       '';
@@ -297,10 +294,4 @@
     # STLink-V2
     SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3748", GROUP="dialout"
   '';
-
-  # configure docker on host
-  virtualisation.docker.enable = true;
-
-  # enable lorri nix/direnv replacement
-  services.lorri.enable = true;
 }
