@@ -13,11 +13,6 @@
     ../modules/qemu-hooks.nix
   ];
 
-  # change power button to suspend
-  services.acpid.powerEventCommands = ''
-    systemctl suspend
-  '';
-
   nix.systemFeatures = ["big-parallel" "benchmark" "nixos-test" "kvm" "gccarch-znver2"];
 
   # hostname + networking setup

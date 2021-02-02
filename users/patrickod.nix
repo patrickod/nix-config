@@ -153,8 +153,6 @@
         pkgs.arduino
         pkgs.bundix
         pkgs.discord
-        pkgs.docker
-        pkgs.docker-compose
         pkgs.eagle
         pkgs.flyctl
         pkgs.gist
@@ -281,9 +279,6 @@
       SUBSYSTEM=="usb", ATTRS{idVendor}=="239a", MODE="0666"
       SUBSYSTEM=="tty", ATTRS{idVendor}=="239a", MODE="0666"
     '';
-
-    # configure docker on host
-    virtualisation.docker.enable = true;
 
     # enable lorri nix/direnv replacement
     services.lorri.enable = true;
