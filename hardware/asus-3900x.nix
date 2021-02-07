@@ -29,6 +29,10 @@
       device = "/dev/disk/by-uuid/a3313d00-2023-471b-b7df-70d64dbbf232";
       preLVM = true;
     };
+    guests-pv = {
+      device = "/dev/disk/by-uuid/5a697699-7317-42eb-a0b8-a2403290e28c";
+      preLVM = true;
+    };
   };
 
   boot.initrd.availableKernelModules =
@@ -70,6 +74,11 @@
 
   fileSystems."/mnt/guests" = {
     device = "/dev/prismo-vm-vg/guest-roots";
+    fsType = "btrfs";
+  };
+
+  fileSystems."/mnt/win10-backup-tmp" = {
+    device = "/dev/prismo-vm-vg/win10-backup-tmp";
     fsType = "btrfs";
   };
 

@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ../modules/polkit-allow-mount.nix
+  ];
+
   # allow use of non-free packages
   nixpkgs.config.allowUnfree = true;
 

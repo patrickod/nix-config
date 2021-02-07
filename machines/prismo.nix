@@ -1,7 +1,9 @@
 { config, lib, ... }:
 
 {
-  nixpkgs.overlays = [ (import ../overlays/systemd.nix) ];
+  nixpkgs.overlays = [
+    (import ../overlays/systemd.nix)
+  ];
 
   imports = [
     ../hardware/asus-3900x.nix
