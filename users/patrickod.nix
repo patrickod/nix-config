@@ -240,7 +240,8 @@
       latitude = "37.7749";
       longitude = "-122.4194";
       brightness.day = "1";
-      brightness.night = "0.7";
+      brightness.night = "0.85";
+      temperature.night = 3900;
       tray = true;
     };
 
@@ -297,5 +298,9 @@
 
     # STLink-V2
     SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3748", GROUP="dialout"
+
+    # Yubikey
+    ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0010|0110|0111|0114|0116|0401|0403|0405|0407|0410", \
+        ENV{ID_SECURITY_TOKEN}="1"
   '';
 }
