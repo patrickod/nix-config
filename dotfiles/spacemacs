@@ -32,7 +32,6 @@
      rust
      shell-scripts
      terraform
-     themes-megapack
      version-control
      yaml
    )
@@ -45,9 +44,9 @@
                                       handlebars-mode
                                       keychain-environment
                                       ox-reveal
-                                      php-mode
                                       protobuf-mode
-                                      sass-mode)
+                                      sass-mode
+                                      github-modern-theme)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -81,8 +80,8 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(tsdh-dark
-                         tsdh-light)
+   dotspacemacs-themes '(github-modern
+                         tsdh-dark)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
