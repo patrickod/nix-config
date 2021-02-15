@@ -177,6 +177,7 @@
       pkgs.kicad-unstable
       pkgs.magic-wormhole
       pkgs.maim
+      pkgs.mdbook
       pkgs.nix-index
       pkgs.nixops
       pkgs.nix-prefetch-github
