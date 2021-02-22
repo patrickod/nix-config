@@ -205,8 +205,10 @@
       enable = true;
       userName = "Patrick O'Doherty";
       userEmail = "p@trickod.com";
-      extraConfig = { pull.ff = "only";
-                      init.defaultBranch = "main"; };
+      extraConfig = {
+        pull.ff = "only";
+        init.defaultBranch = "main";
+      };
     };
     programs.zsh = {
       enable = true;
