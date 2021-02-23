@@ -38,5 +38,7 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
+  services.tailscale.enable = true;
+
   system.stateVersion = "20.03"; # Did you read the comment?
 }
