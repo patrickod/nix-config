@@ -88,11 +88,12 @@
     displayManager = {
       defaultSession = "none+i3";
 
+      autoLogin.enable = true;
+      autoLogin.user = "patrickod";
+
       lightdm = {
         enable = true;
         greeter.enable = false;
-        autoLogin.enable = true;
-        autoLogin.user = "patrickod";
       };
 
       sessionCommands = ''
