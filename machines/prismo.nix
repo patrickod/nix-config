@@ -10,6 +10,7 @@
     ../secrets.nix
     <home-manager/nixos>
     ../users/patrickod.nix
+    ../modules/defaults.nix
     ../modules/qemu-hooks.nix
   ];
 
@@ -21,13 +22,6 @@
   networking.useDHCP = false;
   networking.bridges.br0.interfaces = [ "enp6s0" ];
   networking.interfaces.br0.useDHCP = true;
-
-  # remotely accessible by SSH
-  services.openssh.enable = true;
-
-  # set NOPASSWD sudoers
-  security.sudo.enable = true;
-  security.sudo.wheelNeedsPassword = false;
 
   hardware.pulseaudio.extraConfig = ''
     # Local QEMU socket

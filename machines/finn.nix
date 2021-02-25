@@ -5,6 +5,7 @@
     ../hardware/x260.nix
     ../secrets.nix
     <home-manager/nixos>
+    ../modules/defaults.nix
     ../users/patrickod.nix
     ../modules/musnix
     ../modules/strangeparts-wireguard.nix
@@ -22,23 +23,12 @@
   networking.interfaces.enp0s31f6.useDHCP = false;
   networking.interfaces.wlp4s0.useDHCP = true;
 
-  security.sudo.enable = true;
-  security.sudo.wheelNeedsPassword = false;
-
-  # remotely accessible by SSH
-  services.openssh.enable = true;
-
-  # disable firewall as device never roams from home
-  networking.firewall.enable = false;
-
   # realtime audio
   musnix.enable = true;
 
   # enable bluetooth HW and audio support
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
-
-  services.tailscale.enable = true;
 
   system.stateVersion = "20.03"; # Did you read the comment?
 }
