@@ -9,6 +9,7 @@
     ../users/patrickod.nix
     ../modules/musnix
     ../modules/strangeparts-wireguard.nix
+    ../modules/cafe-sophie-wireless.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
