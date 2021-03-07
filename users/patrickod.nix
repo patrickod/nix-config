@@ -296,7 +296,9 @@
     SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3748", GROUP="dialout"
 
     # Yubikey
-    ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0010|0110|0111|0114|0116|0401|0403|0405|0407|0410", \
-        ENV{ID_SECURITY_TOKEN}="1"
+    ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0010|0110|0111|0114|0116|0401|0403|0405|0407|0410", ENV{ID_SECURITY_TOKEN}="1"
+
+    # MCP2221
+    SUBSYSTEM=="usb", ATTRS{idVendor="04d8"}, ATTR{idProduct="00dd"}, OWNER="patrickod", GROUP="users"
   '';
 }
