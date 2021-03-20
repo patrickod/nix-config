@@ -299,6 +299,6 @@
     ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0010|0110|0111|0114|0116|0401|0403|0405|0407|0410", ENV{ID_SECURITY_TOKEN}="1"
 
     # MCP2221
-    SUBSYSTEM=="usb", ATTRS{idVendor="04d8"}, ATTR{idProduct="00dd"}, OWNER="patrickod", GROUP="users"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="04d8", ATTR{idProduct}=="00dd", MODE="0666"
   '';
 }
