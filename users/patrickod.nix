@@ -159,10 +159,7 @@
   # Configure home-manager with user packages
   home-manager.users.patrickod = { pkgs, ... }: {
     home.packages = [
-      pkgs.arduino
-      pkgs.bundix
       pkgs.discord
-      pkgs.eagle
       pkgs.flyctl
       pkgs.gist
       pkgs.gnome3.nautilus
@@ -182,7 +179,6 @@
       pkgs.nix-index
       pkgs.nixops
       pkgs.nix-prefetch-github
-      pkgs.nix-prefetch-github
       pkgs.nix-query-tree-viewer
       pkgs.patchelf
       pkgs.pavucontrol
@@ -194,7 +190,6 @@
       pkgs.scrot
       pkgs.silver-searcher
       pkgs.slack
-      pkgs.spotify
       pkgs.unzip
       pkgs.vlc
       pkgs.vscode
