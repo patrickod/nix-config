@@ -41,7 +41,7 @@ let
     TRIES=0
     while (( "$ALLOC_PAGES" != "$HUGEPAGES" && $TRIES < 1000 ))
     do
-        echo 1 > /proc/sys/vmmcompact_memory            ## defrag ram
+        echo 1 > /proc/sys/vm/compact_memory            ## defrag ram
         echo $HUGEPAGES > /proc/sys/vm/nr_hugepages
         ALLOC_PAGES="$(cat /proc/sys/vm/nr_hugepages)"
         echo "Succesfully allocated $ALLOC_PAGES / $HUGEPAGES"
