@@ -172,7 +172,6 @@
       pkgs.iotop
       pkgs.jq
       pkgs.keychain
-      pkgs.kicad-unstable
       pkgs.magic-wormhole
       pkgs.maim
       pkgs.mdbook
@@ -204,6 +203,7 @@
       extraConfig = {
         pull.ff = "only";
         init.defaultBranch = "main";
+        core.editor = "code -w";
       };
     };
     programs.zsh = {
@@ -296,4 +296,11 @@
     # MCP2221
     SUBSYSTEM=="usb", ATTRS{idVendor}=="04d8", ATTR{idProduct}=="00dd", MODE="0666"
   '';
+
+  services.syncthing = {
+    enable = true;
+    user = "patrickod";
+    dataDir = "/home/patrickod/syncthing";
+    configDir = "/home/patrickod/.config/syncthing/";
+  };
 }
