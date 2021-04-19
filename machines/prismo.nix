@@ -20,7 +20,7 @@
   # hostname + networking setup
   networking.hostName = "prismo"; # Define your hostname.
   networking.useDHCP = false;
-  networking.bridges.br0.interfaces = [ "enp6s0" ];
+  networking.bridges.br0.interfaces = [ "enp7s0" ];
   networking.interfaces.br0.useDHCP = true;
 
   hardware.pulseaudio.extraConfig = ''
