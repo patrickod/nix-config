@@ -3,12 +3,7 @@ icons = "awesome5"
 
 [[block]]
 block = "net"
-device = "enp6s0"
 ip = true
-speed_up = true
-graph_up = true
-speed_down = true
-graph_down = true
 
 [[block]]
 block = "disk_space"

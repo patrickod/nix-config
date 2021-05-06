@@ -141,6 +141,7 @@
         i3lock-fancy
         i3-gaps
         i3blocks
+        feh
       ];
     };
   };
@@ -176,7 +177,6 @@
       pkgs.maim
       pkgs.mdbook
       pkgs.nix-index
-      pkgs.nixops
       pkgs.nix-prefetch-github
       pkgs.nix-query-tree-viewer
       pkgs.patchelf
