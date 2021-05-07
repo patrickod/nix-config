@@ -146,7 +146,7 @@
     };
   };
 
-  fonts.fonts = with pkgs; [ source-code-pro proggyfonts font-awesome ];
+  fonts.fonts = with pkgs; [ source-code-pro proggyfonts font-awesome jetbrains-mono ];
 
   users.users.patrickod = {
     isNormalUser = true;
