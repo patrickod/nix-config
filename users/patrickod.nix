@@ -1,9 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../modules/polkit-allow-mount.nix
-  ];
+  imports = [ ../modules/polkit-allow-mount.nix ];
 
   # allow use of non-free packages
   nixpkgs.config.allowUnfree = true;
@@ -146,7 +144,12 @@
     };
   };
 
-  fonts.fonts = with pkgs; [ source-code-pro proggyfonts font-awesome jetbrains-mono ];
+  fonts.fonts = with pkgs; [
+    source-code-pro
+    proggyfonts
+    font-awesome
+    jetbrains-mono
+  ];
 
   users.users.patrickod = {
     isNormalUser = true;
@@ -225,7 +228,7 @@
       transparent = true;
       shading = 20;
       extraConfig = {
-        "font" = "xft:Source Code Pro:pixelsize=12";
+        "font" = "xft:JetBrains Mono:pixelsize=12";
         "perl-ext-common" = "font-size";
         "keysym.C-Up" = "font-size:increase";
         "keysym.C-Down" = "font-size:decrease";
