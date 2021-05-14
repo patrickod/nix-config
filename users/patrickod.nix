@@ -1,9 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../modules/polkit-allow-mount.nix
-  ];
+  imports = [ ../modules/polkit-allow-mount.nix ];
 
   # allow use of non-free packages
   nixpkgs.config.allowUnfree = true;
@@ -141,11 +139,17 @@
         i3lock-fancy
         i3-gaps
         i3blocks
+        feh
       ];
     };
   };
 
-  fonts.fonts = with pkgs; [ source-code-pro proggyfonts font-awesome ];
+  fonts.fonts = with pkgs; [
+    source-code-pro
+    proggyfonts
+    font-awesome
+    jetbrains-mono
+  ];
 
   users.users.patrickod = {
     isNormalUser = true;
@@ -176,7 +180,6 @@
       pkgs.maim
       pkgs.mdbook
       pkgs.nix-index
-      pkgs.nixops
       pkgs.nix-prefetch-github
       pkgs.nix-query-tree-viewer
       pkgs.patchelf
@@ -225,7 +228,7 @@
       transparent = true;
       shading = 20;
       extraConfig = {
-        "font" = "xft:Source Code Pro:pixelsize=12";
+        "font" = "xft:JetBrains Mono:pixelsize=12";
         "perl-ext-common" = "font-size";
         "keysym.C-Up" = "font-size:increase";
         "keysym.C-Down" = "font-size:decrease";

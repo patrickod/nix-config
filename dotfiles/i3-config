@@ -1,6 +1,6 @@
 set $mod Mod1
 
-font pango:DejaVu Sans Mono 8
+font pango:JetBrains Sans Mono 8
 
 # set the gaps configuration
 for_window [class=".*"] border pixel 0
@@ -11,7 +11,7 @@ smart_borders on
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-exec --no-startup-id nm-applet
+exec --no-startup-id feh --bg-fill --random ~/backgrounds/*
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -154,7 +154,7 @@ mode "resize" {
 bindsym $mod+p mode "resize"
 
 bar {
-    font pango:DejaVu Sans Mono, FontAwesome 10
+    font pango: JetBrains Mono, FontAwesome 10
     position top
     status_command i3status-rs ~/.config/i3/status.toml
     colors {

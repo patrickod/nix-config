@@ -4,11 +4,6 @@ icons = "awesome5"
 [[block]]
 block = "net"
 device = "wlp4s0"
-ip = true
-speed_up = true
-graph_up = true
-speed_down = true
-graph_down = true
 
 [[block]]
 block = "disk_space"
@@ -45,11 +40,6 @@ per_core = true
 block = "load"
 interval = 1
 format = "{1m}"
-
-[[block]]
-block = "music"
-player = "spotify"
-buttons = ["play", "next"]
 
 [[block]]
 block = "sound"
