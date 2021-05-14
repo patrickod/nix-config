@@ -12,6 +12,15 @@
     ../modules/qemu-hooks.nix
   ];
 
+  specialisation = {
+    work.configuration = {
+      services.ezpassthru.PCIs = {
+        "10de:128b" = "0000:0c:00.0"; # GE710 Video
+        "10de:0e0f" = "0000:0c:00.1"; # GE710 Audio
+      };
+    };
+  };
+
   nix.systemFeatures =
     [ "big-parallel" "benchmark" "nixos-test" "kvm" "gccarch-znver2" ];
 
