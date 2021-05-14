@@ -44,16 +44,12 @@
   boot.kernelModules = [ "kvm-amd" "vfio-pci" ];
   boot.extraModulePackages = [ ];
 
-  # Configure PCI passthrough for:
-  #  * RTX 2070 Super x 4 (VGA, Audio, USB, Serial)
-  #  * USB expansion card
+  # Configure PCI passthrough RTX
   services.ezpassthru = {
     enable = true;
     PCIs = {
-      "10de:1e84" = "0000:05:00.0";
-      "10de:10f8" = "0000:05:00.1";
-      "10de:1ad8" = "0000:05:00.2";
-      "10de:1ad9" = "0000:05:00.3";
+      "10de:2204" = "0000:05:00.0"; # RTX3090 Video
+      "10de:1aef" = "0000:05:00.1"; # RTX3090 Audio
     };
   };
 
