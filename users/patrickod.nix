@@ -193,6 +193,7 @@
       pkgs.silver-searcher
       pkgs.slack
       pkgs.unzip
+      pkgs.urxvt_font_size
       pkgs.vlc
       pkgs.vscode
       pkgs.weechat

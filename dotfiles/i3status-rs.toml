@@ -3,7 +3,6 @@ icons = "awesome5"
 
 [[block]]
 block = "net"
-ip = true
 
 [[block]]
 block = "disk_space"
@@ -28,13 +27,12 @@ alert = 10.0
 [[block]]
 block = "memory"
 display_type = "memory"
-format_mem = "{Mup}%"
-format_swap = "{SUp}%"
+format_mem = "{mem_used_percents}%"
+format_swap = "{swap_used_percents}%"
 
 [[block]]
 block = "cpu"
 interval = 1
-per_core = true
 
 [[block]]
 block = "load"
@@ -48,3 +46,15 @@ block = "sound"
 block = "time"
 interval = 60
 format = "%B %d %Y %R"
+
+[[block]]
+device = "BAT0"
+block = "battery"
+driver = "upower"
+format = "{percentage}"
+
+[[block]]
+device = "BAT1"
+block = "battery"
+driver = "upower"
+format = "{percentage}"
