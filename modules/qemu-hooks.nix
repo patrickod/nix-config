@@ -75,13 +75,13 @@ in {
     preStart = ''
       mkdir -p /var/lib/libvirt/vbios
       mkdir -p /var/lib/libvirt/hooks
-      mkdir -p /var/lib/libvirt/hooks/qemu.d/win10-{steam,intercom,vr}/{prepare/begin,release/end}
+      mkdir -p /var/lib/libvirt/hooks/qemu.d/win10-{steam,intercom,vr,intercom-710}/{prepare/begin,release/end}
 
       ln -sf ${qemuHook} /var/lib/libvirt/hooks/qemu
-      for dest in /var/lib/libvirt/hooks/qemu.d/win10-{steam,intercom,vr}/prepare/begin/start.sh; do
+      for dest in /var/lib/libvirt/hooks/qemu.d/win10-{steam,intercom,vr,intercom-710}/prepare/begin/start.sh; do
         ln -sf ${win10Setup} $dest
       done
-      for dest in /var/lib/libvirt/hooks/qemu.d/win10-{steam,intercom,vr}/release/end/revert.sh; do
+      for dest in /var/lib/libvirt/hooks/qemu.d/win10-{steam,intercom,vr,intercom-710}/release/end/revert.sh; do
         ln -sf ${win10Teardown} $dest
       done
     '';
