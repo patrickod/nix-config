@@ -46,15 +46,3 @@ block = "sound"
 block = "time"
 interval = 60
 format = "%B %d %Y %R"
-
-[[block]]
-device = "BAT0"
-block = "battery"
-driver = "upower"
-format = "{percentage}"
-
-[[block]]
-device = "BAT1"
-block = "battery"
-driver = "upower"
-format = "{percentage}"

@@ -73,11 +73,6 @@
     fsType = "btrfs";
   };
 
-  fileSystems."/mnt/win10-backup-tmp" = {
-    device = "/dev/prismo-vm-vg/win10-backup-tmp";
-    fsType = "btrfs";
-  };
-
   swapDevices =
     [{ device = "/dev/disk/by-uuid/e43f8b57-5651-4881-960d-9524d805b97c"; }];
 
