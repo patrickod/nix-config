@@ -25,6 +25,7 @@
     hwloc
     pciutils
     prometheus-node-exporter
+    keychain
     pv
     silver-searcher
     sqlite
@@ -33,6 +34,7 @@
     vim
     wget
     xorg.xdpyinfo
+    axoloti
   ];
 
   services.gnome3.gnome-keyring.enable = true;
