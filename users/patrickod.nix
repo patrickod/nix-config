@@ -33,6 +33,7 @@
     vim
     wget
     xorg.xdpyinfo
+    swtpm-tpm2
   ];
 
   services.gnome3.gnome-keyring.enable = true;
