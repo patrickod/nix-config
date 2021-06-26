@@ -36,6 +36,7 @@
     xorg.xdpyinfo
     swtpm-tpm2
     axoloti
+    notmuch
   ];
 
   services.gnome3.gnome-keyring.enable = true;

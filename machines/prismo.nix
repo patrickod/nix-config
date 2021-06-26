@@ -14,7 +14,6 @@
 
   specialisation = {
     work.configuration = {
-
       boot.kernelParams = [ "amd_iommu=on" "iommu=pt" "pcie_aspm=off" "video=efifb:off"];
       services.ezpassthru.PCIs = {
         "10de:128b" = "0000:0c:00.0"; # GE710 Video
