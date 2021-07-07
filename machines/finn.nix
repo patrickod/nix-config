@@ -3,7 +3,6 @@
 {
   imports = [ # Include the results of the hardware scan.
     ../hardware/x260.nix
-    ../secrets.nix
     <home-manager/nixos>
     ../modules/defaults.nix
     ../users/patrickod.nix

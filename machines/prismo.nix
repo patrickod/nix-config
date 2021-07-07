@@ -5,8 +5,6 @@
 
   imports = [
     ../hardware/asus-3900x.nix
-    ../secrets.nix
-    <home-manager/nixos>
     ../users/patrickod.nix
     ../modules/defaults.nix
     ../modules/qemu-hooks.nix
@@ -32,11 +30,6 @@
   networking.useDHCP = false;
   networking.bridges.br0.interfaces = [ "enp7s0" ];
   networking.interfaces.br0.useDHCP = true;
-
-  hardware.pulseaudio.extraConfig = ''
-    # Local QEMU socket
-    load-module module-native-protocol-unix auth-anonymous=1 socket=/tmp/pulse
-  '';
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
