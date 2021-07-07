@@ -20,6 +20,7 @@
   environment.systemPackages = with pkgs; [
     dhcp
     direnv
+    nix-direnv
     emacs
     git
     hwloc
