@@ -8,7 +8,7 @@
 # sudo nix flake update --commit-lock-file /etc/nixos
 
 {
-  inputs.nixpkgs.url = "github:patrickod/nixpkgs/personal";
+  inputs.nixpkgs.url = "path:/home/patrickod/code/nixpkgs";
 
   inputs.home-manager.url = "github:nix-community/home-manager/master";
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -17,13 +17,17 @@
 
     nixosConfigurations.prismo = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      # Things in this set are passed to modules and accessible
-      # in the top-level arguments (e.g. `{ pkgs, lib, inputs, ... }:`).
       specialArgs = {
         inherit inputs;
       };
       modules = [
         inputs.home-manager.nixosModules.home-manager
+
+        ({pkgs, ... }: {
+          nixpkgs.overlays = [
+            (self: super: { nix-direnv = super.nix-direnv.override { enableFlakes = true; }; } )
+          ];
+        })
 
         ({ pkgs, ... }: {
           nix.extraOptions = "experimental-features = nix-command flakes";
@@ -36,5 +40,29 @@
       ];
     };
 
+    nixosConfigurations.finn = inputs.nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {
+        inherit inputs;
+      };
+      modules = [
+        inputs.home-manager.nixosModules.home-manager
+
+        ({pkgs, ... }: {
+          nixpkgs.overlays = [
+            (self: super: { nix-direnv = super.nix-direnv.override { enableFlakes = true; }; } )
+          ];
+        })
+
+        ({ pkgs, ... }: {
+          nix.extraOptions = "experimental-features = nix-command flakes";
+          nix.package = pkgs.nixFlakes;
+          nix.registry.nixpkgs.flake = inputs.nixpkgs;
+          home-manager.useGlobalPkgs = true;
+        })
+
+        ./machines/finn.nix
+      ];
+    };
   };
 }

@@ -3,12 +3,11 @@
 {
   imports = [ # Include the results of the hardware scan.
     ../hardware/x260.nix
-    <home-manager/nixos>
     ../modules/defaults.nix
     ../users/patrickod.nix
-    ../modules/musnix
     ../modules/strangeparts-wireguard.nix
-    ../modules/cafe-sophie-wireless.nix
+    # ../modules/cafe-sophie-wireless.nix
+    # ../modules/musnix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -24,7 +23,7 @@
   networking.interfaces.wlp4s0.useDHCP = true;
 
   # realtime audio
-  musnix.enable = true;
+  # musnix.enable = true;
 
   # enable bluetooth HW and audio support
   hardware.bluetooth.enable = true;

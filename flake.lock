@@ -23,18 +23,13 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1625345608,
-        "narHash": "sha256-kIGvy3NmaPNIaIBRzXV3lCkw2KavGEPW3vfchNWMKBk=",
-        "owner": "patrickod",
-        "repo": "nixpkgs",
-        "rev": "9788878dcb526da1f65c110141e0dcde6cdba16a",
-        "type": "github"
+        "narHash": "sha256-rHW5Z2qeZbAfzdMYZeBR24JVNiJ4Q75+u6Px55PgLww=",
+        "path": "/home/patrickod/code/nixpkgs",
+        "type": "path"
       },
       "original": {
-        "owner": "patrickod",
-        "ref": "personal",
-        "repo": "nixpkgs",
-        "type": "github"
+        "path": "/home/patrickod/code/nixpkgs",
+        "type": "path"
       }
     },
     "root": {

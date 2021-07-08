@@ -3,7 +3,7 @@
 {
   nixpkgs.overlays = [
     (import ../overlays/systemd.nix)
-    (self: super: { nix-direnv = super.nix-direnv.override { enableFlakes = true; }; } )
+    # (self: super: { nix-direnv = super.nix-direnv.override { enableFlakes = true; }; } )
   ];
 
   imports = [
