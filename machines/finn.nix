@@ -17,8 +17,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "finn"; # Define your hostname.
-  networking.wireless.enable =
-    true; # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
+  networking.wireless.interfaces = ["wlp4s0"];
 
   networking.useDHCP = false;
   networking.interfaces.enp0s31f6.useDHCP = false;
