@@ -1,12 +1,13 @@
 { config, lib, ... }:
 
 {
-  nixpkgs.overlays = [ (import ../overlays/systemd.nix) ];
+  nixpkgs.overlays = [
+    (import ../overlays/systemd.nix)
+    (self: super: { nix-direnv = super.nix-direnv.override { enableFlakes = true; }; } )
+  ];
 
   imports = [
     ../hardware/asus-3900x.nix
-    ../secrets.nix
-    <home-manager/nixos>
     ../users/patrickod.nix
     ../modules/defaults.nix
     ../modules/qemu-hooks.nix
@@ -14,7 +15,6 @@
 
   specialisation = {
     work.configuration = {
-
       boot.kernelParams = [ "amd_iommu=on" "iommu=pt" "pcie_aspm=off" "video=efifb:off"];
       services.ezpassthru.PCIs = {
         "10de:128b" = "0000:0c:00.0"; # GE710 Video
@@ -33,11 +33,6 @@
   networking.useDHCP = false;
   networking.bridges.br0.interfaces = [ "enp7s0" ];
   networking.interfaces.br0.useDHCP = true;
-
-  hardware.pulseaudio.extraConfig = ''
-    # Local QEMU socket
-    load-module module-native-protocol-unix auth-anonymous=1 socket=/tmp/pulse
-  '';
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;

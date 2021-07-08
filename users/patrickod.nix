@@ -20,6 +20,7 @@
   environment.systemPackages = with pkgs; [
     dhcp
     direnv
+    nix-direnv
     emacs
     git
     hwloc
@@ -36,6 +37,7 @@
     xorg.xdpyinfo
     swtpm-tpm2
     axoloti
+    notmuch
   ];
 
   services.gnome3.gnome-keyring.enable = true;
@@ -158,6 +160,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "libvirtd" "docker" "dialout" "audio" ];
     shell = pkgs.zsh;
+    hashedPassword = "$6$t1qPJ.r2M2XljH$dIBeXMWkq10Pr5C0FsSx44RxXzcxTXaK4.ULeYZ8UmFI8PuNWww5SAci2Zx.WTU4prUS775MuhkbMCg98dT.P0";
   };
 
   programs.ssh.startAgent = true;
