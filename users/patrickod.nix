@@ -197,6 +197,7 @@
       pkgs.rustup
       pkgs.scrot
       pkgs.silver-searcher
+      pkgs.signal-desktop
       pkgs.slack
       pkgs.unzip
       pkgs.urxvt_font_size

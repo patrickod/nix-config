@@ -23,7 +23,7 @@
     },
     "nixpkgs": {
       "locked": {
-        "narHash": "sha256-nW2a6bE3LyWyb+qZsMkCCfDiMyXMUd4cTpP1UxkduuQ=",
+        "narHash": "sha256-H2kbnVgDbdRgZB+rU2g4Hqzl3pq07pLODHGPNt/XoGU=",
         "path": "/home/patrickod/code/nixpkgs",
         "type": "path"
       },
