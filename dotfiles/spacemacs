@@ -54,7 +54,7 @@
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'
    dotspacemacs-delete-orphan-packages t
-   dotspacemacs-line-numbers t))
+   dotspacemacs-line-numbers 'relative))
 
 (defun dotspacemacs/init ()
   "Initialization function.

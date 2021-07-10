@@ -214,7 +214,7 @@
       extraConfig = {
         pull.ff = "only";
         init.defaultBranch = "main";
-        core.editor = "code -w";
+        core.editor = "emacsclient -c";
       };
     };
     programs.zsh = {
