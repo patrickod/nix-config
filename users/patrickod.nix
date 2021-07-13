@@ -21,8 +21,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     dhcp
-    direnv
-    nix-direnv
     emacs
     git
     hwloc
@@ -225,7 +223,6 @@
         plugins = [ "git" ];
       };
       initExtra = ''
-        eval "$(direnv hook zsh)"
         export TERM=xterm-256color
         eval `keychain --eval id_ed25519 iocoop`
       '';
@@ -256,6 +253,12 @@
         };
       };
     };
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+      nix-direnv.enableFlakes = true;
+      enableZshIntegration = true;
+    };
     services.redshift = {
       enable = true;
       latitude = "37.7749";
@@ -271,11 +274,6 @@
     };
 
     home.file.".spacemacs".source = ../dotfiles/spacemacs;
-    home.file.".direnvrc".text = ''
-      if [ -f /run/current-system/sw/share/nix-direnv/direnvrc ]; then
-        source /run/current-system/sw/share/nix-direnv/direnvrc
-      fi
-    '';
 
     ## i3 status & keybinding configuration
     ## TODO: migrate to home-manager i3 configuration management
