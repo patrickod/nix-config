@@ -15,6 +15,8 @@
   time.timeZone = "America/Los_Angeles";
   time.hardwareClockInLocalTime = true;
 
+  environment.pathsToLink = [ "/share/nix-direnv" ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -41,9 +43,6 @@
   ];
 
   services.gnome3.gnome-keyring.enable = true;
-
-  # enable lorri nix/direnv replacement
-  services.lorri.enable = true;
 
   # configure default editor
   services.emacs.enable = true;
@@ -246,6 +245,17 @@
         "keysym.C-slash" = "font-size:show";
       };
     };
+    programs.ssh = {
+      enable = true;
+      matchBlocks = {
+        "betty.patrickod.com" = { user = "root"; };
+        "g1-*" = {
+          user = "root";
+          certificateFile = "~/.ssh/iocoop-cert.pub";
+          proxyCommand = "ssh manage1.scl.iocoop.org nc %h %p";
+        };
+      };
+    };
     services.redshift = {
       enable = true;
       latitude = "37.7749";
@@ -260,19 +270,12 @@
       BROWSER = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
     };
 
-    programs.ssh = {
-      enable = true;
-      matchBlocks = {
-        "betty.patrickod.com" = { user = "root"; };
-        "g1-*" = {
-          user = "root";
-          certificateFile = "~/.ssh/iocoop-cert.pub";
-          proxyCommand = "ssh manage1.scl.iocoop.org nc %h %p";
-        };
-      };
-    };
-
     home.file.".spacemacs".source = ../dotfiles/spacemacs;
+    home.file.".direnvrc".text = ''
+      if [ -f /run/current-system/sw/share/nix-direnv/direnvrc ]; then
+        source /run/current-system/sw/share/nix-direnv/direnvrc
+      fi
+    '';
 
     ## i3 status & keybinding configuration
     ## TODO: migrate to home-manager i3 configuration management
