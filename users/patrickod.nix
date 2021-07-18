@@ -167,7 +167,9 @@
   home-manager.users.patrickod = { pkgs, ... }: {
     home.packages = [
       pkgs.discord
+      pkgs.firefox
       pkgs.flyctl
+      pkgs.fzf
       pkgs.gist
       pkgs.gnome3.nautilus
       pkgs.go
@@ -193,8 +195,8 @@
       pkgs.restic
       pkgs.rustup
       pkgs.scrot
-      pkgs.silver-searcher
       pkgs.signal-desktop
+      pkgs.silver-searcher
       pkgs.slack
       pkgs.unzip
       pkgs.urxvt_font_size
