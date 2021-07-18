@@ -8,7 +8,7 @@
 # sudo nix flake update --commit-lock-file /etc/nixos
 
 {
-  inputs.nixpkgs.url = "path:/home/patrickod/code/nixpkgs";
+  inputs.nixpkgs.url = "github:patrickod/nixpkgs/personal";
 
   inputs.home-manager.url = "github:nix-community/home-manager/master";
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
