@@ -20,7 +20,7 @@ This function should only modify configuration layer settings."
      go
      html
      javascript
-     lsp :variables lsp-rust-server 'rust-analyzer
+     (lsp :variables lsp-rust-server 'rust-analyzer)
      markdown
      nginx
      nixos

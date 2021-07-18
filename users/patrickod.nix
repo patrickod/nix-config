@@ -187,6 +187,7 @@
       pkgs.nix-query-tree-viewer
       pkgs.patchelf
       pkgs.pavucontrol
+      pkgs.paperwork
       pkgs.pcmanfm
       pkgs.pigz
       pkgs.probe-run
@@ -274,6 +275,7 @@
     };
 
     home.file.".spacemacs".source = ../dotfiles/spacemacs;
+    home.file.".urxvt/ext/font-size".source = "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
 
     ## i3 status & keybinding configuration
     ## TODO: migrate to home-manager i3 configuration management
