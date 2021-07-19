@@ -6,8 +6,6 @@
     ../modules/defaults.nix
     ../users/patrickod.nix
     ../modules/strangeparts-wireguard.nix
-    # ../modules/cafe-sophie-wireless.nix
-    # ../modules/musnix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -27,9 +25,6 @@
   networking.useDHCP = false;
   networking.interfaces.enp0s31f6.useDHCP = false;
   networking.interfaces.wlp4s0.useDHCP = true;
-
-  # realtime audio
-  # musnix.enable = true;
 
   # enable bluetooth HW and audio support
   hardware.bluetooth.enable = true;

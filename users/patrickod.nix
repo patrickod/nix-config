@@ -36,8 +36,6 @@
     wget
     xorg.xdpyinfo
     swtpm-tpm2
-    axoloti
-    notmuch
   ];
 
   services.gnome3.gnome-keyring.enable = true;
@@ -165,47 +163,49 @@
 
   # Configure home-manager with user packages
   home-manager.users.patrickod = { pkgs, ... }: {
-    home.packages = [
-      pkgs.discord
-      pkgs.firefox
-      pkgs.flyctl
-      pkgs.fzf
-      pkgs.gist
-      pkgs.gnome3.nautilus
-      pkgs.go
-      pkgs.google-chrome-beta
-      pkgs.htop
-      pkgs.httpie
-      pkgs.hwloc
-      pkgs.iftop
-      pkgs.iotop
-      pkgs.jq
-      pkgs.keychain
-      pkgs.magic-wormhole
-      pkgs.maim
-      pkgs.mdbook
-      pkgs.nix-index
-      pkgs.nix-prefetch-github
-      pkgs.nix-query-tree-viewer
-      pkgs.patchelf
-      pkgs.pavucontrol
-      pkgs.paperwork
-      pkgs.pcmanfm
-      pkgs.pigz
-      pkgs.probe-run
-      pkgs.restic
-      pkgs.rustup
-      pkgs.scrot
-      pkgs.signal-desktop
-      pkgs.silver-searcher
-      pkgs.slack
-      pkgs.unzip
-      pkgs.urxvt_font_size
-      pkgs.vlc
-      pkgs.vscode
-      pkgs.weechat
-      pkgs.wireguard
-      pkgs.xclip
+    home.packages = with pkgs; [
+      _1password-gui
+      exa
+      discord
+      firefox-beta-bin
+      flyctl
+      fzf
+      gist
+      gnome3.nautilus
+      go
+      google-chrome-beta
+      htop
+      httpie
+      hwloc
+      iftop
+      iotop
+      jq
+      keychain
+      magic-wormhole
+      maim
+      mdbook
+      nix-index
+      nix-prefetch-github
+      notmuch
+      patchelf
+      pavucontrol
+      paperwork
+      pcmanfm
+      pigz
+      probe-run
+      restic
+      rustup
+      scrot
+      signal-desktop
+      silver-searcher
+      slack
+      unzip
+      urxvt_font_size
+      vlc
+      vscode
+      weechat
+      wireguard
+      xclip
     ];
     programs.git = {
       enable = true;
@@ -278,6 +278,7 @@
 
     home.file.".spacemacs".source = ../dotfiles/spacemacs;
     home.file.".urxvt/ext/font-size".source = "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
+
 
     ## i3 status & keybinding configuration
     ## TODO: migrate to home-manager i3 configuration management
