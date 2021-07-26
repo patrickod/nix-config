@@ -39,6 +39,7 @@ This function should only modify configuration layer settings."
                                       gist
                                       handlebars-mode
                                       keychain-environment
+                                      darkroom
                                       ox-reveal
                                       protobuf-mode
                                       sass-mode
@@ -358,7 +359,8 @@ See the header of this file for more information."
 This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
-If you are unsure, try setting them in `dotspacemacs/user-config' first.")
+If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (setq-default require-final-newline t))
 
 
 (defun dotspacemacs/user-load ()

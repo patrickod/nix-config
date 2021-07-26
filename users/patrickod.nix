@@ -184,6 +184,7 @@
       magic-wormhole
       maim
       mdbook
+      nixfmt
       nix-index
       nix-prefetch-github
       notmuch
