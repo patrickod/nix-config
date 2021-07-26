@@ -30,5 +30,8 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
+  services.printing.enable = true;
+  services.printing.drivers = [pkgs.brlaser];
+
   system.stateVersion = "20.03"; # Did you read the comment?
 }

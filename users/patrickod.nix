@@ -15,7 +15,7 @@
   time.timeZone = "America/Los_Angeles";
   time.hardwareClockInLocalTime = true;
 
-  environment.pathsToLink = [ "/share/nix-direnv" ];
+  #environment.pathsToLink = [ "/share/nix-direnv" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -149,6 +149,9 @@
     proggyfonts
     font-awesome
     jetbrains-mono
+    font-awesome-ttf
+    font-awesome
+    font-awesome_4
   ];
 
   users.users.patrickod = {
