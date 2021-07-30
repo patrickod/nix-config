@@ -1,6 +1,6 @@
 set $mod Mod1
 
-font pango: JetBrains Mono 10
+font pango: JetBrains Mono 14
 
 # set the gaps configuration
 for_window [class=".*"] border pixel 0
@@ -156,7 +156,7 @@ mode "resize" {
 bindsym $mod+p mode "resize"
 
 bar {
-    font pango: JetBrains Mono, FontAwesome 10
+    font pango: JetBrains Mono, FontAwesome 12
     position top
     status_command i3status-rs ~/.config/i3/status.toml
     colors {

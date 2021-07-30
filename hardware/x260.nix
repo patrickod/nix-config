@@ -46,6 +46,9 @@
   # upower battery configuration
   services.upower.enable = true;
 
+  # enable ACPI daemon for backlight functionality
+  services.acpid.enable = true;
+
   # trackpoint
   hardware.trackpoint = {
     enable = true;

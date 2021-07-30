@@ -170,10 +170,12 @@
       _1password-gui
       exa
       discord
+      fd
       firefox-beta-bin
       flyctl
       fzf
       gist
+      gmailieer
       gnome3.nautilus
       go
       google-chrome-beta
@@ -239,7 +241,7 @@
       transparent = true;
       shading = 20;
       extraConfig = {
-        "font" = "xft:JetBrains Mono:pixelsize=12";
+        "font" = "xft:JetBrains Mono:pixelsize=14";
         "perl-ext-common" = "font-size";
         "keysym.C-Up" = "font-size:increase";
         "keysym.C-Down" = "font-size:decrease";
@@ -281,6 +283,7 @@
     };
 
     home.file.".spacemacs".source = ../dotfiles/spacemacs;
+    home.file.".notmuch-config".source = ../dotfiles/notmuch-config;
     home.file.".urxvt/ext/font-size".source = "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
 
 

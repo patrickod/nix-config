@@ -1,0 +1,13 @@
+[database]
+path=/home/patrickod/mail
+[user]
+name=Patrick O'Doherty
+primary_email=p@trickod.com
+other_email=patrick@patrickodoherty.com;hello@patrickod.com;patrick@intercom.io
+[new]
+tags=new
+ignore=
+[search]
+exclude_tags=deleted;spam;
+[maildir]
+synchronize_flags=true
