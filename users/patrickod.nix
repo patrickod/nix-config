@@ -1,7 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../modules/polkit-allow-mount.nix ];
+  imports = [
+    ../modules/polkit-allow-mount.nix
+  ];
 
   # allow use of non-free packages
   nixpkgs.config.allowUnfree = true;
@@ -168,8 +170,9 @@
   home-manager.users.patrickod = { pkgs, ... }: {
     home.packages = with pkgs; [
       _1password-gui
-      exa
+      cargo
       discord
+      exa
       fd
       firefox-beta-bin
       flyctl
@@ -193,14 +196,13 @@
       nix-index
       nix-prefetch-github
       notmuch
+      paperwork
       patchelf
       pavucontrol
-      paperwork
       pcmanfm
       pigz
       probe-run
       restic
-      rustup
       scrot
       signal-desktop
       silver-searcher
@@ -211,6 +213,7 @@
       vscode
       weechat
       wireguard
+      zoom-us
       xclip
     ];
     programs.git = {
