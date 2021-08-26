@@ -170,6 +170,7 @@
   home-manager.users.patrickod = { pkgs, ... }: {
     home.packages = with pkgs; [
       _1password-gui
+      acpi
       cargo
       discord
       exa
@@ -187,6 +188,7 @@
       hwloc
       iftop
       iotop
+      ispell
       jq
       keychain
       magic-wormhole
@@ -213,8 +215,9 @@
       vscode
       weechat
       wireguard
-      zoom-us
       xclip
+      zeal
+      zoom-us
     ];
     programs.git = {
       enable = true;
