@@ -173,6 +173,7 @@
       acpi
       cargo
       discord
+      eagle
       exa
       fd
       firefox-beta-bin
@@ -198,6 +199,7 @@
       nix-index
       nix-prefetch-github
       notmuch
+      openscad
       paperwork
       patchelf
       pavucontrol
@@ -211,6 +213,7 @@
       slack
       unzip
       urxvt_font_size
+      vcv-rack
       vlc
       vscode
       weechat
@@ -321,7 +324,7 @@
     SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3748", GROUP="dialout"
 
     # Yubikey
-    ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0010|0110|0111|0114|0116|0401|0403|0405|0407|0410", ENV{ID_SECURITY_TOKEN}="1"
+    ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0010|0110|0111|0114|0116|0401|0403|0405|0407|0410", ENV{ID_SECURITY_TOKEN}="1", TAG+="uaccess"
 
     # MCP2221
     SUBSYSTEM=="usb", ATTRS{idVendor}=="04d8", ATTR{idProduct}=="00dd", MODE="0666"
