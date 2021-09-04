@@ -171,6 +171,7 @@
     home.packages = with pkgs; [
       _1password-gui
       acpi
+      bitwig-studio3
       cargo
       discord
       eagle

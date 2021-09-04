@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1630030114,
-        "narHash": "sha256-t5lptbv7rtNSawdwoA2JUAiqXgLYAO+dGqp8KRtOaDA=",
+        "lastModified": 1630428740,
+        "narHash": "sha256-394yJxkFjvg47vB0jK5WHCitLDilyGjO3HpuZkAM2GA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "33db7cc6a66d1c1cb77c23ae8e18cefd0425a0c8",
+        "rev": "21a2ff449620a9cb91802f9d1a9157b2ae8c6b39",
         "type": "github"
       },
       "original": {
@@ -21,13 +21,47 @@
         "type": "github"
       }
     },
+    "musnix": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1628019651,
+        "narHash": "sha256-zLXDF2sfvN8BXb78nHAp3KSbhE1flOkia5+KtiPQ+mQ=",
+        "owner": "musnix",
+        "repo": "musnix",
+        "rev": "7fb04384544fa2e68bf5e71869760674656b62e8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "musnix",
+        "repo": "musnix",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1630113612,
-        "narHash": "sha256-d4Ode+3+/hQ8AVQ2fRv0EYtwGt3uZhXZa588/owg2mw=",
+        "lastModified": 1623743177,
+        "narHash": "sha256-57OM8Ya/yGHAHBq/h0I8Ah/HJFmk0VNpEASYxr+BgK8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4b7c8d538e1aed2bc30b6e7eb1cbd96063ad4132",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1630723050,
+        "narHash": "sha256-OmRmLtBUsSDyhK99V8nZp2SmFhJ1wAdjObPTm15DNPU=",
         "owner": "patrickod",
         "repo": "nixpkgs",
-        "rev": "8b3805be64aaafff88915e0d245dea66f646ccea",
+        "rev": "766d1c785dd0f14bca7688903edee1ab80018c38",
         "type": "github"
       },
       "original": {
@@ -40,7 +74,8 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "musnix": "musnix",
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },

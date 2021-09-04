@@ -13,6 +13,8 @@
   inputs.home-manager.url = "github:nix-community/home-manager/master";
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+  inputs.musnix.url = "github:musnix/musnix";
+
   outputs = inputs: {
 
     nixosConfigurations.prismo = inputs.nixpkgs.lib.nixosSystem {
@@ -47,6 +49,7 @@
       };
       modules = [
         inputs.home-manager.nixosModules.home-manager
+        inputs.musnix.nixosModules.musnix
 
         ({pkgs, ... }: {
           nixpkgs.overlays = [
