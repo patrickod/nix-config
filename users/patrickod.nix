@@ -193,6 +193,7 @@
       ispell
       jq
       keychain
+      kicad-unstable
       magic-wormhole
       maim
       mdbook
