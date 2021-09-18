@@ -24,62 +24,59 @@
     };
   };
 
-  nix.systemFeatures =
-    [ "big-parallel" "benchmark" "nixos-test" "kvm" "gccarch-znver2" ];
+  nix.systemFeatures = [
+    "big-parallel" "benchmark" "nixos-test" "kvm" "gccarch-znver2" ];
 
-  # hostname + networking setup
-  networking.hostName = "prismo"; # Define your hostname.
-  networking.useDHCP = false;
-  networking.bridges.br0.interfaces = [ "enp7s0" ];
-  networking.interfaces.br0.useDHCP = true;
+    # hostname + networking setup
+    networking.hostName = "prismo"; # Define your hostname.
+    networking.useDHCP = false;
+    networking.bridges.br0.interfaces = [ "enp7s0" ];
+    networking.interfaces.br0.useDHCP = true;
 
-  # Enable bluetooth
-  hardware.bluetooth.enable = true;
-
-  # Enable the X11 windowing system.
-  services.xserver = {
-    videoDrivers = [ "nvidia" ];
-    monitorSection = ''
-      DisplaySize 598 366
-      Option "PreferredMode" "2560x1440"
-    '';
-    deviceSection = ''
-      Option	"UseEdidDpi" "false"
-    '';
-    screenSection = ''
-      Option         "metamodes" "2560x1440 +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
-      SubSection "Display"
+    # Enable the X11 windowing system.
+    services.xserver = {
+      videoDrivers = [ "nvidia" ];
+      monitorSection = ''
+        DisplaySize 598 366
+        Option "PreferredMode" "2560x1440"
+      '';
+      deviceSection = ''
+        Option	"UseEdidDpi" "false"
+      '';
+      screenSection = ''
+        Option         "metamodes" "2560x1440 +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
+        SubSection "Display"
         Modes "2560x1440"
-      EndSubSection
-    '';
-  };
+        EndSubSection
+      '';
+    };
 
-  # Configure NFS mounts for backups & photos
-  fileSystems."/mnt/backups" = {
-    device = "alexandria.lan:/mnt/alexandria/backups";
-    fsType = "nfs";
-    options = [ "x-systemd.automount" "noauto" ];
-  };
-  fileSystems."/mnt/photos" = {
-    device = "alexandria.lan:/mnt/alexandria/photos";
-    fsType = "nfs";
-    options = [ "x-systemd.automount" "noauto" ];
-  };
-  fileSystems."/mnt/media" = {
-    device = "alexandria.lan:/mnt/alexandria/media";
-    fsType = "nfs";
-    options = [ "x-systemd.automount" "noauto" ];
-  };
+    # Configure NFS mounts for backups & photos
+    fileSystems."/mnt/backups" = {
+      device = "172.30.42.20:/mnt/alexandria/backups";
+      fsType = "nfs";
+      options = [ "x-systemd.automount" "noauto" ];
+    };
+    fileSystems."/mnt/photos" = {
+      device = "172.30.42.20:/mnt/alexandria/photos";
+      fsType = "nfs";
+      options = [ "x-systemd.automount" "noauto" ];
+    };
+    fileSystems."/mnt/media" = {
+      device = "172.30.42.20:/mnt/alexandria/media";
+      fsType = "nfs";
+      options = [ "x-systemd.automount" "noauto" ];
+    };
 
-  # Configure KVM
-  virtualisation.libvirtd = {
-    enable = true;
-    qemuOvmf = true;
-    qemuRunAsRoot = false;
-    onBoot = "ignore";
-    onShutdown = "shutdown";
-    qemuVerbatimConfig = ''
-      cgroup_device_acl = [
+    # Configure KVM
+    virtualisation.libvirtd = {
+      enable = true;
+      qemuOvmf = true;
+      qemuRunAsRoot = false;
+      onBoot = "ignore";
+      onShutdown = "shutdown";
+      qemuVerbatimConfig = ''
+        cgroup_device_acl = [
         "/dev/null",
         "/dev/full",
         "/dev/zero",
@@ -93,21 +90,17 @@
         "/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse",
         "/dev/input/by-id/usb-Kinesis_Freestyle_Edge_Keyboard_223606797749-if01-event-kbd",
         "/dev/input/by-id/usb-04d9_USB-HID_Keyboard-event-kbd",
-      ]
-      namespaces = []
-    '';
-  };
-  users.users.qemu-libvirtd.extraGroups = [ "input" ];
+        ]
+        namespaces = []
+      '';
+    };
+    users.users.qemu-libvirtd.extraGroups = [ "input" ];
 
-  # configure Looking Glass working file
-  systemd.tmpfiles.rules =
-    [ "f /dev/shm/looking-glass 0660 patrickod qemu-libvirtd -" ];
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.03"; # Did you read the comment?
+    # This value determines the NixOS release from which the default
+    # settings for stateful data, like file locations and database versions
+    # on your system were taken. It‘s perfectly fine and recommended to leave
+    # this value at the release version of the first install of this system.
+    # Before changing this value read the documentation for this option
+    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+    system.stateVersion = "20.03"; # Did you read the comment?
 }

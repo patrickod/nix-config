@@ -176,7 +176,6 @@
       fzf
       gist
       gmailieer
-      gnome3.nautilus
       go
       google-chrome-beta
       htop

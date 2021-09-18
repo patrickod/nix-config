@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1626645263,
-        "narHash": "sha256-rg93wVhy505wofd7jzf+jLNhebXxNJ1dB5PuewSgsr8=",
+        "lastModified": 1631740142,
+        "narHash": "sha256-FnwtaJ+fZw2QzsCqGJW4kJd9hXiPxPgfi+9dwratk28=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2b75633b2c470e1249d46fe5d9ee848e3f7ab4e7",
+        "rev": "371576cdc2580ba93a38e28da8ece2129f558815",
         "type": "github"
       },
       "original": {
@@ -23,16 +23,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1626661051,
-        "narHash": "sha256-V1uUC7FyPoFTPVvP+wNtPnLsSxQFJLXFXs/0b9frtoM=",
+        "lastModified": 1631926312,
+        "narHash": "sha256-LY9P5qOQY2+tx1L6PfmLQ4Hvka4tfC/I56ClEZiluRs=",
         "owner": "patrickod",
         "repo": "nixpkgs",
-        "rev": "4ae96ff6e10017e635c3393b454f9f88cb363008",
+        "rev": "b5ea84f87406af472808370d1075fd65fb0e61f5",
         "type": "github"
       },
       "original": {
         "owner": "patrickod",
-        "ref": "personal",
+        "ref": "finn",
         "repo": "nixpkgs",
         "type": "github"
       }
