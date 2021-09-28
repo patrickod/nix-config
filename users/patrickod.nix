@@ -17,8 +17,6 @@
   time.timeZone = "America/Los_Angeles";
   time.hardwareClockInLocalTime = true;
 
-  #environment.pathsToLink = [ "/share/nix-direnv" ];
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -193,7 +191,6 @@
       ispell
       jq
       keychain
-      kicad-unstable
       magic-wormhole
       maim
       mdbook
@@ -338,4 +335,7 @@
     dataDir = "/home/patrickod/syncthing";
     configDir = "/home/patrickod/.config/syncthing/";
   };
+
+  # enable GVFS daemon for browsing remote shares in nautilus
+  services.gvfs.enable = true;
 }
