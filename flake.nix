@@ -64,5 +64,30 @@
         ./machines/finn.nix
       ];
     };
+
+    nixosConfigurations.kimkilwhan = inputs.nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {
+        inherit inputs;
+      };
+      modules = [
+        inputs.home-manager.nixosModules.home-manager
+
+        ({pkgs, ... }: {
+          nixpkgs.overlays = [
+            (self: super: { nix-direnv = super.nix-direnv.override { enableFlakes = true; }; } )
+          ];
+        })
+
+        ({ pkgs, ... }: {
+          nix.extraOptions = "experimental-features = nix-command flakes";
+          nix.package = pkgs.nixFlakes;
+          nix.registry.nixpkgs.flake = inputs.nixpkgs;
+          home-manager.useGlobalPkgs = true;
+        })
+
+        ./machines/kimkilwhan.nix
+      ];
+    };
   };
 }
