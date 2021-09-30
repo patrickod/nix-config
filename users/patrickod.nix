@@ -20,6 +20,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    brightnessctl
     dhcp
     emacs
     git
@@ -192,6 +193,7 @@
       nix-index
       nix-prefetch-github
       notmuch
+      obs-studio
       patchelf
       pavucontrol
       paperwork
@@ -211,6 +213,7 @@
       weechat
       wireguard
       xclip
+      zoom-us
     ];
     programs.git = {
       enable = true;
