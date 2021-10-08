@@ -65,6 +65,7 @@
         Identifier "keyboardio"
         MatchIsKeyboard "on"
         MatchProduct "Keyboardio"
+        Driver "evdev"
 
         Option "XkbLayout" "us"
       ''
@@ -72,6 +73,7 @@
         Identifier "advantage"
         MatchIsKeyboard "on"
         MatchProduct "05f3"
+        Driver "evdev"
 
         Option "XkbLayout" "us"
 
@@ -182,6 +184,7 @@
       httpie
       hwloc
       iftop
+      inkscape
       iotop
       jq
       keychain
@@ -192,12 +195,14 @@
       nix-index
       nix-prefetch-github
       notmuch
+      obs-studio
       patchelf
       pavucontrol
       paperwork
       pcmanfm
       pigz
       probe-run
+      processing
       restic
       rustup
       scrot

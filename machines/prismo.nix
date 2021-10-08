@@ -12,17 +12,7 @@
     ../modules/qemu-hooks.nix
   ];
 
-  specialisation = {
-    work.configuration = {
-      boot.kernelParams = [ "amd_iommu=on" "iommu=pt" "pcie_aspm=off" "video=efifb:off"];
-      services.ezpassthru.PCIs = {
-        "10de:128b" = "0000:0c:00.0"; # GE710 Video
-        "10de:0e0f" = "0000:0c:00.1"; # GE710 Audio
-        "10de:2204" = "0000:05:00.0"; # RTX3090 Video
-        "10de:1aef" = "0000:05:00.1"; # RTX3090 Audio
-      };
-    };
-  };
+  nix.trustedUsers = ["@wheel"];
 
   nix.systemFeatures = [
     "big-parallel" "benchmark" "nixos-test" "kvm" "gccarch-znver2" ];

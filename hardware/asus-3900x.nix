@@ -36,17 +36,17 @@
 
   boot.initrd.availableKernelModules =
     [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-
     boot.initrd.kernelModules = [ "dm-snapshot" ];
 
-    Boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+    # boot.kernelPackages = pkgs.linuxPackages_5_12;
     boot.kernelParams = [ "amd_iommu=on" "iommu=pt" "pcie_aspm=off" ];
     boot.kernelModules = [ "kvm-amd" "vfio-pci" ];
     boot.extraModulePackages = [ ];
 
     # Configure PCI passthrough RTX
     services.ezpassthru = {
-      enable = true;
+      enable = false;
       PCIs = {
         "10de:2204" = "0000:05:00.0"; # RTX3090 Video
         "10de:1aef" = "0000:05:00.1"; # RTX3090 Audio

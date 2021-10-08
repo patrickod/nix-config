@@ -1,6 +1,6 @@
 set $mod Mod1
 
-font pango: JetBrains Mono 14
+font pango: JetBrains Mono 12
 
 # set the gaps configuration
 for_window [class=".*"] border pixel 0
