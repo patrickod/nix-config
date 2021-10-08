@@ -17,7 +17,6 @@ alert = 10.0
 [[block]]
 block = "disk_space"
 path = "/"
-alias = "/"
 info_type = "available"
 unit = "GB"
 interval = 20
@@ -27,8 +26,8 @@ alert = 10.0
 [[block]]
 block = "memory"
 display_type = "memory"
-format_mem = "{mem_used_percents}%"
-format_swap = "{swap_used_percents}%"
+format_mem = "{mem_used_percents}"
+format_swap = "{swap_used_percents}"
 
 [[block]]
 block = "cpu"
@@ -46,3 +45,8 @@ block = "sound"
 block = "time"
 interval = 60
 format = "%B %d %Y %R"
+
+[[block]]
+block = "battery"
+interval = 10
+format = "{percentage} {time}"
