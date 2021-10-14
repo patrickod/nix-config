@@ -5,28 +5,28 @@ font pango: JetBrains Mono 10
 # set the gaps configuration
 for_window [class=".*"] border pixel 0
 for_window [class="^.*"] border pixel 3
-gaps inner 10
-smart_gaps on
-smart_borders on
-
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# gaps inner 10
+# smart_gaps on
+# smart_borders on
 
 exec --no-startup-id feh --bg-fill --random ~/backgrounds/*
 
-# Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
+
+# Use pactl to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-bindsym XF86MonBrightnessUp exec light -A 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
+# brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10 # decrease screen brightness
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+apostrophe kill
@@ -169,3 +169,10 @@ bar {
         urgent_workspace #2f343a #900000 #ffffff
     }
 }
+
+# static window assignments
+assign [class="Code"] 1
+assign [class="Google Chrome"] 1
+
+assign [class="(?i)slack"] 2
+assign [class="(?i)quill"] 2

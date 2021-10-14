@@ -1,5 +1,5 @@
 theme = "gruvbox-light"
-icons = "awesome5"
+icons = "awesome"
 
 [[block]]
 block = "net"
@@ -46,3 +46,7 @@ block = "sound"
 block = "time"
 interval = 60
 format = "%B %d %Y %R"
+
+[[block]]
+block = "battery"
+format = "{time} {percentage}"
