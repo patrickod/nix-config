@@ -1,28 +1,26 @@
 { config, pkgs, ... }:
 
 {
-  xresources.properties = {
-    "URxvt*.foreground" = "#c5c8c6";
-    "URxvt*.background" = "#1d1f21";
-    "URxvt*.cursorColor" = "#c5c8c6";
-    "URxvt*.color0" = "#282a2e";
-    "URxvt*.color8" = "#373b41";
-    "URxvt*.color1" = "#a54242";
-    "URxvt*.color9" = "#cc6666";
-    "URxvt*.color2" = "#8c9440";
-    "URxvt*.color10" = "#b5bd68";
-    "URxvt*.color3" = "#de935f";
-    "URxvt*.color11" = "#f0c674";
-    "URxvt*.color4" = "#5f819d";
-    "URxvt*.color12" = "#81a2be";
-    "URxvt*.color5" = "#85678f";
-    "URxvt*.color13" = "#b294bb";
-    "URxvt*.color6" = "#5e8d87";
-    "URxvt*.color14" = "#8abeb7";
-    "URxvt*.color7" = "#707880";
-    "URxvt*.color15" = "#c5c8c6";
+  # home-manager setup
+  home.username = "patrickod";
+  home.homeDirectory = "/home/patrickod";
+  home.sessionVariables = {
+    "PATH" = "$HOME/.yarn/bin:$PATH";
   };
+  home.stateVersion = "21.11";
 
+  # dotfiles
+  home.file.".spacemacs".source = ../dotfiles/spacemacs;
+  home.file.".urxvt/ext/font-size".source =
+    "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
+  home.file.".config/nix/nix.conf".source = ../dotfiles/nix.conf;
+
+  ## i3 status & keybinding configuration
+  ## TODO: migrate to home-manager i3 configuration management
+  xdg.configFile."i3/status.toml".source = ../dotfiles/i3status-rs.toml;
+  xdg.configFile."i3/config".source = ../dotfiles/i3-config;
+
+  # default packages
   home.packages = [
     pkgs.discord
     pkgs.feh
@@ -67,7 +65,31 @@
     pkgs.weechat
     pkgs.wireguard
     pkgs.xclip
+    pkgs.zoxide
   ];
+
+  xresources.properties = {
+    "URxvt*.foreground" = "#c5c8c6";
+    "URxvt*.background" = "#1d1f21";
+    "URxvt*.cursorColor" = "#c5c8c6";
+    "URxvt*.color0" = "#282a2e";
+    "URxvt*.color8" = "#373b41";
+    "URxvt*.color1" = "#a54242";
+    "URxvt*.color9" = "#cc6666";
+    "URxvt*.color2" = "#8c9440";
+    "URxvt*.color10" = "#b5bd68";
+    "URxvt*.color3" = "#de935f";
+    "URxvt*.color11" = "#f0c674";
+    "URxvt*.color4" = "#5f819d";
+    "URxvt*.color12" = "#81a2be";
+    "URxvt*.color5" = "#85678f";
+    "URxvt*.color13" = "#b294bb";
+    "URxvt*.color6" = "#5e8d87";
+    "URxvt*.color14" = "#8abeb7";
+    "URxvt*.color7" = "#707880";
+    "URxvt*.color15" = "#c5c8c6";
+  };
+
   programs.git = {
     enable = true;
     userName = "Patrick O'Doherty";
@@ -77,6 +99,7 @@
       init.defaultBranch = "main";
     };
   };
+
   programs.zsh = {
     enable = true;
     history.extended = true;
@@ -104,6 +127,7 @@
       export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
     '';
   };
+
   programs.urxvt = {
     enable = true;
     transparent = true;
@@ -119,6 +143,7 @@
       "keysym.C-slash" = "font-size:show";
     };
   };
+
   programs.ssh = {
     enable = true;
     matchBlocks = {
@@ -130,12 +155,29 @@
       };
     };
   };
+
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
     nix-direnv.enableFlakes = true;
     enableZshIntegration = true;
   };
+
+  programs.home-manager.enable = true;
+
+  programs.i3status-rust.enable = true;
+  programs.autorandr.enable = true;
+
+  services.dunst.enable = true;
+  services.dunst.settings = {
+    global = {
+      geometry = "0x5-30+50";
+      transparency = 10;
+      frame_color = "#eceff1";
+      font = "Jetbrains Mono 10";
+    };
+  };
+
   services.redshift = {
     enable = true;
     latitude = "37.7749";
@@ -145,50 +187,4 @@
     temperature.night = 3900;
     tray = true;
   };
-
-  home.sessionVariables = {
-    "PATH" = "$HOME/.yarn/bin:$PATH";
-  };
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-  home.username = "patrickod";
-  home.homeDirectory = "/home/patrickod";
-
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "21.11";
-
-  home.file.".spacemacs".source = ../dotfiles/spacemacs;
-  home.file.".urxvt/ext/font-size".source =
-    "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
-
-  home.file.".config/nix/nix.conf".source = ../dotfiles/nix.conf;
-
-  ## i3 status & keybinding configuration
-  ## TODO: migrate to home-manager i3 configuration management
-  xdg.configFile."i3/status.toml".source = ../dotfiles/i3status-rs.toml;
-  xdg.configFile."i3/config".source = ../dotfiles/i3-config;
-
-  programs.i3status-rust.enable = true;
-  programs.autorandr.enable = true;
-
-  services.dunst.enable = true;
-  services.dunst.settings = {
-    global = {
-      geometry = "0-10+33";
-      transparency = 10;
-      font = "Jetbrains Mono 12";
-    };
-  };
-
 }
