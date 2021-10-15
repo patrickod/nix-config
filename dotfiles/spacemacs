@@ -32,6 +32,7 @@ This function should only modify configuration layer settings."
      rust
      shell-scripts
      terraform
+     theme-megapack
      version-control
      yaml
      multiple-cursors)

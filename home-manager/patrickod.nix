@@ -187,4 +187,7 @@
     temperature.night = 3900;
     tray = true;
   };
+
+  programs.zoxide.enable = true;
+  programs.zoxide.enableZshIntegration = true;
 }
