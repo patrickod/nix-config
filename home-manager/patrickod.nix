@@ -190,4 +190,39 @@
 
   programs.zoxide.enable = true;
   programs.zoxide.enableZshIntegration = true;
+
+  systemd.user = {
+    timers = {
+      dendron-backup = {
+        Unit = {
+          Description = "git commit & push dendron notes at end of every working day";
+        };
+        timerConfig = {
+          OnCalendar = "0 17 * * 1-5";
+          Persistent = true;
+        };
+        Install = {
+          WantedBy = ["timers.target"];
+        };
+      };
+    };
+    services = {
+      dendron-backup = {
+        Unit = {
+          Description = "git commit & backup dendron notes every working day";
+        };
+        Service = {
+          Script = ''
+            ${pkgs.bash}/bin/bash
+            cd /home/patrickod/code/notes
+            git commit -am "eod commit $(date +'%F')"
+            git push github oso
+          '';
+        };
+        Install = {
+          WantedBy = ["multi-user.target"];
+        };
+      };
+    };
+  };
 }

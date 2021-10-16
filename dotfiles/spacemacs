@@ -99,7 +99,7 @@ It should only modify the values of Spacemacs settings."
 
    dotspacemacs-initial-scratch-message nil
 
-   dotspacemacs-themes '(spacemacs-light
+   dotspacemacs-themes '(gruvbox-dark-hard
                          lsdh)
 
    dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
