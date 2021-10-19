@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   nixpkgs.overlays = [
@@ -12,7 +12,16 @@
     ../modules/qemu-hooks.nix
   ];
 
+  # remote build configuration
   nix.trustedUsers = ["@wheel"];
+  environment.etc."nix/builder-priv-key.pem".source = ../prismo-cache-priv.pem;
+  nix.extraOptions = ''
+    secret-key-files = /etc/nix/builder-priv-key.pem
+  '';
+
+  environment.systemPackages = [
+    pkgs.gnome.nautilus
+  ];
 
   nix.systemFeatures = [
     "big-parallel" "benchmark" "nixos-test" "kvm" "gccarch-znver2" ];
@@ -85,6 +94,8 @@
       '';
     };
     users.users.qemu-libvirtd.extraGroups = [ "input" ];
+
+    virtualisation.docker.enable = true;
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
