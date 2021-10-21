@@ -10,6 +10,7 @@
     ../users/patrickod.nix
     ../modules/defaults.nix
     ../modules/qemu-hooks.nix
+    ../services/vscode-ssh-fix.nix
   ];
 
   # remote build configuration
@@ -20,8 +21,10 @@
   '';
 
   environment.systemPackages = [
-    pkgs.gnome.nautilus
+    pkgs.xfce.thunar
   ];
+
+  services.nixos-vscode-ssh-fix.enable = true;
 
   nix.systemFeatures = [
     "big-parallel" "benchmark" "nixos-test" "kvm" "gccarch-znver2" ];
