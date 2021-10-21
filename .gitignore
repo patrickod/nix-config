@@ -1,3 +1,4 @@
 secrets.nix
+*.pem
 /configuration.nix
 modules/cafe-sophie-wireless.nix
