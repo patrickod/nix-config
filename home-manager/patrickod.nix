@@ -22,6 +22,7 @@
 
   # default packages
   home.packages = [
+    pkgs.act
     pkgs.discord
     pkgs.feh
     pkgs.firefox
@@ -34,6 +35,7 @@
     pkgs.htop
     pkgs.httpie
     pkgs.hwloc
+    pkgs.hugo
     pkgs.iftop
     pkgs.iotop
     pkgs.jq
@@ -65,6 +67,7 @@
     pkgs.weechat
     pkgs.wireguard
     pkgs.xclip
+    pkgs.yarn
     pkgs.zoxide
   ];
 

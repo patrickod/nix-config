@@ -2,13 +2,11 @@ set $mod Mod1
 
 font pango: JetBrains Mono 10
 
-# set the gaps configuration
-for_window [class=".*"] border pixel 0
-for_window [class="^.*"] border pixel 3
-# gaps inner 10
-# smart_gaps on
-# smart_borders on
-
+# bluetooth management
+exec --no-startup-id blueman-applet
+# network manager
+exec --no-startup-id nm-applet
+# set a random background
 exec --no-startup-id feh --bg-fill --random ~/backgrounds/*
 
 set $refresh_i3status killall -SIGUSR1 i3status
