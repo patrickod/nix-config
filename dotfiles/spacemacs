@@ -17,7 +17,8 @@ This function should only modify configuration layer settings."
      emacs-lisp
      git
      github
-     go
+     (go :variables go-backend 'lsp
+                    go-format-before-save t)
      html
      javascript
      (lsp :variables lsp-rust-server 'rust-analyzer)
