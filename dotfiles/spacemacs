@@ -17,7 +17,8 @@ This function should only modify configuration layer settings."
      emacs-lisp
      git
      github
-     go
+     (go :variables go-backend 'lsp
+                    go-format-before-save t)
      html
      javascript
      (lsp :variables lsp-rust-server 'rust-analyzer)
@@ -25,22 +26,20 @@ This function should only modify configuration layer settings."
      nginx
      nixos
      org
-     python
+    (python :variables python-backend 'lsp python-lsp-server 'pyright)
      react
      ruby
      ruby-on-rails
-     rust
+     (rust :variables rust-format-on-save t)
      shell-scripts
      terraform
+     themes-megapack
      version-control
      yaml
      multiple-cursors)
    dotspacemacs-additional-packages '(direnv
                                       gist
-                                      handlebars-mode
                                       keychain-environment
-                                      darkroom
-                                      ox-reveal
                                       protobuf-mode
                                       sass-mode
                                       notmuch)
@@ -99,8 +98,8 @@ It should only modify the values of Spacemacs settings."
 
    dotspacemacs-initial-scratch-message nil
 
-   dotspacemacs-themes '(spacemacs-light
-                         lsdh)
+   dotspacemacs-themes '(gruvbox-dark-hard
+                         gruvbox-light-hard)
 
    dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
 

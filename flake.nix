@@ -23,12 +23,6 @@
       modules = [
         inputs.home-manager.nixosModules.home-manager
 
-        ({pkgs, ... }: {
-          nixpkgs.overlays = [
-            (self: super: { nix-direnv = super.nix-direnv.override { enableFlakes = true; }; } )
-          ];
-        })
-
         ({ pkgs, ... }: {
           nix.extraOptions = "experimental-features = nix-command flakes";
           nix.package = pkgs.nixFlakes;
@@ -48,12 +42,6 @@
       modules = [
         inputs.home-manager.nixosModules.home-manager
 
-        ({pkgs, ... }: {
-          nixpkgs.overlays = [
-            (self: super: { nix-direnv = super.nix-direnv.override { enableFlakes = true; }; } )
-          ];
-        })
-
         ({ pkgs, ... }: {
           nix.extraOptions = "experimental-features = nix-command flakes";
           nix.package = pkgs.nixFlakes;
@@ -72,12 +60,6 @@
       };
       modules = [
         inputs.home-manager.nixosModules.home-manager
-
-        ({pkgs, ... }: {
-          nixpkgs.overlays = [
-            (self: super: { nix-direnv = super.nix-direnv.override { enableFlakes = true; }; } )
-          ];
-        })
 
         ({ pkgs, ... }: {
           nix.extraOptions = "experimental-features = nix-command flakes";
