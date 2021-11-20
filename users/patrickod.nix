@@ -232,11 +232,6 @@
     programs.zsh = {
       enable = true;
       history.extended = true;
-      oh-my-zsh = {
-        enable = true;
-        theme = "dieter";
-        plugins = [ "git" ];
-      };
       initExtra = ''
         export TERM=xterm-256color
         eval `keychain --eval id_ed25519 iocoop`
