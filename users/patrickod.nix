@@ -22,6 +22,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    brightnessctl
     dhcp
     emacs
     git
@@ -67,6 +68,7 @@
         Identifier "keyboardio"
         MatchIsKeyboard "on"
         MatchProduct "Keyboardio"
+        Driver "evdev"
 
         Option "XkbLayout" "us"
       ''
@@ -74,6 +76,7 @@
         Identifier "advantage"
         MatchIsKeyboard "on"
         MatchProduct "05f3"
+        Driver "evdev"
 
         Option "XkbLayout" "us"
 
@@ -179,13 +182,13 @@
       fzf
       gist
       gmailieer
-      gnome3.nautilus
       go
       google-chrome-beta
       htop
       httpie
       hwloc
       iftop
+      inkscape
       iotop
       jq
       keychain
@@ -197,11 +200,13 @@
       nix-prefetch-github
       notmuch
       paperwork
+      obs-studio
       patchelf
       pavucontrol
       pcmanfm
       pigz
       probe-run
+      processing
       restic
       scrot
       signal-desktop
@@ -215,6 +220,7 @@
       wireguard
       zoom-us
       xclip
+      zoom-us
     ];
     programs.git = {
       enable = true;
@@ -244,7 +250,7 @@
       transparent = true;
       shading = 20;
       extraConfig = {
-        "font" = "xft:JetBrains Mono:pixelsize=14";
+        "font" = "xft:JetBrains Mono:pixelsize=12";
         "perl-ext-common" = "font-size";
         "keysym.C-Up" = "font-size:increase";
         "keysym.C-Down" = "font-size:decrease";
@@ -268,7 +274,6 @@
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;
-      nix-direnv.enableFlakes = true;
       enableZshIntegration = true;
     };
     services.redshift = {

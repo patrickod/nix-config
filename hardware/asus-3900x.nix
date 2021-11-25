@@ -36,49 +36,49 @@
 
   boot.initrd.availableKernelModules =
     [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
+    boot.initrd.kernelModules = [ "dm-snapshot" ];
 
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_5_12;
-  boot.kernelParams = [ "amd_iommu=on" "iommu=pt" "pcie_aspm=off" ];
-  boot.kernelModules = [ "kvm-amd" "vfio-pci" ];
-  boot.extraModulePackages = [ ];
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+    # boot.kernelPackages = pkgs.linuxPackages_5_12;
+    boot.kernelParams = [ "amd_iommu=on" "iommu=pt" "pcie_aspm=off" ];
+    boot.kernelModules = [ "kvm-amd" "vfio-pci" ];
+    boot.extraModulePackages = [ ];
 
-  # Configure PCI passthrough RTX
-  services.ezpassthru = {
-    enable = true;
-    PCIs = {
-      "10de:2204" = "0000:05:00.0"; # RTX3090 Video
-      "10de:1aef" = "0000:05:00.1"; # RTX3090 Audio
+    # Configure PCI passthrough RTX
+    services.ezpassthru = {
+      enable = false;
+      PCIs = {
+        "10de:2204" = "0000:05:00.0"; # RTX3090 Video
+        "10de:1aef" = "0000:05:00.1"; # RTX3090 Audio
+      };
     };
-  };
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/6791871d-b2cc-482b-b711-3cace57bab08";
-    fsType = "btrfs";
-  };
+    fileSystems."/" = {
+      device = "/dev/disk/by-uuid/6791871d-b2cc-482b-b711-3cace57bab08";
+      fsType = "btrfs";
+    };
 
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/d753b535-4758-4ae6-8281-cd0f455feae5";
-    fsType = "btrfs";
-  };
+    fileSystems."/home" = {
+      device = "/dev/disk/by-uuid/d753b535-4758-4ae6-8281-cd0f455feae5";
+      fsType = "btrfs";
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/EA5C-C3B7";
-    fsType = "vfat";
-  };
+    fileSystems."/boot" = {
+      device = "/dev/disk/by-uuid/EA5C-C3B7";
+      fsType = "vfat";
+    };
 
-  fileSystems."/mnt/guests" = {
-    device = "/dev/prismo-vm-vg/guest-roots";
-    fsType = "btrfs";
-  };
+    fileSystems."/mnt/guests" = {
+      device = "/dev/prismo-vm-vg/guest-roots";
+      fsType = "btrfs";
+    };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/e43f8b57-5651-4881-960d-9524d805b97c"; }];
+    swapDevices =
+      [{ device = "/dev/disk/by-uuid/e43f8b57-5651-4881-960d-9524d805b97c"; }];
 
-  nix.maxJobs = lib.mkDefault 24;
-  nix.extraOptions = ''
-    keep-outputs = true
-    keep-derivations = true
-  '';
+      nix.maxJobs = lib.mkDefault 24;
+      nix.extraOptions = ''
+        keep-outputs = true
+        keep-derivations = true
+      '';
 }

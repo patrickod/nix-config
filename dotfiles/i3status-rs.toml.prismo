@@ -42,6 +42,9 @@ format = "{1m}"
 block = "sound"
 
 [[block]]
+block = "notify"
+
+[[block]]
 block = "time"
 interval = 60
 format = "%B %d %Y %R"
