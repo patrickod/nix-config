@@ -8,6 +8,8 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
 # set a random background
 exec --no-startup-id feh --bg-fill --random ~/backgrounds/*
+# redshift-gtk with SF lat long
+redshift-gtk -l 33.77:-122.41
 
 set $refresh_i3status killall -SIGUSR1 i3status
 

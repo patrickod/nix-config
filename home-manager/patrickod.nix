@@ -28,12 +28,14 @@
     pkgs.firefox
     pkgs.flyctl
     pkgs.fzf
+    pkgs.gdb
     pkgs.gist
     pkgs.gnome3.nautilus
     pkgs.go
     pkgs.google-chrome-beta
     pkgs.htop
     pkgs.httpie
+    pkgs.hub
     pkgs.hwloc
     pkgs.hugo
     pkgs.iftop
@@ -44,10 +46,8 @@
     pkgs.magic-wormhole
     pkgs.maim
     pkgs.mdbook
-    pkgs.nix-index
-    pkgs.nix-prefetch-github
-    pkgs.nix-query-tree-viewer
     pkgs.nixUnstable
+    pkgs.nixfmt
     pkgs.paperwork
     pkgs.patchelf
     pkgs.pavucontrol
@@ -136,7 +136,7 @@
     transparent = true;
     shading = 20;
     extraConfig = {
-      "font" = "xft:JetBrains Mono:pixelsize=14";
+      "font" = "xft:JetBrains Mono:pixelsize=12";
       "perl-ext-common" = "font-size";
       "keysym.C-Up" = "font-size:increase";
       "keysym.C-Down" = "font-size:decrease";
@@ -162,7 +162,6 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-    nix-direnv.enableFlakes = true;
     enableZshIntegration = true;
   };
 
@@ -177,7 +176,7 @@
       geometry = "0x5-30+50";
       transparency = 10;
       frame_color = "#eceff1";
-      font = "Jetbrains Mono 10";
+      font = "Jetbrains Mono 11";
     };
   };
 
@@ -193,5 +192,4 @@
 
   programs.zoxide.enable = true;
   programs.zoxide.enableZshIntegration = true;
-
 }
