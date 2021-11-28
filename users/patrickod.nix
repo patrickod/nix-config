@@ -206,6 +206,7 @@
       processing
       restic
       rustup
+      rust-analyzer
       scrot
       signal-desktop
       silver-searcher
