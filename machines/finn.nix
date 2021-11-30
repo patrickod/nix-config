@@ -13,11 +13,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "finn"; # Define your hostname.
-  networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
-  networking.wireless.interfaces = ["wlp4s0"];
+  networking.wireless.enable =
+    true; # Enables wireless support via wpa_supplicant.
+  networking.wireless.interfaces = [ "wlp4s0" ];
   networking.wireless.networks = {
     "Cafe Sophie" = {
-      pskRaw = "e156bbdd4b632fd2f0e1ca18a01944acbe825d9384ffc1a65b6a91cccd719e82";
+      pskRaw =
+        "e156bbdd4b632fd2f0e1ca18a01944acbe825d9384ffc1a65b6a91cccd719e82";
     };
   };
   hardware.enableRedistributableFirmware = true;
@@ -31,7 +33,7 @@
   services.blueman.enable = true;
 
   services.printing.enable = true;
-  services.printing.drivers = [pkgs.brlaser];
+  services.printing.drivers = [ pkgs.brlaser ];
 
   system.stateVersion = "20.03"; # Did you read the comment?
 }

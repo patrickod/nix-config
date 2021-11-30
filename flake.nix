@@ -1,6 +1,5 @@
 # https://www.tweag.io/blog/2020-07-31-nixos-flakes/
 
-
 # Now nixos-rebuild can use flakes:
 # sudo nixos-rebuild switch --flake /etc/nixos
 
@@ -17,9 +16,7 @@
 
     nixosConfigurations.prismo = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = {
-        inherit inputs;
-      };
+      specialArgs = { inherit inputs; };
       modules = [
         inputs.home-manager.nixosModules.home-manager
 
@@ -36,9 +33,7 @@
 
     nixosConfigurations.finn = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = {
-        inherit inputs;
-      };
+      specialArgs = { inherit inputs; };
       modules = [
         inputs.home-manager.nixosModules.home-manager
 
@@ -55,9 +50,7 @@
 
     nixosConfigurations.kimkilwhan = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = {
-        inherit inputs;
-      };
+      specialArgs = { inherit inputs; };
       modules = [
         inputs.home-manager.nixosModules.home-manager
 
