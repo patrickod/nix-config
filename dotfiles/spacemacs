@@ -14,6 +14,7 @@ This function should only modify configuration layer settings."
    '(
      auto-completion
      csv
+     clojure
      emacs-lisp
      git
      github
@@ -98,7 +99,8 @@ It should only modify the values of Spacemacs settings."
 
    dotspacemacs-initial-scratch-message nil
 
-   dotspacemacs-themes '(gruvbox-dark-hard
+   dotspacemacs-themes '(doom-palenight
+                         gruvbox-dark-hard
                          gruvbox-light-hard)
 
    dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)

@@ -24,6 +24,7 @@
   home.packages = [
     pkgs.act
     pkgs.discord
+    pkgs.exa
     pkgs.feh
     pkgs.firefox
     pkgs.flyctl
@@ -36,8 +37,8 @@
     pkgs.htop
     pkgs.httpie
     pkgs.hub
-    pkgs.hwloc
     pkgs.hugo
+    pkgs.hwloc
     pkgs.iftop
     pkgs.iotop
     pkgs.jq
@@ -46,14 +47,15 @@
     pkgs.magic-wormhole
     pkgs.maim
     pkgs.mdbook
-    pkgs.nixUnstable
     pkgs.nixfmt
+    pkgs.nixUnstable
     pkgs.paperwork
     pkgs.patchelf
     pkgs.pavucontrol
     pkgs.pcmanfm
     pkgs.pigz
     pkgs.probe-run
+    pkgs.rage
     pkgs.restic
     pkgs.rustup
     pkgs.scrot
@@ -128,6 +130,9 @@
 
       # processing.org pretty fonts
       export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+
+      # use exa instead of ls
+      alias ls="exa"
     '';
   };
 
