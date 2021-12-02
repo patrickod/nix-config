@@ -197,4 +197,15 @@
 
   programs.zoxide.enable = true;
   programs.zoxide.enableZshIntegration = true;
+
+  services.hound = {
+    enable = true;
+    databasePath = "/home/patrickod/hound";
+    listenAddress = "localhost:6080";
+    repositories = {
+      "oso" = {
+        url = "https://github.com/osohq/oso.git";
+      };
+    };
+  };
 }
