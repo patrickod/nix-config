@@ -74,15 +74,24 @@ in {
   systemd.services.swtpm = {
     description = "SWTPM implementation for QEMU VM";
     serviceConfig = {
-      ExecStart = "${pkgs.swtpm-tpm2}/bin/swtpm socket --tpmstate dir=/var/lib/swtpm-localca --ctrl type=unixio,path=/var/lib/swtpm-localca/swtpm-sock";
+      ExecStart =
+        "${pkgs.swtpm-tpm2}/bin/swtpm socket --tpmstate dir=/var/lib/swtpm-localca --ctrl type=unixio,path=/var/lib/swtpm-localca/swtpm-sock";
       User = "qemu-libvirtd";
       Group = "qemu-libvirtd";
     };
-    wantedBy = ["libvirtd.service"];
+    wantedBy = [ "libvirtd.service" ];
   };
 
   systemd.services.libvirtd = {
-    path = with pkgs; [ libvirt procps utillinux doas gawk vfio-isolate swtpm-tpm2 ];
+    path = with pkgs; [
+      libvirt
+      procps
+      utillinux
+      doas
+      gawk
+      vfio-isolate
+      swtpm-tpm2
+    ];
     preStart = ''
       mkdir -p /var/lib/libvirt/vbios
       mkdir -p /var/lib/libvirt/hooks

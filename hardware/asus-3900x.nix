@@ -4,9 +4,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [
-    ../modules/ezpassthru.nix
-  ];
+  imports = [ ../modules/ezpassthru.nix ];
 
   # configure necessary virtualization packages
   environment.systemPackages = with pkgs; [ virtmanager qemu ntfs3g ];

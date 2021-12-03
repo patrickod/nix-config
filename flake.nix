@@ -65,16 +65,17 @@
     };
 
     homeConfigurations = {
-      "patrickod@kimkilwhan" = inputs.home-manager.lib.homeManagerConfiguration {
-        system = "x86_64-linux";
-        homeDirectory = "/home/patrickod";
-        username = "patrickod";
-        stateVersion = "21.11";
-        configuration = { config, lib, pkgs, ... }: {
-          nixpkgs.config = { allowUnfree = true; };
-          imports = [ ./home-manager/kimkilwhan.nix ];
+      "patrickod@kimkilwhan" =
+        inputs.home-manager.lib.homeManagerConfiguration {
+          system = "x86_64-linux";
+          homeDirectory = "/home/patrickod";
+          username = "patrickod";
+          stateVersion = "21.11";
+          configuration = { config, lib, pkgs, ... }: {
+            nixpkgs.config = { allowUnfree = true; };
+            imports = [ ./home-manager/kimkilwhan.nix ];
+          };
         };
-      };
     };
   };
 }
