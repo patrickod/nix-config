@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../modules/polkit-allow-mount.nix ../home-manager/common.nix ];
+  imports = [ ../modules/polkit-allow-mount.nix ];
 
   users.users.patrickod = {
     isNormalUser = true;

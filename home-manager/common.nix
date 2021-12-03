@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ home, config, pkgs, ... }:
 
 {
   # home-manager setup
@@ -15,11 +15,6 @@
   home.file.".urxvt/ext/font-size".source =
     "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
   home.file.".config/nix/nix.conf".source = ../dotfiles/nix.conf;
-
-  ## i3 status & keybinding configuration
-  ## TODO: migrate to home-manager i3 configuration management
-  xdg.configFile."i3/status.toml".source = ../dotfiles/i3status-rs.toml;
-  xdg.configFile."i3/config".source = ../dotfiles/i3-config;
 
   # default packages
   home.packages = [
@@ -120,40 +115,29 @@
       init.defaultBranch = "main";
       core.editor = "emacsclient -c";
     };
+  };
 
-    programs.git = {
+  programs.zsh = {
+    enable = true;
+    history.extended = true;
+    oh-my-zsh = {
       enable = true;
-      userName = "Patrick O'Doherty";
-      userEmail = "p@trickod.com";
-      extraConfig = {
-        pull.ff = "only";
-        init.defaultBranch = "main";
-      };
+      theme = "dieter";
+      plugins = [ "git" ];
     };
+    initExtra = ''
+      export TERM=xterm-256color
+      eval `keychain --eval id_ed25519`
 
-    programs.zsh = {
-      enable = true;
-      history.extended = true;
-      oh-my-zsh = {
-        enable = true;
-        theme = "dieter";
-        plugins = [ "git" ];
-      };
-      initExtra = ''
-        export TERM=xterm-256color
-        eval `keychain --eval id_ed25519`
+      # add ~/.cargo/bin & ~/bin to path
+      export PATH="$HOME/.cargo/bin:$HOME/bin:$PATH"
 
-        # add ~/.cargo/bin & ~/bin to path
-        export PATH="$HOME/.cargo/bin:$HOME/bin:$PATH"
+      # processing.org pretty fonts
+      export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 
-        # processing.org pretty fonts
-        export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
-
-        # use exa instead of ls
-        alias ls="exa"
-      '';
-    };
-
+      # use exa instead of ls
+      alias ls="exa"
+    '';
   };
 
   programs.urxvt = {

@@ -27,6 +27,11 @@
         })
 
         ./machines/prismo.nix
+        ({pkgs, ... }: {
+          home-manager.users.patrickod = { pkgs, ... }: {
+            imports = [./home-manager/prismo.nix];
+          };
+        })
       ];
     };
 
@@ -44,6 +49,11 @@
         })
 
         ./machines/finn.nix
+        ({pkgs, ... }: {
+          home-manager.users.patrickod = { pkgs, ... }: {
+            imports = [./home-manager/finn.nix];
+          };
+        })
       ];
     };
 
@@ -61,6 +71,12 @@
         })
 
         ./machines/kimkilwhan.nix
+
+        ({pkgs, ... }: {
+          home-manager.users.patrickod = { pkgs, ... }: {
+            imports = [./home-manager/kimkilwhan.nix];
+          };
+        })
       ];
     };
 
