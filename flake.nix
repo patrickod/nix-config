@@ -13,7 +13,6 @@
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
   outputs = inputs: {
-
     nixosConfigurations.prismo = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
