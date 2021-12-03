@@ -24,6 +24,7 @@
   # default packages
   home.packages = [
     pkgs.act
+    pkgs.age
     pkgs.discord
     pkgs.exa
     pkgs.feh
@@ -65,6 +66,7 @@
     pkgs.scrot
     pkgs.signal-desktop
     pkgs.silver-searcher
+    pkgs.sops
     pkgs.slack
     pkgs.unzip
     pkgs.urxvt_font_size
