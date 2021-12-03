@@ -1,7 +1,15 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../modules/polkit-allow-mount.nix ];
+  imports = [ ../modules/polkit-allow-mount.nix ../home-manager/common.nix ];
+
+  users.users.patrickod = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "libvirtd" "docker" "dialout" "audio" ];
+    shell = pkgs.zsh;
+    hashedPassword =
+      "$6$t1qPJ.r2M2XljH$dIBeXMWkq10Pr5C0FsSx44RxXzcxTXaK4.ULeYZ8UmFI8PuNWww5SAci2Zx.WTU4prUS775MuhkbMCg98dT.P0";
+  };
 
   # allow use of non-free packages
   nixpkgs.config.allowUnfree = true;
@@ -18,7 +26,6 @@
   environment.pathsToLink = [ "/share/nix-direnv" ];
 
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     dhcp
     emacs
@@ -26,35 +33,34 @@
     hwloc
     pciutils
     prometheus-node-exporter
-    keychain
-    pv
-    silver-searcher
     sqlite
     systool
     usbutils
     vim
     wget
-    xorg.xdpyinfo
-    swtpm-tpm2
-    axoloti
-    notmuch
   ];
 
   services.gnome3.gnome-keyring.enable = true;
 
   # configure default editor
-  services.emacs.enable = true;
   environment.variables = {
     EDITOR = "emacsclient -c";
     VISUAL = "emacsclient -c";
     LIBVIRT_DEFAULT_URI = "qemu:///system";
-    NIXPKGS = "/home/patrickod/code/nixpkgs";
   };
 
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
+
+  # fonts for system wide use
+  fonts.fonts = with pkgs; [
+    source-code-pro
+    proggyfonts
+    font-awesome
+    jetbrains-mono
+  ];
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -95,41 +101,6 @@
         enable = true;
         greeter.enable = false;
       };
-
-      sessionCommands = ''
-        ${pkgs.xorg.xrdb}/bin/xrdb -merge <${
-          pkgs.writeText "Xresources" ''
-            ! hard contrast: *background: #1d2021
-            *background: #282828
-            ! soft contrast: *background: #32302f
-            *foreground: #ebdbb2
-            ! Black + DarkGrey
-            *color0:  #282828
-            *color8:  #928374
-            ! DarkRed + Red
-            *color1:  #cc241d
-            *color9:  #fb4934
-            ! DarkGreen + Green
-            *color2:  #98971a
-            *color10: #b8bb26
-            ! DarkYellow + Yellow
-            *color3:  #d79921
-            *color11: #fabd2f
-            ! DarkBlue + Blue
-            *color4:  #458588
-            *color12: #83a598
-            ! DarkMagenta + Magenta
-            *color5:  #b16286
-            *color13: #d3869b
-            ! DarkCyan + Cyan
-            *color6:  #689d6a
-            *color14: #8ec07c
-            ! LightGrey + White
-            *color7:  #a89984
-            *color15: #ebdbb2
-          ''
-        }
-      '';
     };
 
     windowManager.i3 = {
@@ -144,149 +115,6 @@
         feh
       ];
     };
-  };
-
-  fonts.fonts = with pkgs; [
-    source-code-pro
-    proggyfonts
-    font-awesome
-    jetbrains-mono
-  ];
-
-  users.users.patrickod = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "libvirtd" "docker" "dialout" "audio" ];
-    shell = pkgs.zsh;
-    hashedPassword = "$6$t1qPJ.r2M2XljH$dIBeXMWkq10Pr5C0FsSx44RxXzcxTXaK4.ULeYZ8UmFI8PuNWww5SAci2Zx.WTU4prUS775MuhkbMCg98dT.P0";
-  };
-
-  programs.ssh.startAgent = true;
-  programs.zsh.enable = true;
-
-  # Configure home-manager with user packages
-  home-manager.users.patrickod = { pkgs, ... }: {
-    home.packages = [
-      pkgs.discord
-      pkgs.firefox
-      pkgs.flyctl
-      pkgs.fzf
-      pkgs.gist
-      pkgs.gnome3.nautilus
-      pkgs.go
-      pkgs.google-chrome-beta
-      pkgs.htop
-      pkgs.httpie
-      pkgs.hwloc
-      pkgs.iftop
-      pkgs.iotop
-      pkgs.jq
-      pkgs.keychain
-      pkgs.magic-wormhole
-      pkgs.maim
-      pkgs.mdbook
-      pkgs.nix-index
-      pkgs.nix-prefetch-github
-      pkgs.nix-query-tree-viewer
-      pkgs.patchelf
-      pkgs.pavucontrol
-      pkgs.paperwork
-      pkgs.pcmanfm
-      pkgs.pigz
-      pkgs.probe-run
-      pkgs.restic
-      pkgs.rustup
-      pkgs.scrot
-      pkgs.signal-desktop
-      pkgs.silver-searcher
-      pkgs.slack
-      pkgs.unzip
-      pkgs.urxvt_font_size
-      pkgs.vlc
-      pkgs.vscode
-      pkgs.weechat
-      pkgs.wireguard
-      pkgs.xclip
-    ];
-    programs.git = {
-      enable = true;
-      userName = "Patrick O'Doherty";
-      userEmail = "p@trickod.com";
-      extraConfig = {
-        pull.ff = "only";
-        init.defaultBranch = "main";
-        core.editor = "emacsclient -c";
-      };
-    };
-    programs.zsh = {
-      enable = true;
-      history.extended = true;
-      oh-my-zsh = {
-        enable = true;
-        theme = "dieter";
-        plugins = [ "git" ];
-      };
-      initExtra = ''
-        export TERM=xterm-256color
-        eval `keychain --eval id_ed25519 iocoop`
-      '';
-    };
-    programs.urxvt = {
-      enable = true;
-      transparent = true;
-      shading = 20;
-      extraConfig = {
-        "font" = "xft:JetBrains Mono:pixelsize=12";
-        "perl-ext-common" = "font-size";
-        "keysym.C-Up" = "font-size:increase";
-        "keysym.C-Down" = "font-size:decrease";
-        "keysym.C-S-Up" = "font-size:incglobal";
-        "keysym.C-S-Down" = "font-size:decglobal";
-        "keysym.C-equal" = "font-size:reset";
-        "keysym.C-slash" = "font-size:show";
-      };
-    };
-    programs.ssh = {
-      enable = true;
-      matchBlocks = {
-        "betty.patrickod.com" = { user = "root"; };
-        "g1-*" = {
-          user = "root";
-          certificateFile = "~/.ssh/iocoop-cert.pub";
-          proxyCommand = "ssh manage1.scl.iocoop.org nc %h %p";
-        };
-      };
-    };
-    programs.direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-      nix-direnv.enableFlakes = true;
-      enableZshIntegration = true;
-    };
-    services.redshift = {
-      enable = true;
-      latitude = "37.7749";
-      longitude = "-122.4194";
-      brightness.day = "1";
-      brightness.night = "0.85";
-      temperature.night = 3900;
-      tray = true;
-    };
-
-    home.sessionVariables = {
-      BROWSER = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
-    };
-
-    home.file.".spacemacs".source = ../dotfiles/spacemacs;
-    home.file.".urxvt/ext/font-size".source = "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
-
-    ## i3 status & keybinding configuration
-    ## TODO: migrate to home-manager i3 configuration management
-    xdg.configFile."i3/status.toml".source = ../dotfiles/i3status-rs.toml;
-    xdg.configFile."i3/config".source = ../dotfiles/i3-config;
-
-    # configure nixpkgs to allow unfree etc...
-    home.file.".config/nixpkgs/config.nix".source =
-      ../dotfiles/nixpkgs-config.nix;
   };
 
   # udev rules for programming keyboard & axoloti
@@ -313,10 +141,4 @@
     SUBSYSTEM=="usb", ATTRS{idVendor}=="04d8", ATTR{idProduct}=="00dd", MODE="0666"
   '';
 
-  services.syncthing = {
-    enable = true;
-    user = "patrickod";
-    dataDir = "/home/patrickod/syncthing";
-    configDir = "/home/patrickod/.config/syncthing/";
-  };
 }

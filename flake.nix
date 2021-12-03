@@ -1,6 +1,5 @@
 # https://www.tweag.io/blog/2020-07-31-nixos-flakes/
 
-
 # Now nixos-rebuild can use flakes:
 # sudo nixos-rebuild switch --flake /etc/nixos
 
@@ -10,22 +9,22 @@
 {
   inputs.nixpkgs.url = "github:patrickod/nixpkgs/personal";
 
-  inputs.home-manager.url = "github:nix-community/home-manager/master";
+  inputs.home-manager.url = "github:nix-community/home-manager";
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
   outputs = inputs: {
 
     nixosConfigurations.prismo = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = {
-        inherit inputs;
-      };
+      specialArgs = { inherit inputs; };
       modules = [
         inputs.home-manager.nixosModules.home-manager
 
-        ({pkgs, ... }: {
+        ({ pkgs, ... }: {
           nixpkgs.overlays = [
-            (self: super: { nix-direnv = super.nix-direnv.override { enableFlakes = true; }; } )
+            (self: super: {
+              nix-direnv = super.nix-direnv.override { enableFlakes = true; };
+            })
           ];
         })
 
@@ -42,15 +41,15 @@
 
     nixosConfigurations.finn = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = {
-        inherit inputs;
-      };
+      specialArgs = { inherit inputs; };
       modules = [
         inputs.home-manager.nixosModules.home-manager
 
-        ({pkgs, ... }: {
+        ({ pkgs, ... }: {
           nixpkgs.overlays = [
-            (self: super: { nix-direnv = super.nix-direnv.override { enableFlakes = true; }; } )
+            (self: super: {
+              nix-direnv = super.nix-direnv.override { enableFlakes = true; };
+            })
           ];
         })
 
@@ -63,6 +62,19 @@
 
         ./machines/finn.nix
       ];
+    };
+
+    homeConfigurations = {
+      "patrickod@kimkilwhan" = inputs.home-manager.lib.homeManagerConfiguration {
+        system = "x86_64-linux";
+        homeDirectory = "/home/patrickod";
+        username = "patrickod";
+        stateVersion = "21.11";
+        configuration = { config, lib, pkgs, ... }: {
+          nixpkgs.config = { allowUnfree = true; };
+          imports = [ ./home-manager/kimkilwhan.nix ];
+        };
+      };
     };
   };
 }

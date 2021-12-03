@@ -6,6 +6,7 @@
   home.homeDirectory = "/home/patrickod";
   home.sessionVariables = {
     "PATH" = "$HOME/go/bin:$HOME/.yarn/bin:$PATH";
+    "BROWSER" = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
   };
   home.stateVersion = "21.11";
 
@@ -48,6 +49,9 @@
     pkgs.maim
     pkgs.mdbook
     pkgs.nixfmt
+    pkgs.nix-index
+    pkgs.nix-prefetch-github
+    pkgs.nix-query-tree-viewer
     pkgs.nixUnstable
     pkgs.paperwork
     pkgs.patchelf
@@ -72,6 +76,16 @@
     pkgs.yarn
     pkgs.zoxide
   ];
+
+  services.redshift = {
+    enable = true;
+    latitude = "37.7749";
+    longitude = "-122.4194";
+    brightness.day = "1";
+    brightness.night = "0.85";
+    temperature.night = 3900;
+    tray = true;
+  };
 
   xresources.properties = {
     "URxvt*.foreground" = "#c5c8c6";
@@ -102,6 +116,7 @@
     extraConfig = {
       pull.ff = "only";
       init.defaultBranch = "main";
+      core.editor = "emacsclient -c";
     };
   };
 
@@ -115,18 +130,10 @@
     };
     initExtra = ''
       export TERM=xterm-256color
+      eval `keychain --eval id_ed25519`
 
-      # add cargo & ~/bin to path
-      export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/bin:$PATH"
-
-      # pyenv initialization
-      export PATH="$HOME/.pyenv/bin:$PATH"
-      eval "$(pyenv init --path)"
-      eval "$(pyenv init -)"
-      eval "$(pyenv virtualenv-init -)"
-
-      # rbenv initialization
-      eval "$(rbenv init -)"
+      # add ~/.cargo/bin & ~/bin to path
+      export PATH="$HOME/.cargo/bin:$HOME/bin:$PATH"
 
       # processing.org pretty fonts
       export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
@@ -156,10 +163,11 @@
     enable = true;
     matchBlocks = {
       "betty.patrickod.com" = { user = "root"; };
+      "neptr" = { user = "root"; };
       "g1-*" = {
         user = "root";
         certificateFile = "~/.ssh/iocoop-cert.pub";
-        proxyCommand = "ssh manage1.scl.iocoop.org nc %h %p";
+        proxyCommand = "ssh -i iocoop manage1.scl.iocoop.org nc %h %p";
       };
     };
   };
@@ -185,16 +193,6 @@
     };
   };
 
-  services.redshift = {
-    enable = true;
-    latitude = "37.7749";
-    longitude = "-122.4194";
-    brightness.day = "1";
-    brightness.night = "0.85";
-    temperature.night = 3900;
-    tray = true;
-  };
-
   programs.zoxide.enable = true;
   programs.zoxide.enableZshIntegration = true;
 
@@ -205,6 +203,7 @@
     repositories = {
       "oso" = {
         url = "https://github.com/osohq/oso.git";
+        ref = "main";
       };
     };
   };
