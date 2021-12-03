@@ -9,7 +9,7 @@
 {
   inputs.nixpkgs.url = "github:patrickod/nixpkgs/personal";
 
-  inputs.home-manager.url = "github:nix-community/home-manager/master";
+  inputs.home-manager.url = "github:nix-community/home-manager";
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
   outputs = inputs: {
@@ -63,6 +63,20 @@
 
         ./machines/kimkilwhan.nix
       ];
+    };
+
+    homeConfigurations = {
+      "patrickod@kimkilwhan" =
+        inputs.home-manager.lib.homeManagerConfiguration {
+          system = "x86_64-linux";
+          homeDirectory = "/home/patrickod";
+          username = "patrickod";
+          stateVersion = "21.11";
+          configuration = { config, lib, pkgs, ... }: {
+            nixpkgs.config = { allowUnfree = true; };
+            imports = [ ./home-manager/kimkilwhan.nix ];
+          };
+        };
     };
   };
 }
