@@ -96,6 +96,11 @@
           stateVersion = "21.11";
           configuration = { config, lib, pkgs, ... }: {
             nixpkgs.config = { allowUnfree = true; };
+            nixpkgs.overlays = [
+              (self: super: {
+                nix-direnv = super.nix-direnv.override { enableFlakes = true; };
+              })
+            ];
             imports = [ ./home-manager/kimkilwhan.nix ];
           };
         };
