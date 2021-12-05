@@ -1,11 +1,12 @@
-{ config, pkgs, mkMerge, ... }:
+{ home, config, pkgs, ... }:
 
-mkMerge [{
+{
   # home-manager setup
   home.username = "patrickod";
   home.homeDirectory = "/home/patrickod";
   home.sessionVariables = {
     "PATH" = "$HOME/go/bin:$HOME/.yarn/bin:$PATH";
+    "BROWSER" = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
   };
   home.stateVersion = "21.11";
 
@@ -15,25 +16,30 @@ mkMerge [{
     "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
   home.file.".config/nix/nix.conf".source = ../dotfiles/nix.conf;
 
-  ## i3 status & keybinding configuration
-  ## TODO: migrate to home-manager i3 configuration management
+  # TODO: migrate to nix-based i3 configuration
+  xdg.configFile."i3/config".source = ../dotfiles/i3-config;
 
   # default packages
   home.packages = [
     pkgs.act
+    pkgs.age
     pkgs.discord
+    pkgs.exa
+    pkgs.fd
     pkgs.feh
     pkgs.firefox
     pkgs.flyctl
     pkgs.fzf
+    pkgs.gdb
     pkgs.gist
     pkgs.gnome3.nautilus
     pkgs.go
     pkgs.google-chrome-beta
     pkgs.htop
     pkgs.httpie
-    pkgs.hwloc
+    pkgs.hub
     pkgs.hugo
+    pkgs.hwloc
     pkgs.iftop
     pkgs.iotop
     pkgs.jq
@@ -42,6 +48,7 @@ mkMerge [{
     pkgs.magic-wormhole
     pkgs.maim
     pkgs.mdbook
+    pkgs.nixfmt
     pkgs.nix-index
     pkgs.nix-prefetch-github
     pkgs.nix-query-tree-viewer
@@ -52,24 +59,45 @@ mkMerge [{
     pkgs.pcmanfm
     pkgs.pigz
     pkgs.probe-run
+    pkgs.rage
     pkgs.restic
     pkgs.rustup
     pkgs.scrot
     pkgs.signal-desktop
     pkgs.silver-searcher
     pkgs.slack
+    pkgs.sops
     pkgs.unzip
     pkgs.urxvt_font_size
     pkgs.vlc
-    pkgs.vscode
     pkgs.weechat
     pkgs.wireguard
     pkgs.xclip
     pkgs.yarn
     pkgs.zoxide
+    (pkgs.vscode-with-extensions.override {
+     vscodeExtensions = [pkgs.vscode-extensions.ms-vsliveshare.vsliveshare] ++ map
+       (extension: pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+         mktplcRef = {
+          inherit (extension) name publisher version sha256;
+         };
+       })
+       (import ./extensions.nix).extensions;
+    })
   ];
 
+  services.redshift = {
+    enable = true;
+    latitude = "37.7749";
+    longitude = "-122.4194";
+    brightness.day = "1";
+    brightness.night = "0.85";
+    temperature.night = 3900;
+    tray = true;
+  };
+
   xresources.properties = {
+    "Emacs.font" = "JetBrains Mono:font=12";
     "URxvt*.foreground" = "#c5c8c6";
     "URxvt*.background" = "#1d1f21";
     "URxvt*.cursorColor" = "#c5c8c6";
@@ -95,6 +123,7 @@ mkMerge [{
     enable = true;
     userName = "Patrick O'Doherty";
     userEmail = "p@trickod.com";
+    lfs.enable = true;
     extraConfig = {
       pull.ff = "only";
       init.defaultBranch = "main";
@@ -111,21 +140,16 @@ mkMerge [{
     };
     initExtra = ''
       export TERM=xterm-256color
+      eval `keychain --eval id_ed25519`
 
-      # add cargo & ~/bin to path
-      export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/bin:$PATH"
-
-      # pyenv initialization
-      export PATH="$HOME/.pyenv/bin:$PATH"
-      eval "$(pyenv init --path)"
-      eval "$(pyenv init -)"
-      eval "$(pyenv virtualenv-init -)"
-
-      # rbenv initialization
-      eval "$(rbenv init -)"
+      # add ~/.cargo/bin & ~/bin to path
+      export PATH="$HOME/.cargo/bin:$HOME/bin:$PATH"
 
       # processing.org pretty fonts
       export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+
+      # use exa instead of ls
+      alias ls="exa"
     '';
   };
 
@@ -149,21 +173,22 @@ mkMerge [{
     enable = true;
     matchBlocks = {
       "betty.patrickod.com" = { user = "root"; };
+      "neptr" = { user = "root"; };
       "g1-*" = {
         user = "root";
         certificateFile = "~/.ssh/iocoop-cert.pub";
-        proxyCommand = "ssh manage1.scl.iocoop.org nc %h %p";
+        proxyCommand = "ssh -i iocoop manage1.scl.iocoop.org nc %h %p";
       };
     };
   };
 
   programs.direnv = {
     enable = true;
+    nix-direnv.enable = true;
     enableZshIntegration = true;
   };
 
   programs.home-manager.enable = true;
-
   programs.i3status-rust.enable = true;
   programs.autorandr.enable = true;
 
@@ -173,27 +198,22 @@ mkMerge [{
       geometry = "0x5-30+50";
       transparency = 10;
       frame_color = "#eceff1";
-      font = "Jetbrains Mono 10";
+      font = "Jetbrains Mono 11";
     };
-  };
-
-  services.redshift = {
-    enable = true;
-    latitude = "37.7749";
-    longitude = "-122.4194";
-    brightness.day = "1";
-    brightness.night = "0.85";
-    temperature.night = 3900;
-    tray = true;
   };
 
   programs.zoxide.enable = true;
   programs.zoxide.enableZshIntegration = true;
 
+  services.hound = {
+    enable = true;
+    databasePath = "/home/patrickod/hound";
+    listenAddress = "localhost:6080";
+    repositories = {
+      "oso" = {
+        url = "https://github.com/osohq/oso.git";
+        ref = "main";
+      };
+    };
+  };
 }
-  (mkIf config.networking.hostName == "prismo" {
-    xdg.configFile."i3/status.toml".source = lib.mkIf (config.networking.hostName == "prismo") ../dotfiles/i3-status-rs.toml.prismo;
-    xdg.configFile."i3/config".source = ../dotfiles/i3-config.prismo;
-
-  })
-]

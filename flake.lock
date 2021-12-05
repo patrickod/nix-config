@@ -7,27 +7,26 @@
         ]
       },
       "locked": {
-        "lastModified": 1637249535,
-        "narHash": "sha256-RCatEYQ+uqsZOZpN4ZOtSoO7CJTiQpHNdPjUA0jtejw=",
+        "lastModified": 1638484748,
+        "narHash": "sha256-Xb5X84/PUMXCyZGnixyqjtVyEt5tlCCrSp4lfJdtiHw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2452979efe92128b03e3c27567267066c2825fab",
+        "rev": "fbb80207f3840785e2918143ebe709f26372f91d",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "master",
         "repo": "home-manager",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1637280287,
-        "narHash": "sha256-mLngziBTvm3xr9L/GZPA4takd+oRkD66sEZpYdhceFg=",
+        "lastModified": 1638506386,
+        "narHash": "sha256-hLg3N/+YjZHdhS6jhQucOi44fK5ZRvpCy9iNuuw/gQ0=",
         "owner": "patrickod",
         "repo": "nixpkgs",
-        "rev": "7bec899b97b35bc1ea9e6c852886bcd4e5fcdad2",
+        "rev": "a42a1e5808cf8592380932c696d23c6fe3f76801",
         "type": "github"
       },
       "original": {
@@ -40,7 +39,28 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "sops-nix": "sops-nix"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1638188662,
+        "narHash": "sha256-heLEbhH3W3GrtYDwacghCiO3g94QkJLW0LhErMWbT2g=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "0e0dcc74bae23c7ef7fb6251c43c277b827e8c34",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     }
   },

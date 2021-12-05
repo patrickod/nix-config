@@ -1,153 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../modules/polkit-allow-mount.nix
-  ];
-
-  # allow use of non-free packages
-  nixpkgs.config.allowUnfree = true;
-
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "dvorak";
-  };
-
-  time.timeZone = "America/Los_Angeles";
-  time.hardwareClockInLocalTime = true;
-
-  #environment.pathsToLink = [ "/share/nix-direnv" ];
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    brightnessctl
-    dhcp
-    emacs
-    git
-    hwloc
-    pciutils
-    prometheus-node-exporter
-    keychain
-    pv
-    silver-searcher
-    sqlite
-    systool
-    usbutils
-    vim
-    wget
-    xorg.xdpyinfo
-    swtpm-tpm2
-  ];
-
-  services.gnome3.gnome-keyring.enable = true;
-
-  # configure default editor
-  services.emacs.enable = true;
-  environment.variables = {
-    EDITOR = "emacsclient -c";
-    VISUAL = "emacsclient -c";
-    LIBVIRT_DEFAULT_URI = "qemu:///system";
-    NIXPKGS = "/home/patrickod/code/nixpkgs";
-  };
-
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
-
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    layout = "dvorak";
-    xkbOptions = "caps:escape";
-
-    inputClassSections = [
-      ''
-        Identifier "keyboardio"
-        MatchIsKeyboard "on"
-        MatchProduct "Keyboardio"
-        Driver "evdev"
-
-        Option "XkbLayout" "us"
-      ''
-      ''
-        Identifier "advantage"
-        MatchIsKeyboard "on"
-        MatchProduct "05f3"
-        Driver "evdev"
-
-        Option "XkbLayout" "us"
-
-      ''
-    ];
-
-    desktopManager = {
-      xterm.enable = false;
-      wallpaper.mode = "fill";
-    };
-
-    displayManager = {
-      defaultSession = "none+i3";
-
-      autoLogin.enable = true;
-      autoLogin.user = "patrickod";
-
-      lightdm = {
-        enable = true;
-        greeter.enable = false;
-      };
-
-      sessionCommands = ''
-        ${pkgs.xorg.xrdb}/bin/xrdb -merge <${
-          pkgs.writeText "Xresources" ''
-            ! hard contrast: *background: #1d2021
-            *background: #282828
-            ! soft contrast: *background: #32302f
-            *foreground: #ebdbb2
-            ! Black + DarkGrey
-            *color0:  #282828
-            *color8:  #928374
-            ! DarkRed + Red
-            *color1:  #cc241d
-            *color9:  #fb4934
-            ! DarkGreen + Green
-            *color2:  #98971a
-            *color10: #b8bb26
-            ! DarkYellow + Yellow
-            *color3:  #d79921
-            *color11: #fabd2f
-            ! DarkBlue + Blue
-            *color4:  #458588
-            *color12: #83a598
-            ! DarkMagenta + Magenta
-            *color5:  #b16286
-            *color13: #d3869b
-            ! DarkCyan + Cyan
-            *color6:  #689d6a
-            *color14: #8ec07c
-            ! LightGrey + White
-            *color7:  #a89984
-            *color15: #ebdbb2
-          ''
-        }
-      '';
-    };
-
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-gaps;
-      extraPackages = with pkgs; [
-        rofi
-        i3status-rust
-        i3lock-fancy
-        i3-gaps
-        i3blocks
-        feh
-      ];
-    };
-  };
+  imports = [ ../modules/polkit-allow-mount.nix ];
 
   fonts.fonts = with pkgs; [
     source-code-pro
@@ -163,11 +17,9 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "libvirtd" "docker" "dialout" "audio" ];
     shell = pkgs.zsh;
-    hashedPassword = "$6$t1qPJ.r2M2XljH$dIBeXMWkq10Pr5C0FsSx44RxXzcxTXaK4.ULeYZ8UmFI8PuNWww5SAci2Zx.WTU4prUS775MuhkbMCg98dT.P0";
+    hashedPassword =
+      "$6$t1qPJ.r2M2XljH$dIBeXMWkq10Pr5C0FsSx44RxXzcxTXaK4.ULeYZ8UmFI8PuNWww5SAci2Zx.WTU4prUS775MuhkbMCg98dT.P0";
   };
-
-  programs.ssh.startAgent = true;
-  programs.zsh.enable = true;
 
   # Configure home-manager with user packages
   home-manager.users.patrickod = { pkgs, ... }: {
@@ -262,6 +114,7 @@
     };
     programs.ssh = {
       enable = true;
+      startAgent = true;
       matchBlocks = {
         "betty.patrickod.com" = { user = "root"; };
         "g1-*" = {
@@ -292,8 +145,8 @@
 
     home.file.".spacemacs".source = ../dotfiles/spacemacs;
     home.file.".notmuch-config".source = ../dotfiles/notmuch-config;
-    home.file.".urxvt/ext/font-size".source = "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
-
+    home.file.".urxvt/ext/font-size".source =
+      "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
 
     ## i3 status & keybinding configuration
     ## TODO: migrate to home-manager i3 configuration management
@@ -329,10 +182,4 @@
     SUBSYSTEM=="usb", ATTRS{idVendor}=="04d8", ATTR{idProduct}=="00dd", MODE="0666"
   '';
 
-  services.syncthing = {
-    enable = true;
-    user = "patrickod";
-    dataDir = "/home/patrickod/syncthing";
-    configDir = "/home/patrickod/.config/syncthing/";
-  };
 }
