@@ -43,8 +43,6 @@
 
   # configure default editor
   environment.variables = {
-    EDITOR = "emacsclient -c";
-    VISUAL = "emacsclient -c";
     LIBVIRT_DEFAULT_URI = "qemu:///system";
   };
 

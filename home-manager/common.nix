@@ -16,12 +16,16 @@
     "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
   home.file.".config/nix/nix.conf".source = ../dotfiles/nix.conf;
 
+  # TODO: migrate to nix-based i3 configuration
+  xdg.configFile."i3/config".source = ../dotfiles/i3-config;
+
   # default packages
   home.packages = [
     pkgs.act
     pkgs.age
     pkgs.discord
     pkgs.exa
+    pkgs.fd
     pkgs.feh
     pkgs.firefox
     pkgs.flyctl
@@ -61,17 +65,25 @@
     pkgs.scrot
     pkgs.signal-desktop
     pkgs.silver-searcher
-    pkgs.sops
     pkgs.slack
+    pkgs.sops
     pkgs.unzip
     pkgs.urxvt_font_size
     pkgs.vlc
-    pkgs.vscode
     pkgs.weechat
     pkgs.wireguard
     pkgs.xclip
     pkgs.yarn
     pkgs.zoxide
+    (pkgs.vscode-with-extensions.override {
+     vscodeExtensions = [pkgs.vscode-extensions.ms-vsliveshare.vsliveshare] ++ map
+       (extension: pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+         mktplcRef = {
+          inherit (extension) name publisher version sha256;
+         };
+       })
+       (import ./extensions.nix).extensions;
+    })
   ];
 
   services.redshift = {
@@ -85,6 +97,7 @@
   };
 
   xresources.properties = {
+    "Emacs.font" = "JetBrains Mono:font=12";
     "URxvt*.foreground" = "#c5c8c6";
     "URxvt*.background" = "#1d1f21";
     "URxvt*.cursorColor" = "#c5c8c6";
@@ -110,10 +123,10 @@
     enable = true;
     userName = "Patrick O'Doherty";
     userEmail = "p@trickod.com";
+    lfs.enable = true;
     extraConfig = {
       pull.ff = "only";
       init.defaultBranch = "main";
-      core.editor = "emacsclient -c";
     };
   };
 
@@ -176,7 +189,6 @@
   };
 
   programs.home-manager.enable = true;
-
   programs.i3status-rust.enable = true;
   programs.autorandr.enable = true;
 

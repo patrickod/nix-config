@@ -1,5 +1,12 @@
-theme = "gruvbox-light"
-icons = "awesome"
+theme = "slick"
+icons = "awesome5"
+
+[[block]]
+block = "nvidia_gpu"
+label = "RTX 3090"
+show_memory = false
+show_clocks = true
+show_temperature = true
 
 [[block]]
 block = "net"
@@ -13,6 +20,7 @@ unit = "GB"
 interval = 20
 warning = 20.0
 alert = 10.0
+format = "{icon} {path} {available}"
 
 [[block]]
 block = "disk_space"
@@ -22,6 +30,7 @@ unit = "GB"
 interval = 20
 warning = 20.0
 alert = 10.0
+format = "{icon} {path} {available}"
 
 [[block]]
 block = "memory"

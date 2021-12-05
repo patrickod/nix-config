@@ -9,8 +9,13 @@
 {
   inputs.nixpkgs.url = "github:patrickod/nixpkgs/personal";
 
+  ## home manager
   inputs.home-manager.url = "github:nix-community/home-manager";
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+  ## sops-nix for secrets encryption
+  inputs.sops-nix.url = "github:Mic92/sops-nix";
+  inputs.sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
   outputs = inputs: {
     nixosConfigurations.prismo = inputs.nixpkgs.lib.nixosSystem {
@@ -18,6 +23,7 @@
       specialArgs = { inherit inputs; };
       modules = [
         inputs.home-manager.nixosModules.home-manager
+        inputs.sops-nix.nixosModules.sops
 
         ({ pkgs, ... }: {
           nix.extraOptions = "experimental-features = nix-command flakes";
@@ -40,6 +46,7 @@
       specialArgs = { inherit inputs; };
       modules = [
         inputs.home-manager.nixosModules.home-manager
+        inputs.sops-nix.nixosModules.sops
 
         ({ pkgs, ... }: {
           nix.extraOptions = "experimental-features = nix-command flakes";
