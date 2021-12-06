@@ -23,7 +23,6 @@
   home.packages = [
     pkgs.act
     pkgs.age
-    pkgs.vscode
     pkgs.discord
     pkgs.exa
     pkgs.fd
