@@ -41,6 +41,7 @@
     pkgs.hugo
     pkgs.hwloc
     pkgs.iftop
+    pkgs.inkscape
     pkgs.iotop
     pkgs.jq
     pkgs.keychain
@@ -94,6 +95,32 @@
     brightness.night = "0.85";
     temperature.night = 3900;
     tray = true;
+  };
+
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      font = {
+        size = 8.0;
+        normal = {
+          family = "JetBrains Mono";
+          style = "Regular";
+        };
+        bold = {
+          family = "JetBrains Mono";
+          style = "Bold";
+        };
+        italic = {
+          family = "JetBrains Mono";
+          style = "Italic";
+        };
+        bold_italic = {
+          family = "JetBrains Mono";
+          style = "Bold Italic";
+        };
+      };
+      background_opacity = 0.8;
+    };
   };
 
   xresources.properties = {

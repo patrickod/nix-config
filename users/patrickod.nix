@@ -57,6 +57,7 @@
     proggyfonts
     font-awesome
     jetbrains-mono
+    arkpandora_ttf
   ];
 
   # Enable the X11 windowing system.
