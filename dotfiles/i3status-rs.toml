@@ -13,6 +13,7 @@ unit = "GB"
 interval = 20
 warning = 20.0
 alert = 10.0
+format = "{icon} {path} {available}"
 
 [[block]]
 block = "disk_space"
@@ -22,6 +23,7 @@ unit = "GB"
 interval = 20
 warning = 20.0
 alert = 10.0
+format = "{icon} {path} {available}"
 
 [[block]]
 block = "memory"
@@ -40,6 +42,9 @@ format = "{1m}"
 
 [[block]]
 block = "sound"
+
+[[block]]
+block = "notify"
 
 [[block]]
 block = "time"

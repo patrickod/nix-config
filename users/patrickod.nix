@@ -3,16 +3,6 @@
 {
   imports = [ ../modules/polkit-allow-mount.nix ];
 
-  fonts.fonts = with pkgs; [
-    source-code-pro
-    proggyfonts
-    font-awesome
-    jetbrains-mono
-    font-awesome-ttf
-    font-awesome
-    font-awesome_4
-  ];
-
   users.users.patrickod = {
     isNormalUser = true;
     extraGroups = [ "wheel" "libvirtd" "docker" "dialout" "audio" ];
@@ -21,141 +11,110 @@
       "$6$t1qPJ.r2M2XljH$dIBeXMWkq10Pr5C0FsSx44RxXzcxTXaK4.ULeYZ8UmFI8PuNWww5SAci2Zx.WTU4prUS775MuhkbMCg98dT.P0";
   };
 
-  # Configure home-manager with user packages
-  home-manager.users.patrickod = { pkgs, ... }: {
-    home.packages = with pkgs; [
-      _1password-gui
-      cargo
-      discord
-      exa
-      fd
-      firefox-beta-bin
-      flyctl
-      fzf
-      gist
-      gmailieer
-      go
-      google-chrome-beta
-      htop
-      httpie
-      hwloc
-      iftop
-      inkscape
-      iotop
-      jq
-      keychain
-      magic-wormhole
-      maim
-      mdbook
-      nixfmt
-      nix-index
-      nix-prefetch-github
-      notmuch
-      paperwork
-      obs-studio
-      patchelf
-      pavucontrol
-      pcmanfm
-      pigz
-      probe-run
-      processing
-      restic
-      scrot
-      signal-desktop
-      silver-searcher
-      slack
-      unzip
-      urxvt_font_size
-      vlc
-      vscode
-      weechat
-      wireguard
-      zoom-us
-      xclip
-      zoom-us
+  # allow use of non-free packages
+  nixpkgs.config.allowUnfree = true;
+
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "dvorak";
+  };
+
+  time.timeZone = "America/Los_Angeles";
+  time.hardwareClockInLocalTime = true;
+
+  # List packages installed in system profile. To search, run:
+  environment.systemPackages = with pkgs; [
+    brightnessctl
+    dhcp
+    emacs
+    git
+    hwloc
+    pciutils
+    prometheus-node-exporter
+    sqlite
+    systool
+    usbutils
+    vim
+    wget
+  ];
+
+  services.gnome3.gnome-keyring.enable = true;
+
+  # configure default editor
+  environment.variables = {
+    LIBVIRT_DEFAULT_URI = "qemu:///system";
+  };
+
+  # Enable sound.
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+
+  # fonts for system wide use
+  fonts.fonts = with pkgs; [
+    source-code-pro
+    proggyfonts
+    font-awesome
+    jetbrains-mono
+    arkpandora_ttf
+  ];
+
+  # Enable the X11 windowing system.
+  services.xserver = {
+    enable = true;
+    layout = "dvorak";
+    xkbOptions = "caps:escape";
+
+    inputClassSections = [
+      ''
+        Identifier "keyboardio"
+        MatchIsKeyboard "on"
+        MatchProduct "Keyboardio"
+        Driver "evdev"
+
+        Option "XkbLayout" "us"
+      ''
+      ''
+        Identifier "advantage"
+        MatchIsKeyboard "on"
+        MatchProduct "05f3"
+        Driver "evdev"
+
+        Option "XkbLayout" "us"
+
+      ''
     ];
-    programs.git = {
-      enable = true;
-      userName = "Patrick O'Doherty";
-      userEmail = "p@trickod.com";
-      extraConfig = {
-        pull.ff = "only";
-        init.defaultBranch = "main";
-        core.editor = "emacsclient -c";
-      };
+
+    desktopManager = {
+      xterm.enable = false;
+      wallpaper.mode = "fill";
     };
-    programs.zsh = {
-      enable = true;
-      history.extended = true;
-      oh-my-zsh = {
+
+    displayManager = {
+      defaultSession = "none+i3";
+
+      autoLogin.enable = true;
+      autoLogin.user = "patrickod";
+
+      lightdm = {
         enable = true;
-        theme = "dieter";
-        plugins = [ "git" ];
-      };
-      initExtra = ''
-        export TERM=xterm-256color
-        eval `keychain --eval id_ed25519 iocoop`
-      '';
-    };
-    programs.urxvt = {
-      enable = true;
-      transparent = true;
-      shading = 20;
-      extraConfig = {
-        "font" = "xft:JetBrains Mono:pixelsize=12";
-        "perl-ext-common" = "font-size";
-        "keysym.C-Up" = "font-size:increase";
-        "keysym.C-Down" = "font-size:decrease";
-        "keysym.C-S-Up" = "font-size:incglobal";
-        "keysym.C-S-Down" = "font-size:decglobal";
-        "keysym.C-equal" = "font-size:reset";
-        "keysym.C-slash" = "font-size:show";
+        greeter.enable = false;
       };
     };
-    programs.ssh = {
+
+    windowManager.i3 = {
       enable = true;
-      startAgent = true;
-      matchBlocks = {
-        "betty.patrickod.com" = { user = "root"; };
-        "g1-*" = {
-          user = "root";
-          certificateFile = "~/.ssh/iocoop-cert.pub";
-          proxyCommand = "ssh manage1.scl.iocoop.org nc %h %p";
-        };
-      };
+      package = pkgs.i3-gaps;
+      extraPackages = with pkgs; [
+        rofi
+        i3status-rust
+        i3lock-fancy
+        i3-gaps
+        i3blocks
+        feh
+      ];
     };
-    programs.direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-      enableZshIntegration = true;
-    };
-    services.redshift = {
-      enable = true;
-      latitude = "37.7749";
-      longitude = "-122.4194";
-      brightness.day = "1";
-      brightness.night = "0.85";
-      temperature.night = 3900;
-      tray = true;
-    };
-
-    home.sessionVariables = {
-      BROWSER = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
-    };
-
-    home.file.".spacemacs".source = ../dotfiles/spacemacs;
-    home.file.".notmuch-config".source = ../dotfiles/notmuch-config;
-    home.file.".urxvt/ext/font-size".source =
-      "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
-
-    ## i3 status & keybinding configuration
-    ## TODO: migrate to home-manager i3 configuration management
-    xdg.configFile."i3/status.toml".source = ../dotfiles/i3status-rs.toml;
-    xdg.configFile."i3/config".source = ../dotfiles/i3-config;
-
-    # configure nixpkgs to allow unfree etc...
-    home.file.".config/nixpkgs/config.nix".source =
-      ../dotfiles/nixpkgs-config.nix;
   };
 
   # udev rules for programming keyboard & axoloti

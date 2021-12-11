@@ -11,13 +11,6 @@
     ../modules/qemu-hooks.nix
   ];
 
-  # remote build configuration
-  nix.trustedUsers = [ "@wheel" ];
-  environment.etc."nix/builder-priv-key.pem".source = ../prismo-cache-priv.pem;
-  nix.extraOptions = ''
-    secret-key-files = /etc/nix/builder-priv-key.pem
-  '';
-
   environment.systemPackages = [ pkgs.xfce.thunar ];
 
   nix.systemFeatures =
