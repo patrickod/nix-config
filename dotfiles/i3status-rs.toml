@@ -1,5 +1,5 @@
 theme = "slick"
-icons = "awesome"
+icons = "awesome5"
 
 [[block]]
 block = "net"

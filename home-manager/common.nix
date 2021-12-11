@@ -153,6 +153,7 @@
     lfs.enable = true;
     extraConfig = {
       pull.ff = "only";
+      core.editor = "vim";
       init.defaultBranch = "main";
     };
   };
