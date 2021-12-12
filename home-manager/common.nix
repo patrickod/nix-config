@@ -75,6 +75,7 @@
     pkgs.wireguard
     pkgs.xclip
     pkgs.yarn
+    pkgs.zeal
     pkgs.zoxide
     (pkgs.vscode-with-extensions.override {
      vscodeExtensions = [pkgs.vscode-extensions.ms-vsliveshare.vsliveshare] ++ map
