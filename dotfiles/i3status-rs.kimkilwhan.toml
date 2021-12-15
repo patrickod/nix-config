@@ -49,7 +49,7 @@ block = "notify"
 [[block]]
 block = "time"
 interval = 60
-format = "%D" # month/day/year
+format = "%D %R" # month/day/year w/ 24H
 
 [[block]]
 block = "battery"
