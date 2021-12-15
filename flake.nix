@@ -28,8 +28,8 @@
         ({ pkgs, ... }: {
           nix.extraOptions = "experimental-features = nix-command flakes";
           nix.package = pkgs.nixFlakes;
-          nix.registry.nixpkgs.flake = inputs.nixpkgs;
           home-manager.useGlobalPkgs = true;
+          nix.registry.nixpkgs.flake = inputs.nixpkgs;
         })
 
         ./machines/prismo.nix
@@ -52,6 +52,7 @@
           nix.extraOptions = "experimental-features = nix-command flakes";
           nix.package = pkgs.nixFlakes;
           nix.registry.nixpkgs.flake = inputs.nixpkgs;
+          nixpkgs.config = { allowUnfree = true; };
           home-manager.useGlobalPkgs = true;
         })
 
@@ -74,6 +75,7 @@
           nix.extraOptions = "experimental-features = nix-command flakes";
           nix.package = pkgs.nixFlakes;
           nix.registry.nixpkgs.flake = inputs.nixpkgs;
+          nixpkgs.config = { allowUnfree = true; };
           home-manager.useGlobalPkgs = true;
         })
 

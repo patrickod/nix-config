@@ -1,5 +1,5 @@
-theme = "gruvbox-light"
-icons = "awesome5"
+theme = "slick"
+icons = "awesome"
 
 [[block]]
 block = "net"
@@ -28,13 +28,12 @@ alert = 10.0
 [[block]]
 block = "memory"
 display_type = "memory"
-format_mem = "{Mup}%"
-format_swap = "{SUp}%"
+format_mem = "{mem_used_percents}"
+format_swap = "{swap_used_percents}"
 
 [[block]]
 block = "cpu"
 interval = 1
-per_core = true
 
 [[block]]
 block = "load"
@@ -47,7 +46,10 @@ block = "sound"
 [[block]]
 block = "time"
 interval = 60
-format = "%d/%m/%y %R"
+format = "%D %R"
+
+[[block]]
+block = "notify"
 
 [[block]]
 block = "battery"
