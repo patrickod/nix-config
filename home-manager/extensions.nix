@@ -44,8 +44,8 @@
   {
     name = "dendron";
     publisher = "dendron";
-    version = "0.71.0";
-    sha256 = "1nrv3rlnlqjpgfa30slwmmxknf5i9fhqygdi7ykn14p4p01hdpvw";
+    version = "0.73.0";
+    sha256 = "19wn4fqjrc54s4hskpp5x7yi1h6nr112pfsq13b7b7q4mka36d8a";
   }
   {
     name = "dendron-markdown-links";
@@ -110,8 +110,8 @@
   {
     name = "vscode-pull-request-github";
     publisher = "GitHub";
-    version = "0.33.2021120309";
-    sha256 = "0qp23f2zri7qpyapkffn9lnkl4liahi4dqm9x0xi6wj9rdp6mjnc";
+    version = "0.35.2021121409";
+    sha256 = "0nv26kl1kg489inhv44fa97c4pywd8pwxbac0kaayai70zhn6pyv";
   }
   {
     name = "go";
@@ -176,8 +176,8 @@
   {
     name = "rust-analyzer";
     publisher = "matklad";
-    version = "0.2.834";
-    sha256 = "1q5al9gbnw5vklpq4r3rkhq33dwsanv0hvaknzbr9p766wf836qv";
+    version = "0.2.853";
+    sha256 = "0fasdv9wazir6qv2qvmn0wsy2v5lwa4lhxq7scqwr16wxhzbr2hx";
   }
   {
     name = "compiler-explorer";
@@ -194,20 +194,20 @@
   {
     name = "python";
     publisher = "ms-python";
-    version = "2021.11.1422169775";
-    sha256 = "1ax0lr0r9ip8pb3fzg462c00q98rlnpq5al5fkgaywcyx2k9pib3";
+    version = "2021.12.1559732655";
+    sha256 = "0ghwj1n57zgfqnlwdxy18ahkljixv6dd2810rzw6vfqvp1kxax45";
   }
   {
     name = "vscode-pylance";
     publisher = "ms-python";
-    version = "2021.12.0";
-    sha256 = "0pvhp63qgdlnj8znxxmwj7mzgpfqpicq3xis0js1hr0lsk7i5w04";
+    version = "2021.12.2";
+    sha256 = "1fpk2qv0b5cpcqqhpncqdwjnhhdf42zwj90nkfggc56d8sjvxfzd";
   }
   {
     name = "jupyter";
     publisher = "ms-toolsai";
-    version = "2021.11.1001532801";
-    sha256 = "1c5ja0lqqvxsil83qxw9ly4sjk2c64j5m3mh6afihylnll446m8r";
+    version = "2022.1.1001576989";
+    sha256 = "08ajl0qhl80fqyhlf3i8xwi29xjhbzi6gx2vkx0ija5yfxq7n9yy";
   }
   {
     name = "jupyter-keymap";
@@ -224,14 +224,20 @@
   {
     name = "remote-wsl";
     publisher = "ms-vscode-remote";
-    version = "0.63.4";
-    sha256 = "1f3jwfy6kalcawl08v2dh5pkm7xllyf9fjdszlggmsa64hg8kjkl";
+    version = "0.63.11";
+    sha256 = "1i8pqv74vmjivciw5ddhz5g5p869slgxfwc165sizv5b556hcmll";
   }
   {
     name = "makefile-tools";
     publisher = "ms-vscode";
-    version = "0.3.0";
-    sha256 = "02lmf5qslaarybbq0b4ra30yqhjydx4myd3g6cais0jk7f67idxz";
+    version = "0.3.1";
+    sha256 = "0xsawwqvp2rhgz6cx587ygjb3ggysilnwba2xpfialj1czl2984q";
+  }
+  {
+    name = "vsliveshare";
+    publisher = "ms-vsliveshare";
+    version = "1.0.5196";
+    sha256 = "0p1bkhypwws4ckpnzzgmih9rrmyaxw8rd3ldx5j5dy9fswvi7iq0";
   }
   {
     name = "vscode-paste-image";
