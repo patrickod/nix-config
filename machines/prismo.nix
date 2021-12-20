@@ -20,6 +20,7 @@
   networking.hostName = "prismo";
   networking.useDHCP = false;
   networking.interfaces.enp7s0.useDHCP = true;
+  networking.interfaces.enp7s0.wakeOnLan.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver = {

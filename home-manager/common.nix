@@ -32,7 +32,6 @@
     pkgs.fzf
     pkgs.gdb
     pkgs.gist
-    pkgs.gnome3.nautilus
     pkgs.go
     pkgs.google-chrome-beta
     pkgs.htop
@@ -154,7 +153,6 @@
     lfs.enable = true;
     extraConfig = {
       pull.ff = "only";
-      core.editor = "vim";
       init.defaultBranch = "main";
     };
   };

@@ -13,6 +13,8 @@
     eval "$(rbenv init -)"
   '';
 
+  programs.git.extraConfig.core.editor = "vim";
+
   ## i3 status & keybinding configuration
   ## TODO: migrate to home-manager i3 configuration management
   xdg.configFile."i3/status.toml".source = ../dotfiles/i3status-rs.toml;
