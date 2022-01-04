@@ -35,7 +35,6 @@
     pkgs.htop
     pkgs.httpie
     pkgs.hub
-    pkgs.hugo
     pkgs.hwloc
     pkgs.iftop
     pkgs.inkscape

@@ -13,7 +13,7 @@ for_window [class="^.*"] border pixel 3
 # set a random background
 exec --no-startup-id feh --bg-fill --random ~/backgrounds/*
 # redshift-gtk with SF lat long
-exec redshift-gtk -l 33.77:-122.41
+exec redshift-gtk -l 55.34:-6.26
 
 set $refresh_i3status killall -SIGUSR1 i3status
 
