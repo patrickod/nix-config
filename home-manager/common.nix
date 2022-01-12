@@ -16,9 +16,6 @@
     "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
   home.file.".config/nix/nix.conf".source = ../dotfiles/nix.conf;
 
-  # TODO: migrate to nix-based i3 configuration
-  xdg.configFile."i3/config".source = ../dotfiles/i3-config;
-
   # default packages
   home.packages = [
     pkgs.act
