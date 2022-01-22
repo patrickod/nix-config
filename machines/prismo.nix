@@ -11,6 +11,8 @@
     ../modules/qemu-hooks.nix
   ];
 
+  services.espanso.enable = true;
+
   environment.systemPackages = [ pkgs.xfce.thunar ];
 
   # sops secret import for encrypted backups
