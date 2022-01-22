@@ -13,6 +13,25 @@
 
   environment.systemPackages = [ pkgs.xfce.thunar ];
 
+  # sops secret import for encrypted backups
+  sops.defaultSopsFile = ../secrets/prismo.yml;
+  # sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  sops.age.keyFile = "/home/patrickod/.config/sops/age/keys.txt";
+  sops.secrets.restic_backup_password = {
+    mode = "0440";
+    owner = "root";
+    group = "root";
+  };
+
+  services.restic.backups.home = {
+    repository = "/mnt/backups/prismo/restic";
+    paths = [ "/home" ];
+    initialize = true;
+    passwordFile = "/run/secrets/restic_backup_password";
+    extraBackupArgs = [ "--exclude-file=/home/patrickod/.cache" ];
+    timerConfig = { OnCalendar = "daily"; };
+  };
+
   nix.systemFeatures =
     [ "big-parallel" "benchmark" "nixos-test" "kvm" "gccarch-znver2" ];
 
