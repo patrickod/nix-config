@@ -151,6 +151,7 @@
     extraConfig = {
       pull.ff = "only";
       init.defaultBranch = "main";
+      core.editor = "vim";
     };
   };
 
@@ -198,6 +199,7 @@
     matchBlocks = {
       "betty.patrickod.com" = { user = "root"; };
       "neptr" = { user = "root"; };
+      "pb" = { user = "root"; };
       "g1-*" = {
         user = "root";
         certificateFile = "~/.ssh/iocoop-cert.pub";

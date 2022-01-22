@@ -19,17 +19,29 @@
   sops.age.keyFile = "/home/patrickod/.config/sops/age/keys.txt";
   sops.secrets.restic_backup_password = {
     mode = "0440";
-    owner = "root";
-    group = "root";
+    owner = "patrickod";
+    group = "wheel";
   };
 
   services.restic.backups.home = {
+    user = "patrickod";
     repository = "/mnt/backups/prismo/restic";
     paths = [ "/home" ];
     initialize = true;
     passwordFile = "/run/secrets/restic_backup_password";
-    extraBackupArgs = [ "--exclude-file=/home/patrickod/.cache" ];
-    timerConfig = { OnCalendar = "daily"; };
+    extraBackupArgs =
+      [ "--exclude-file=/home/patrickod/.restic-backup-exclude"];
+    timerConfig = {
+      OnCalendar = "hourly";
+      Persistent = true;
+    };
+    pruneOpts = [
+      "--keep-hourly 72"
+      "--keep-daily 21"
+      "--keep-weekly 52"
+      "--keep-monthly 60"
+      "--keep-yearly 50"
+    ];
   };
 
   nix.systemFeatures =
