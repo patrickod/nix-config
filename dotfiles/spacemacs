@@ -34,6 +34,7 @@ This function should only modify configuration layer settings."
      ruby-on-rails
      (rust :variables rust-format-on-save t)
      shell-scripts
+     sql
      terraform
      themes-megapack
      typescript

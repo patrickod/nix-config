@@ -16,6 +16,9 @@
     "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
   home.file.".config/nix/nix.conf".source = ../dotfiles/nix.conf;
 
+  # restic common backup exclusions
+  home.file.".restic-backup-exclude".source = ../dotfiles/restic-backup-exclude;
+
   # default packages
   home.packages = [
     pkgs.act
@@ -29,7 +32,6 @@
     pkgs.fzf
     pkgs.gdb
     pkgs.gist
-    pkgs.gnome3.nautilus
     pkgs.go
     pkgs.google-chrome-beta
     pkgs.htop
@@ -71,6 +73,7 @@
     pkgs.wireguard
     pkgs.xclip
     pkgs.yarn
+    pkgs.zeal
     pkgs.zoxide
     # (pkgs.vscode-with-extensions.override {
     #  vscodeExtensions = [pkgs.vscode-extensions.ms-vsliveshare.vsliveshare] ++ map
@@ -152,8 +155,8 @@
     lfs.enable = true;
     extraConfig = {
       pull.ff = "only";
-      core.editor = "vim";
       init.defaultBranch = "main";
+      core.editor = "vim";
     };
   };
 
@@ -201,6 +204,7 @@
     matchBlocks = {
       "betty" = { user = "root"; };
       "neptr" = { user = "root"; };
+      "pb" = { user = "root"; };
       "g1-*" = {
         user = "root";
         certificateFile = "~/.ssh/iocoop-cert.pub";
