@@ -20,13 +20,13 @@ in {
         '';
       };
       excludeFile = mkOption {
-        default = "/home/patrickod/.restic-backup-exclude";
+        default = "${home.homeDirectory}/.restic-backup-exclude";
         description = ''
           List of file/folder patterns to ignore when backing up /home
         '';
       };
       passwordFile = mkOption {
-        default = "/home/patrickod/.restic-backup-password";
+        default = "${home.homeDirectory}/.restic-backup-password";
         description = ''
           The passwordFile containing the backup key to pass to restic.
         '';
@@ -36,7 +36,7 @@ in {
 
   config = mkIf cfg.enable {
     systemd.user.timers."restic-home-backup" = {
-      Unit = { Description = "backup /home with restic"; };
+      Unit = { Description = "backup $HOME with restic"; };
 
       Timer = {
         OnCalendar = "hourly";
@@ -48,12 +48,12 @@ in {
     };
 
     systemd.user.services."restic-home-backup" = {
-      Unit = { Description = "restic /home backup"; };
+      Unit = { Description = "restic $HOME backup"; };
 
       Service = {
         Type = "oneshot";
         ExecStart =
-          "${pkgs.restic}/bin/restic --repo ${cfg.repository} --password-file ${cfg.passwordFile} --exclude-file ${cfg.excludeFile} backup /home";
+          "${pkgs.restic}/bin/restic --repo ${cfg.repository} --password-file ${cfg.passwordFile} --exclude-file ${cfg.excludeFile} backup ${home.homeDirectory}";
       };
 
       Install = { WantedBy = [ "default.target" ]; };
