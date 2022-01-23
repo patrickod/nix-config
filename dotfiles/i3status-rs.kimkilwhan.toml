@@ -62,7 +62,7 @@ format = "DUB: %R" # month/day/year w/ 24H
 [[block]]
 block = "time"
 interval = 60
-format = "%D"
+format = "%a %D"
 
 [[block]]
 block = "sound"

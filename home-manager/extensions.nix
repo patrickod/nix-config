@@ -44,8 +44,8 @@
   {
     name = "dendron";
     publisher = "dendron";
-    version = "0.75.1";
-    sha256 = "0lfnqwsa2li4ihxg8zy9vbvdp0xcmjc8jzf484ic0j48900p08a4";
+    version = "0.78.0";
+    sha256 = "016z6s4mx64pmr659mj0xx12fhh9m945ra5s17iyk9313k5wvh9h";
   }
   {
     name = "dendron-markdown-links";
@@ -110,8 +110,8 @@
   {
     name = "vscode-pull-request-github";
     publisher = "GitHub";
-    version = "0.35.2022010409";
-    sha256 = "0dzn3klvq0fxkw4kgb4dhmwffjhv4r3wanbpcv1adq0s1jdf7m9c";
+    version = "0.35.2022012009";
+    sha256 = "0rbky4cy6r0nw32pqfjj854nj9kf3f5dc6v38mf4wvzmxd5nb6bj";
   }
   {
     name = "go";
@@ -122,8 +122,8 @@
   {
     name = "todo-tree";
     publisher = "Gruntfuggly";
-    version = "0.0.214";
-    sha256 = "0rwxjnrl44rnhx3183037k6435xs4772p58a37azl5cahsyav1hk";
+    version = "0.0.215";
+    sha256 = "0lyaijsvi1gqidpn8mnnfc0qsnd7an8qg5p2m7l24c767gllkbsq";
   }
   {
     name = "latex-workshop";
@@ -170,14 +170,14 @@
   {
     name = "restructuredtext";
     publisher = "lextudio";
-    version = "167.0.0";
-    sha256 = "1kl0r153m2ms1kmby3phbxm1fw37ww99iv042ngw4bnnnv3l97g1";
+    version = "168.0.0";
+    sha256 = "1rvzynpqhw2wlw9wr63nxbhvg35b2v1rfp3kvhrwbzxdlyc02smh";
   }
   {
     name = "rust-analyzer";
     publisher = "matklad";
-    version = "0.3.891";
-    sha256 = "199k29i78rjymm5gsw0kdl3rxz3k59hw4a91wwcg6hqd4y0h3cbk";
+    version = "0.3.912";
+    sha256 = "0qv74bzhlxnrbfarjp8gxs7syk1hvk4mpawfq5g6gpqkcxk2ax5i";
   }
   {
     name = "compiler-explorer";
@@ -188,8 +188,8 @@
   {
     name = "vscode-docker";
     publisher = "ms-azuretools";
-    version = "1.18.0";
-    sha256 = "0hhlhx3xy7x31xx2v3srvk67immajs6dm9h0wi49ii1rwx61zxah";
+    version = "1.19.0";
+    sha256 = "0qg4k5ivwa54i9f5ls1a0wl7blpymaq03dakdvvzallarip01qkf";
   }
   {
     name = "python";
@@ -200,14 +200,14 @@
   {
     name = "vscode-pylance";
     publisher = "ms-python";
-    version = "2021.12.2";
-    sha256 = "1fpk2qv0b5cpcqqhpncqdwjnhhdf42zwj90nkfggc56d8sjvxfzd";
+    version = "2022.1.1";
+    sha256 = "0v5ynwbjyh3ggw2m0j2dpx1yx691zi3w3rmlm97ngjy6p3ldr701";
   }
   {
     name = "jupyter";
     publisher = "ms-toolsai";
-    version = "2022.1.1001614873";
-    sha256 = "0hvhvn3slhax7sxky3fy59c34pj6yy3x77v8aqxlz59gf5m9l9w8";
+    version = "2022.1.1001727824";
+    sha256 = "0hj04cgw5027nsghcjzp7gp4x55chimrbr1c1p7jnrial4yhrvgq";
   }
   {
     name = "jupyter-keymap";
@@ -224,8 +224,8 @@
   {
     name = "remote-wsl";
     publisher = "ms-vscode-remote";
-    version = "0.63.13";
-    sha256 = "06m5if4fmsjasj7p25whwwx4hr15ypwnwd8shpznxgb7mr869ix4";
+    version = "0.64.1";
+    sha256 = "1lqaxm8a4bhy3v3na9g3l7ry9jq2fgx122q8jyrqlka1swdbcvm8";
   }
   {
     name = "makefile-tools";
@@ -236,8 +236,8 @@
   {
     name = "vsliveshare";
     publisher = "ms-vsliveshare";
-    version = "1.0.5200";
-    sha256 = "1fpifp7w66sfmp4qfbm0q0866w8wfzlrw1v8aajsjcjq9inmraiv";
+    version = "1.0.5273";
+    sha256 = "17q3k4c688nr29ihf0x9kizfchab6i74dkl3b66767czx07kkd1m";
   }
   {
     name = "vscode-paste-image";
@@ -254,8 +254,8 @@
   {
     name = "vscode-yaml";
     publisher = "redhat";
-    version = "1.2.2";
-    sha256 = "06n4fxqr3lqmiyns9jdk3rdnanamcpzhrivllai8z9d997xmwcx6";
+    version = "1.3.0";
+    sha256 = "1b9kl8ziz299451bsmn1crj8j1n2r611lcw2f7y3j0alq0nrngjg";
   }
   {
     name = "vscode-direnv";
@@ -284,14 +284,14 @@
   {
     name = "code-spell-checker";
     publisher = "streetsidesoftware";
-    version = "2.0.14";
-    sha256 = "0y3xw0490n35138z964ai97mfw9b2v0a7a74abkxmkns1fqjq1wv";
+    version = "2.1.4";
+    sha256 = "1y0gfdr8kw3rjp47p9lxnylpwl1pd5wfr2zvl7i3hws39gya1jsp";
   }
   {
     name = "vscode-open-in-github";
     publisher = "sysoev";
-    version = "1.15.0";
-    sha256 = "0y8h7jskc09a0yfmzr8i2r34ksw0smg4hfmnjchpbvi2zmhpckz8";
+    version = "1.16.0";
+    sha256 = "1x42qd5k29wqv4n7j5ah93qnjc769ff8yf7pwv406m7lykjipfhs";
   }
   {
     name = "rainbow-brackets-2";
@@ -314,8 +314,8 @@
   {
     name = "graphviz-interactive-preview";
     publisher = "tintinweb";
-    version = "0.0.12";
-    sha256 = "048azn03raf0x9qxzbr13gavdri0ygh640605xhlg0ypxiz2xy4d";
+    version = "0.0.13";
+    sha256 = "1phihfp07xqdm9pccpvjqw4fc2yxr1938wfiy06bp1ankczalv8d";
   }
   {
     name = "simple-rst";
