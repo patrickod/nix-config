@@ -40,16 +40,35 @@ block = "load"
 interval = 1
 format = "{1m}"
 
+
+[[block]]
+block = "time"
+interval = 5
+timezone = "US/Pacific"
+format = "SFO: %R" # month/day/year w/ 24H
+
+[[block]]
+block = "time"
+interval = 5
+timezone = "US/Eastern"
+format = "NYC: %R"
+
+[[block]]
+block = "time"
+interval = 5
+timezone = "Europe/Dublin"
+format = "DUB: %R" # month/day/year w/ 24H
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %D"
+
 [[block]]
 block = "sound"
 
 [[block]]
 block = "notify"
-
-[[block]]
-block = "time"
-interval = 60
-format = "%D %R" # month/day/year w/ 24H
 
 [[block]]
 block = "battery"

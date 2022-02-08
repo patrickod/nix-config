@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./common.nix ];
+  imports = [ ./common.nix ../modules/home-manager/restic ];
   programs.zsh.initExtra = ''
     # pyenv initialization
     export PATH="$HOME/.pyenv/bin:$PATH"
@@ -14,6 +14,8 @@
   '';
 
   programs.git.extraConfig.core.editor = "vim";
+
+  services.restic-home-backup.enable = true;
 
   ## i3 status & keybinding configuration
   ## TODO: migrate to home-manager i3 configuration management

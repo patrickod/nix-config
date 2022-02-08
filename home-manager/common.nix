@@ -16,6 +16,9 @@
     "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
   home.file.".config/nix/nix.conf".source = ../dotfiles/nix.conf;
 
+  # restic common backup exclusions
+  home.file.".restic-backup-exclude".source = ../dotfiles/restic-backup-exclude;
+
   # default packages
   home.packages = [
     pkgs.act
@@ -34,7 +37,6 @@
     pkgs.htop
     pkgs.httpie
     pkgs.hub
-    pkgs.hugo
     pkgs.hwloc
     pkgs.iftop
     pkgs.inkscape
@@ -73,23 +75,26 @@
     pkgs.yarn
     pkgs.zeal
     pkgs.zoxide
-    (pkgs.vscode-with-extensions.override {
-     vscodeExtensions = [pkgs.vscode-extensions.ms-vsliveshare.vsliveshare] ++ map
-       (extension: pkgs.vscode-utils.buildVscodeMarketplaceExtension {
-         mktplcRef = {
-          inherit (extension) name publisher version sha256;
-         };
-       })
-       (import ./extensions.nix).extensions;
-    })
+    # (pkgs.vscode-with-extensions.override {
+    #  vscodeExtensions = [pkgs.vscode-extensions.ms-vsliveshare.vsliveshare] ++ map
+    #    (extension: pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+    #      mktplcRef = {
+    #       inherit (extension) name publisher version sha256;
+    #      };
+    #    })
+    #    (import ./extensions.nix).extensions;
+    # })
+    pkgs.vscode
   ];
 
   services.redshift = {
     enable = true;
+    settings = {
+      brightness.day = "1";
+      brightness.night = "0.85";
+    };
     latitude = "37.7749";
     longitude = "-122.4194";
-    brightness.day = "1";
-    brightness.night = "0.85";
     temperature.night = 3900;
     tray = true;
   };
@@ -197,7 +202,7 @@
   programs.ssh = {
     enable = true;
     matchBlocks = {
-      "betty.patrickod.com" = { user = "root"; };
+      "betty" = { user = "root"; };
       "neptr" = { user = "root"; };
       "pb" = { user = "root"; };
       "g1-*" = {
@@ -230,16 +235,4 @@
 
   programs.zoxide.enable = true;
   programs.zoxide.enableZshIntegration = true;
-
-  services.hound = {
-    enable = true;
-    databasePath = "/home/patrickod/hound";
-    listenAddress = "localhost:6080";
-    repositories = {
-      "oso" = {
-        url = "https://github.com/osohq/oso.git";
-        ref = "main";
-      };
-    };
-  };
 }
