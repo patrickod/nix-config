@@ -121,7 +121,7 @@
           style = "Bold Italic";
         };
       };
-      background_opacity = 0.8;
+      window.opacity = 0.2;
     };
   };
 

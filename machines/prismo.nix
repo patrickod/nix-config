@@ -45,7 +45,7 @@
     ];
   };
 
-  nix.systemFeatures =
+  nix.settings.system-features =
     [ "big-parallel" "benchmark" "nixos-test" "kvm" "gccarch-znver2" ];
 
   # hostname + networking setup
@@ -89,36 +89,7 @@
     options = [ "x-systemd.automount" "noauto" ];
   };
 
-  # Configure KVM
-  virtualisation.libvirtd = {
-    enable = true;
-    qemuOvmf = true;
-    qemuRunAsRoot = false;
-    onBoot = "ignore";
-    onShutdown = "shutdown";
-    qemuVerbatimConfig = ''
-      cgroup_device_acl = [
-      "/dev/null",
-      "/dev/full",
-      "/dev/zero",
-      "/dev/random",
-      "/dev/urandom",
-      "/dev/ptmx",
-      "/dev/kvm",
-      "/dev/kqemu",
-      "/dev/rtc",
-      "/dev/hpet",
-      "/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse",
-      "/dev/input/by-id/usb-Kinesis_Freestyle_Edge_Keyboard_223606797749-if01-event-kbd",
-      "/dev/input/by-id/usb-04d9_USB-HID_Keyboard-event-kbd",
-      ]
-      namespaces = []
-    '';
-  };
-  users.users.qemu-libvirtd.extraGroups = [ "input" ];
-
   virtualisation.docker.enable = true;
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
