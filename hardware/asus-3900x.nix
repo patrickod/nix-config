@@ -7,7 +7,7 @@
   imports = [ ../modules/ezpassthru.nix ];
 
   # configure necessary virtualization packages
-  environment.systemPackages = with pkgs; [ virtmanager qemu ntfs3g ];
+  environment.systemPackages = with pkgs; [ ntfs3g ];
 
   # configure GRUB
   boot.loader = {

@@ -38,7 +38,7 @@
     };
     pruneOpts = [
       "--keep-hourly 72"
-      "--keep-daily 21"
+      "--keep-daily 90"
       "--keep-weekly 52"
       "--keep-monthly 60"
       "--keep-yearly 50"

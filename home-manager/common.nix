@@ -35,7 +35,7 @@
     pkgs.go
     pkgs.google-chrome-beta
     pkgs.htop
-    pkgs.httpie
+    # pkgs.httpie
     pkgs.hub
     pkgs.hwloc
     pkgs.iftop
