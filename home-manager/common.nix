@@ -28,14 +28,13 @@
     pkgs.fd
     pkgs.feh
     pkgs.firefox
-    pkgs.flyctl
     pkgs.fzf
     pkgs.gdb
     pkgs.gist
     pkgs.go
     pkgs.google-chrome-beta
     pkgs.htop
-    # pkgs.httpie
+    pkgs.httpie
     pkgs.hub
     pkgs.hwloc
     pkgs.iftop
@@ -48,10 +47,7 @@
     pkgs.maim
     pkgs.mdbook
     pkgs.nixfmt
-    pkgs.nix-index
-    pkgs.nix-prefetch-github
-    pkgs.nix-query-tree-viewer
-    pkgs.nixUnstable
+    pkgs.obs-studio
     pkgs.paperwork
     pkgs.patchelf
     pkgs.pavucontrol
