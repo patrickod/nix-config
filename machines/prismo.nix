@@ -31,7 +31,7 @@
     initialize = true;
     passwordFile = "/run/secrets/restic_backup_password";
     extraBackupArgs =
-      [ "--exclude-file=/home/patrickod/.restic-backup-exclude"];
+      [ "--exclude-file=/home/patrickod/.restic-backup-exclude" ];
     timerConfig = {
       OnCalendar = "hourly";
       Persistent = true;
@@ -90,6 +90,9 @@
   };
 
   virtualisation.docker.enable = true;
+
+  programs.noisetorch.enable = true;
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
