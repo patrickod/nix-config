@@ -17,8 +17,7 @@
 
   # sops secret import for encrypted backups
   sops.defaultSopsFile = ../secrets/prismo.yml;
-  # sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-  sops.age.keyFile = "/home/patrickod/.config/sops/age/keys.txt";
+  sops.age.keyFile = "/etc/sops/age/keys.txt";
   sops.secrets.restic_backup_password = {
     mode = "0440";
     owner = "patrickod";
@@ -39,21 +38,21 @@
     };
     pruneOpts = [
       "--keep-hourly 72"
-      "--keep-daily 21"
+      "--keep-daily 90"
       "--keep-weekly 52"
       "--keep-monthly 60"
       "--keep-yearly 50"
     ];
   };
 
-  nix.systemFeatures =
+  nix.settings.system-features =
     [ "big-parallel" "benchmark" "nixos-test" "kvm" "gccarch-znver2" ];
 
   # hostname + networking setup
   networking.hostName = "prismo";
   networking.useDHCP = false;
-  networking.interfaces.enp7s0.useDHCP = true;
-  networking.interfaces.enp7s0.wakeOnLan.enable = true;
+  networking.interfaces.enp6s0.useDHCP = true;
+  networking.interfaces.enp6s0.wakeOnLan.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -90,36 +89,7 @@
     options = [ "x-systemd.automount" "noauto" ];
   };
 
-  # Configure KVM
-  virtualisation.libvirtd = {
-    enable = true;
-    qemuOvmf = true;
-    qemuRunAsRoot = false;
-    onBoot = "ignore";
-    onShutdown = "shutdown";
-    qemuVerbatimConfig = ''
-      cgroup_device_acl = [
-      "/dev/null",
-      "/dev/full",
-      "/dev/zero",
-      "/dev/random",
-      "/dev/urandom",
-      "/dev/ptmx",
-      "/dev/kvm",
-      "/dev/kqemu",
-      "/dev/rtc",
-      "/dev/hpet",
-      "/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse",
-      "/dev/input/by-id/usb-Kinesis_Freestyle_Edge_Keyboard_223606797749-if01-event-kbd",
-      "/dev/input/by-id/usb-04d9_USB-HID_Keyboard-event-kbd",
-      ]
-      namespaces = []
-    '';
-  };
-  users.users.qemu-libvirtd.extraGroups = [ "input" ];
-
   virtualisation.docker.enable = true;
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

@@ -28,7 +28,6 @@
     pkgs.fd
     pkgs.feh
     pkgs.firefox
-    pkgs.flyctl
     pkgs.fzf
     pkgs.gdb
     pkgs.gist
@@ -48,10 +47,7 @@
     pkgs.maim
     pkgs.mdbook
     pkgs.nixfmt
-    pkgs.nix-index
-    pkgs.nix-prefetch-github
-    pkgs.nix-query-tree-viewer
-    pkgs.nixUnstable
+    pkgs.obs-studio
     pkgs.paperwork
     pkgs.patchelf
     pkgs.pavucontrol
@@ -120,7 +116,7 @@
           style = "Bold Italic";
         };
       };
-      background_opacity = 0.8;
+      window.opacity = 0.2;
     };
   };
 

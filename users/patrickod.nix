@@ -39,7 +39,7 @@
     wget
   ];
 
-  services.gnome3.gnome-keyring.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   # configure default editor
   environment.variables = {
@@ -139,6 +139,9 @@
 
     # MCP2221
     SUBSYSTEM=="usb", ATTRS{idVendor}=="04d8", ATTR{idProduct}=="00dd", MODE="0666"
+
+    # RTL-SDR
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2832", ENV{ID_SOFTWARE_RADIO}="1", MODE="0660", OWNER="patrickod"
   '';
 
 }
