@@ -23,7 +23,7 @@
   home.packages = [
     pkgs.act
     pkgs.age
-    pkgs.discord
+    # pkgs.discord
     pkgs.exa
     pkgs.fd
     pkgs.feh
@@ -64,13 +64,12 @@
     pkgs.scrot
     pkgs.signal-desktop
     pkgs.silver-searcher
-    pkgs.slack
     pkgs.sops
     pkgs.unzip
     pkgs.urxvt_font_size
     pkgs.vlc
     pkgs.weechat
-    pkgs.wireguard
+    pkgs.wireguard-tools
     pkgs.xclip
     pkgs.yarn
     pkgs.zeal
