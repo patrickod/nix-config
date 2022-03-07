@@ -41,7 +41,7 @@
     pciutils
     prometheus-node-exporter
     sqlite
-    systool
+    sysfsutils
     usbutils
     vim
     wget

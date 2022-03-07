@@ -5,10 +5,9 @@
   home.username = "patrickod";
   home.homeDirectory = "/home/patrickod";
   home.sessionVariables = {
-    "PATH" = "$HOME/go/bin:$HOME/.yarn/bin:$PATH";
     "BROWSER" = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
   };
-  home.stateVersion = "21.11";
+  home.stateVersion = "22.05";
 
   # dotfiles
   home.file.".spacemacs".source = ../dotfiles/spacemacs;
@@ -66,7 +65,7 @@
     pkgs.urxvt_font_size
     pkgs.vlc
     pkgs.weechat
-    pkgs.wireguard
+    pkgs.wireguard-tools
     pkgs.xclip
     pkgs.yarn
     pkgs.zeal

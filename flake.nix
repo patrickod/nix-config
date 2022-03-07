@@ -25,17 +25,15 @@
         inputs.home-manager.nixosModules.home-manager
         inputs.sops-nix.nixosModules.sops
 
+        ./machines/prismo.nix
+
         ({ pkgs, ... }: {
           nix.extraOptions = "experimental-features = nix-command flakes";
           nix.package = pkgs.nixFlakes;
-          nixpkgs.config = { allowUnfree = true; };
           nix.registry.nixpkgs.flake = inputs.nixpkgs;
-        })
+          nixpkgs.config = { allowUnfree = true; };
 
-        ./machines/prismo.nix
-
-        ({pkgs, ... }: {
-          home-manager.users.patrickod = { pkgs, ... }: {
+          home-manager.users.patrickod = { ... }: {
             nixpkgs.config = { allowUnfree = true; };
             imports = [./home-manager/prismo.nix];
           };
