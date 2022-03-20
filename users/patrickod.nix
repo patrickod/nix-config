@@ -52,11 +52,6 @@
   # configure default editor
   environment.variables = { LIBVIRT_DEFAULT_URI = "qemu:///system"; };
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
-
   # fonts for system wide use
   fonts.fonts = with pkgs; [
     source-code-pro

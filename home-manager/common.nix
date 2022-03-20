@@ -45,6 +45,7 @@
     pkgs.magic-wormhole
     pkgs.maim
     pkgs.mdbook
+    pkgs.ncmpcpp
     pkgs.nixfmt
     pkgs.obs-studio
     pkgs.paperwork

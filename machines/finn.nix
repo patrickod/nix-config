@@ -8,6 +8,13 @@
     ../modules/strangeparts-wireguard.nix
   ];
 
+  # Enable sound.
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.extraConfig =
+    "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1";
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

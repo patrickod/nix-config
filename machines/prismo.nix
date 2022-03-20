@@ -8,10 +8,35 @@
     ../modules/remote-luks-unlock.nix
     ../users/patrickod.nix
     ../modules/defaults.nix
-    ../modules/qemu-hooks.nix
   ];
 
   services.espanso.enable = true;
+
+  services.mpd = {
+    enable = true;
+    user = "patrickod";
+    musicDirectory = "/mnt/media/audio/beets-export";
+    extraConfig = ''
+      audio_output {
+        type "pipewire"
+        name "pipewire"
+      }
+
+      # Enable replay gain.
+      replaygain          "track"
+    '';
+  };
+
+  ## necessary to resolve permissions issues between MPD & pipewire
+  systemd.services.mpd.environment = {
+    XDG_RUNTIME_DIR = "/run/user/1000";
+  };
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
 
   environment.systemPackages = [ pkgs.xfce.thunar ];
 
