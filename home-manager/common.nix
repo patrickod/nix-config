@@ -5,10 +5,9 @@
   home.username = "patrickod";
   home.homeDirectory = "/home/patrickod";
   home.sessionVariables = {
-    "PATH" = "$HOME/go/bin:$HOME/.yarn/bin:$PATH";
     "BROWSER" = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
   };
-  home.stateVersion = "21.11";
+  home.stateVersion = "22.05";
 
   # dotfiles
   home.file.".spacemacs".source = ../dotfiles/spacemacs;
@@ -16,8 +15,8 @@
     "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
   home.file.".config/nix/nix.conf".source = ../dotfiles/nix.conf;
 
-  # TODO: migrate to nix-based i3 configuration
-  xdg.configFile."i3/config".source = ../dotfiles/i3-config;
+  # restic common backup exclusions
+  home.file.".restic-backup-exclude".source = ../dotfiles/restic-backup-exclude;
 
   # default packages
   home.packages = [
@@ -28,17 +27,14 @@
     pkgs.fd
     pkgs.feh
     pkgs.firefox
-    pkgs.flyctl
     pkgs.fzf
     pkgs.gdb
     pkgs.gist
-    pkgs.gnome3.nautilus
     pkgs.go
     pkgs.google-chrome-beta
     pkgs.htop
     pkgs.httpie
     pkgs.hub
-    pkgs.hugo
     pkgs.hwloc
     pkgs.iftop
     pkgs.inkscape
@@ -49,11 +45,9 @@
     pkgs.magic-wormhole
     pkgs.maim
     pkgs.mdbook
+    pkgs.ncmpcpp
     pkgs.nixfmt
-    pkgs.nix-index
-    pkgs.nix-prefetch-github
-    pkgs.nix-query-tree-viewer
-    pkgs.nixUnstable
+    pkgs.obs-studio
     pkgs.paperwork
     pkgs.patchelf
     pkgs.pavucontrol
@@ -72,9 +66,10 @@
     pkgs.urxvt_font_size
     pkgs.vlc
     pkgs.weechat
-    pkgs.wireguard
+    pkgs.wireguard-tools
     pkgs.xclip
     pkgs.yarn
+    pkgs.zeal
     pkgs.zoxide
     (pkgs.vscode-with-extensions.override {
      vscodeExtensions = [pkgs.vscode-extensions.ms-vsliveshare.vsliveshare] ++ map
@@ -85,14 +80,17 @@
        })
        (import ./extensions.nix).extensions;
     })
+    # pkgs.vscode
   ];
 
   services.redshift = {
     enable = true;
+    settings = {
+      brightness.day = "1";
+      brightness.night = "0.85";
+    };
     latitude = "37.7749";
     longitude = "-122.4194";
-    brightness.day = "1";
-    brightness.night = "0.85";
     temperature.night = 3900;
     tray = true;
   };
@@ -119,7 +117,7 @@
           style = "Bold Italic";
         };
       };
-      background_opacity = 0.8;
+      window.opacity = 0.2;
     };
   };
 
@@ -153,8 +151,8 @@
     lfs.enable = true;
     extraConfig = {
       pull.ff = "only";
-      core.editor = "vim";
       init.defaultBranch = "main";
+      core.editor = "vim";
     };
   };
 
@@ -200,8 +198,9 @@
   programs.ssh = {
     enable = true;
     matchBlocks = {
-      "betty.patrickod.com" = { user = "root"; };
+      "betty" = { user = "root"; };
       "neptr" = { user = "root"; };
+      "pb" = { user = "root"; };
       "g1-*" = {
         user = "root";
         certificateFile = "~/.ssh/iocoop-cert.pub";
@@ -232,16 +231,4 @@
 
   programs.zoxide.enable = true;
   programs.zoxide.enableZshIntegration = true;
-
-  services.hound = {
-    enable = true;
-    databasePath = "/home/patrickod/hound";
-    listenAddress = "localhost:6080";
-    repositories = {
-      "oso" = {
-        url = "https://github.com/osohq/oso.git";
-        ref = "main";
-      };
-    };
-  };
 }

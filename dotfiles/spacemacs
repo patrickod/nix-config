@@ -21,6 +21,7 @@ This function should only modify configuration layer settings."
      (go :variables go-backend 'lsp
                     go-format-before-save t)
      html
+     java
      javascript
      (lsp :variables lsp-rust-server 'rust-analyzer)
      markdown
@@ -33,8 +34,10 @@ This function should only modify configuration layer settings."
      ruby-on-rails
      (rust :variables rust-format-on-save t)
      shell-scripts
+     sql
      terraform
      themes-megapack
+     typescript
      version-control
      yaml
      multiple-cursors)
