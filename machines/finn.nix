@@ -5,7 +5,7 @@
     ../hardware/x260.nix
     ../modules/defaults.nix
     ../users/patrickod.nix
-    ../modules/strangeparts-wireguard.nix
+    # ../modules/strangeparts-wireguard.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
