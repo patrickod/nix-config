@@ -72,13 +72,11 @@
     pkgs.zeal
     pkgs.zoxide
     (pkgs.vscode-with-extensions.override {
-     vscodeExtensions = [pkgs.vscode-extensions.ms-vsliveshare.vsliveshare] ++ map
-       (extension: pkgs.vscode-utils.buildVscodeMarketplaceExtension {
-         mktplcRef = {
-          inherit (extension) name publisher version sha256;
-         };
-       })
-       (import ./extensions.nix).extensions;
+      vscodeExtensions = [ pkgs.vscode-extensions.ms-vsliveshare.vsliveshare ]
+        ++ map (extension:
+          pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+            mktplcRef = { inherit (extension) name publisher version sha256; };
+          }) (import ./extensions.nix).extensions;
     })
     # pkgs.vscode
   ];
