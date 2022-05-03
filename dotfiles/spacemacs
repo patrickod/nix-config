@@ -17,7 +17,6 @@ This function should only modify configuration layer settings."
      clojure
      emacs-lisp
      git
-     github
      (go :variables go-backend 'lsp
                     go-format-before-save t)
      html
