@@ -47,7 +47,7 @@ This function should only modify configuration layer settings."
                                       keychain-environment
                                       protobuf-mode
                                       sass-mode
-                                      zen-mode
+                                      caddyfile-mode
                                       notmuch)
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages '()

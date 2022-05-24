@@ -27,7 +27,6 @@
     pkgs.exa
     pkgs.fd
     pkgs.feh
-    pkgs.firefox
     pkgs.fzf
     pkgs.gdb
     pkgs.gist
