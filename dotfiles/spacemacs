@@ -18,7 +18,6 @@ This function should only modify configuration layer settings."
      docker
      emacs-lisp
      git
-     github
      (go :variables go-backend 'lsp
                     go-format-before-save t)
      html

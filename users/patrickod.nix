@@ -9,10 +9,18 @@
     shell = pkgs.zsh;
     hashedPassword =
       "$6$t1qPJ.r2M2XljH$dIBeXMWkq10Pr5C0FsSx44RxXzcxTXaK4.ULeYZ8UmFI8PuNWww5SAci2Zx.WTU4prUS775MuhkbMCg98dT.P0";
-  };
 
-  # allow use of non-free packages
-  nixpkgs.config.allowUnfree = true;
+    openssh = {
+      authorizedKeys = {
+        keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILnVbaP3o6F5ri9NMS+oAoZ6GlEq7h5XRAe9pgGJBnsg patrickod@prismo"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJNw1fiUqzoc1HizXt54asUffQ/z0oQU/j5FKLf4371i patrickod@finn"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH0y01bFTQj57K1u9ZrVLPv45cwm8MFwLzRRm2U9vgOp patrickod@kimkilwhan"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ5KnJSwhuKtaaqVzoQKmnJIddfTJRhzYqLVze6NgFgq patrickod@ipad"
+        ];
+      };
+    };
+  };
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
@@ -33,7 +41,7 @@
     pciutils
     prometheus-node-exporter
     sqlite
-    systool
+    sysfsutils
     usbutils
     vim
     wget
@@ -42,14 +50,7 @@
   services.gnome.gnome-keyring.enable = true;
 
   # configure default editor
-  environment.variables = {
-    LIBVIRT_DEFAULT_URI = "qemu:///system";
-  };
-
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  environment.variables = { LIBVIRT_DEFAULT_URI = "qemu:///system"; };
 
   # fonts for system wide use
   fonts.fonts = with pkgs; [

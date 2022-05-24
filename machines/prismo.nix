@@ -8,10 +8,33 @@
     ../modules/remote-luks-unlock.nix
     ../users/patrickod.nix
     ../modules/defaults.nix
-    ../modules/qemu-hooks.nix
   ];
 
   services.espanso.enable = true;
+
+  services.mpd = {
+    enable = true;
+    user = "patrickod";
+    musicDirectory = "/mnt/media/audio/beets-export";
+    extraConfig = ''
+      audio_output {
+        type "pipewire"
+        name "pipewire"
+      }
+
+      # Enable replay gain.
+      replaygain          "track"
+    '';
+  };
+
+  ## necessary to resolve permissions issues between MPD & pipewire
+  systemd.services.mpd.environment = { XDG_RUNTIME_DIR = "/run/user/1000"; };
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
 
   environment.systemPackages = [ pkgs.xfce.thunar ];
 
@@ -31,7 +54,7 @@
     initialize = true;
     passwordFile = "/run/secrets/restic_backup_password";
     extraBackupArgs =
-      [ "--exclude-file=/home/patrickod/.restic-backup-exclude"];
+      [ "--exclude-file=/home/patrickod/.restic-backup-exclude" ];
     timerConfig = {
       OnCalendar = "hourly";
       Persistent = true;
@@ -90,6 +113,9 @@
   };
 
   virtualisation.docker.enable = true;
+
+  programs.noisetorch.enable = true;
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

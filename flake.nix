@@ -25,17 +25,17 @@
         inputs.home-manager.nixosModules.home-manager
         inputs.sops-nix.nixosModules.sops
 
+        ./machines/prismo.nix
+
         ({ pkgs, ... }: {
           nix.extraOptions = "experimental-features = nix-command flakes";
           nix.package = pkgs.nixFlakes;
-          home-manager.useGlobalPkgs = true;
           nix.registry.nixpkgs.flake = inputs.nixpkgs;
-        })
+          nixpkgs.config = { allowUnfree = true; };
 
-        ./machines/prismo.nix
-        ({pkgs, ... }: {
-          home-manager.users.patrickod = { pkgs, ... }: {
-            imports = [./home-manager/prismo.nix];
+          home-manager.users.patrickod = { ... }: {
+            nixpkgs.config = { allowUnfree = true; };
+            imports = [ ./home-manager/prismo.nix ];
           };
         })
       ];
@@ -57,9 +57,9 @@
         })
 
         ./machines/finn.nix
-        ({pkgs, ... }: {
+        ({ pkgs, ... }: {
           home-manager.users.patrickod = { pkgs, ... }: {
-            imports = [./home-manager/finn.nix];
+            imports = [ ./home-manager/finn.nix ];
           };
         })
       ];
@@ -81,9 +81,9 @@
 
         ./machines/kimkilwhan.nix
 
-        ({pkgs, ... }: {
+        ({ pkgs, ... }: {
           home-manager.users.patrickod = { pkgs, ... }: {
-            imports = [./home-manager/kimkilwhan.nix];
+            imports = [ ./home-manager/kimkilwhan.nix ];
           };
         })
       ];

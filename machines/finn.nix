@@ -5,8 +5,15 @@
     ../hardware/x260.nix
     ../modules/defaults.nix
     ../users/patrickod.nix
-    ../modules/strangeparts-wireguard.nix
+    # ../modules/strangeparts-wireguard.nix
   ];
+
+  # Enable sound.
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.extraConfig =
+    "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1";
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -15,7 +22,8 @@
   networking.hostName = "finn"; # Define your hostname.
   networking.wireless.enable =
     true; # Enables wireless support via wpa_supplicant.
-  networking.wireless.interfaces = [ "wlp4s0" ];
+  networking.useDHCP = false;
+  networking.interfaces.wlp4s0.useDHCP = true;
   networking.wireless.networks = {
     "Cafe Sophie" = {
       pskRaw =
@@ -24,10 +32,6 @@
   };
   hardware.enableRedistributableFirmware = true;
 
-  networking.useDHCP = false;
-  networking.interfaces.enp0s31f6.useDHCP = false;
-  networking.interfaces.wlp4s0.useDHCP = true;
-
   # enable bluetooth HW and audio support
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
@@ -35,5 +39,5 @@
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.brlaser ];
 
-  system.stateVersion = "20.03"; # Did you read the comment?
+  system.stateVersion = "21.05"; # Did you read the comment?
 }
