@@ -22,11 +22,10 @@
   home.packages = [
     pkgs.act
     pkgs.age
-    pkgs.discord
+    # pkgs.discord
     pkgs.exa
     pkgs.fd
     pkgs.feh
-    pkgs.firefox
     pkgs.fzf
     pkgs.gdb
     pkgs.gist
@@ -61,7 +60,6 @@
     pkgs.scrot
     pkgs.signal-desktop
     pkgs.silver-searcher
-    pkgs.slack
     pkgs.sops
     pkgs.unzip
     pkgs.urxvt_font_size

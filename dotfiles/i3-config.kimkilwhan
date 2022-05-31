@@ -172,10 +172,3 @@ bar {
         urgent_workspace #2f343a #900000 #ffffff
     }
 }
-
-# static window assignments
-assign [class="Code"] 1
-assign [class="Google Chrome"] 1
-
-assign [class="(?i)slack"] 2
-assign [class="(?i)quill"] 2

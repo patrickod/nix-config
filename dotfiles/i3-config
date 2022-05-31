@@ -178,8 +178,6 @@ bar {
 }
 
 # static window assignments
-assign [class="Code"] 1
 assign [class="Google Chrome"] 1
 
 assign [class="(?i)slack"] 2
-assign [class="(?i)quill"] 2
