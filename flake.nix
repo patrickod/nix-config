@@ -95,7 +95,7 @@
           system = "x86_64-linux";
           homeDirectory = "/home/patrickod";
           username = "patrickod";
-          stateVersion = "21.11";
+          stateVersion = "22.05";
           configuration = { config, lib, pkgs, ... }: {
             nixpkgs.config = { allowUnfree = true; };
             nixpkgs.overlays = [

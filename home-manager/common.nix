@@ -32,6 +32,7 @@
     pkgs.git-history
     pkgs.go
     pkgs.google-chrome-beta
+    pkgs.glslang
     pkgs.htop
     pkgs.httpie
     pkgs.hub
@@ -68,7 +69,6 @@
     pkgs.wireguard-tools
     pkgs.xclip
     pkgs.yarn
-    pkgs.zeal
     pkgs.zoxide
     # (pkgs.vscode-with-extensions.override {
     #  vscodeExtensions = [pkgs.vscode-extensions.ms-vsliveshare.vsliveshare] ++ map
@@ -200,6 +200,7 @@
       "betty" = { user = "root"; };
       "neptr" = { user = "root"; };
       "pb" = { user = "root"; };
+      "100.*" = { user = "ubuntu"; };
       "g1-*" = {
         user = "root";
         certificateFile = "~/.ssh/iocoop-cert.pub";
