@@ -39,7 +39,8 @@
                   (final.fetchpatch {
                     url =
                       "https://github.com/openldap/openldap/commit/d7c0417bcfba5400c0be2ce83eaf43ec97c97edd.patch";
-                    sha256 = "sha256-l7b17j8Cm7zMotq7wBoNRNCaQgdoNAvf4h7XJ+Q1Le4=";
+                    sha256 =
+                      "sha256-l7b17j8Cm7zMotq7wBoNRNCaQgdoNAvf4h7XJ+Q1Le4=";
                   })
                 ];
               });

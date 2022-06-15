@@ -23,6 +23,7 @@
     pkgs.act
     pkgs.age
     # pkgs.discord
+    pkgs.cascadia-code
     pkgs.exa
     pkgs.fd
     pkgs.feh
