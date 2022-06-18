@@ -22,16 +22,17 @@
   home.packages = [
     pkgs.act
     pkgs.age
-    pkgs.discord
+    # pkgs.discord
     pkgs.exa
     pkgs.fd
     pkgs.feh
-    pkgs.firefox
     pkgs.fzf
     pkgs.gdb
     pkgs.gist
+    pkgs.git-history
     pkgs.go
     pkgs.google-chrome-beta
+    pkgs.glslang
     pkgs.htop
     pkgs.httpie
     pkgs.hub
@@ -60,7 +61,6 @@
     pkgs.scrot
     pkgs.signal-desktop
     pkgs.silver-searcher
-    pkgs.slack
     pkgs.sops
     pkgs.unzip
     pkgs.urxvt_font_size
@@ -69,7 +69,6 @@
     pkgs.wireguard-tools
     pkgs.xclip
     pkgs.yarn
-    pkgs.zeal
     pkgs.zoxide
     pkgs.python310Packages.python-pushover
     # (pkgs.vscode-with-extensions.override {
@@ -202,6 +201,7 @@
       "betty" = { user = "root"; };
       "neptr" = { user = "root"; };
       "pb" = { user = "root"; };
+      "100.*" = { user = "ubuntu"; };
       "g1-*" = {
         user = "root";
         certificateFile = "~/.ssh/iocoop-cert.pub";

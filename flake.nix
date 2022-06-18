@@ -35,7 +35,7 @@
 
           home-manager.users.patrickod = { ... }: {
             nixpkgs.config = { allowUnfree = true; };
-            imports = [./home-manager/prismo.nix];
+            imports = [ ./home-manager/prismo.nix ];
           };
         })
       ];
@@ -57,9 +57,9 @@
         })
 
         ./machines/finn.nix
-        ({pkgs, ... }: {
+        ({ pkgs, ... }: {
           home-manager.users.patrickod = { pkgs, ... }: {
-            imports = [./home-manager/finn.nix];
+            imports = [ ./home-manager/finn.nix ];
           };
         })
       ];
@@ -81,9 +81,9 @@
 
         ./machines/kimkilwhan.nix
 
-        ({pkgs, ... }: {
+        ({ pkgs, ... }: {
           home-manager.users.patrickod = { pkgs, ... }: {
-            imports = [./home-manager/kimkilwhan.nix];
+            imports = [ ./home-manager/kimkilwhan.nix ];
           };
         })
       ];
@@ -95,7 +95,7 @@
           system = "x86_64-linux";
           homeDirectory = "/home/patrickod";
           username = "patrickod";
-          stateVersion = "21.11";
+          stateVersion = "22.05";
           configuration = { config, lib, pkgs, ... }: {
             nixpkgs.config = { allowUnfree = true; };
             nixpkgs.overlays = [

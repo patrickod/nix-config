@@ -20,13 +20,13 @@ in {
         '';
       };
       excludeFile = mkOption {
-        default = "${home.homeDirectory}/.restic-backup-exclude";
+        default = "/home/patrickod/.restic-backup-exclude";
         description = ''
           List of file/folder patterns to ignore when backing up /home
         '';
       };
       passwordFile = mkOption {
-        default = "${home.homeDirectory}/.restic-backup-password";
+        default = "/home/patrickod/.restic-backup-password";
         description = ''
           The passwordFile containing the backup key to pass to restic.
         '';
@@ -53,7 +53,7 @@ in {
       Service = {
         Type = "oneshot";
         ExecStart =
-          "${pkgs.restic}/bin/restic --repo ${cfg.repository} --password-file ${cfg.passwordFile} --exclude-file ${cfg.excludeFile} backup ${home.homeDirectory}";
+          "${pkgs.restic}/bin/restic --repo ${cfg.repository} --password-file ${cfg.passwordFile} --exclude-file ${cfg.excludeFile} backup /home";
       };
 
       Install = { WantedBy = [ "default.target" ]; };

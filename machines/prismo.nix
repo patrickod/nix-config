@@ -28,9 +28,7 @@
   };
 
   ## necessary to resolve permissions issues between MPD & pipewire
-  systemd.services.mpd.environment = {
-    XDG_RUNTIME_DIR = "/run/user/1000";
-  };
+  systemd.services.mpd.environment = { XDG_RUNTIME_DIR = "/run/user/1000"; };
 
   services.pipewire = {
     enable = true;
@@ -115,8 +113,6 @@
   };
 
   virtualisation.docker.enable = true;
-
-  programs.noisetorch.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

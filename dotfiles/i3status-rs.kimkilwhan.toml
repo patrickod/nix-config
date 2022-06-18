@@ -72,6 +72,5 @@ block = "notify"
 
 [[block]]
 block = "battery"
-driver = "upower"
 interval = 10
 format = "{percentage} {time}"
