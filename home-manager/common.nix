@@ -71,6 +71,7 @@
     pkgs.xclip
     pkgs.yarn
     pkgs.zoxide
+    pkgs.python310Packages.python-pushover
     # (pkgs.vscode-with-extensions.override {
     #  vscodeExtensions = [pkgs.vscode-extensions.ms-vsliveshare.vsliveshare] ++ map
     #    (extension: pkgs.vscode-utils.buildVscodeMarketplaceExtension {
@@ -99,7 +100,7 @@
     enable = true;
     settings = {
       font = {
-        size = 8.0;
+        size = 5;
         normal = {
           family = "JetBrains Mono";
           style = "Regular";
