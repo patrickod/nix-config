@@ -10,7 +10,18 @@
     ../modules/defaults.nix
   ];
 
-  services.espanso.enable = true;
+  nix.trustedUsers = [ "@wheel" ];
+
+  services.postgresql = {
+    enable = true;
+    ensureDatabases = [ "control" ];
+    ensureUsers = [
+      {
+        name = "patrickod";
+        ensurePermissions = { "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES"; };
+      }
+    ];
+  };
 
   services.mpd = {
     enable = true;
@@ -36,7 +47,7 @@
     pulse.enable = true;
   };
 
-  environment.systemPackages = [ pkgs.xfce.thunar ];
+  environment.systemPackages = [ pkgs.xfce.thunar pkgs.nodejs ];
 
   # sops secret import for encrypted backups
   sops.defaultSopsFile = ../secrets/prismo.yml;
@@ -120,5 +131,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.03"; # Did you read the comment?
+
+  system.stateVersion = "22.05"; # Did you read the comment?
 }

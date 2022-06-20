@@ -37,10 +37,14 @@
   boot.initrd.kernelModules = [ "dm-snapshot" ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  # boot.kernelPackages = pkgs.linuxPackages_5_12;
   boot.kernelParams = [ "amd_iommu=on" "iommu=pt" "pcie_aspm=off" ];
-  boot.kernelModules = [ "kvm-amd" "vfio-pci" ];
-  boot.extraModulePackages = [ ];
+  boot.kernelModules = [ "kvm-amd" "vfio-pci" "v4l2loopback" "snd-aloop" ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
+  '';
+
+  boot.extraModulePackages = with config.boot.kernelPackages;
+    [ v4l2loopback.out ];
 
   # Configure PCI passthrough RTX
   services.ezpassthru = {
