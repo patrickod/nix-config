@@ -74,7 +74,7 @@
         MatchProduct "Keyboardio"
         Driver "evdev"
 
-        Option "XkbLayout" "us"
+        Option "XkbLayout" "dvorak"
       ''
       ''
         Identifier "advantage"

@@ -11,6 +11,8 @@
     pkgs.picard
     pkgs.slack
     pkgs.discord
+    pkgs.obs-studio
+    pkgs.prusa-slicer
   ];
 
   # prismo specific i3 configuration
