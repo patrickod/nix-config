@@ -17,96 +17,76 @@
   inputs.sops-nix.url = "github:Mic92/sops-nix";
   inputs.sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-  outputs = inputs: {
-    nixosConfigurations.prismo = inputs.nixpkgs.lib.nixosSystem {
+  outputs = inputs:
+    let
       system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        inputs.home-manager.nixosModules.home-manager
-        inputs.sops-nix.nixosModules.sops
+      pkgs = inputs.nixpkgs.legacyPackages."${system}";
+    in {
+      nixosConfigurations.prismo = inputs.nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs; };
+        modules = [
+          inputs.home-manager.nixosModules.home-manager
+          inputs.sops-nix.nixosModules.sops
 
-        ./machines/prismo.nix
+          ./machines/prismo.nix
 
-        ({ pkgs, ... }: {
-          nix.extraOptions = "experimental-features = nix-command flakes";
-          nix.package = pkgs.nixFlakes;
-          nix.registry.nixpkgs.flake = inputs.nixpkgs;
-          nixpkgs.config = { allowUnfree = true; };
-          nixpkgs.overlays = [
-            (final: prev: {
-              openldap = prev.openldap.overrideAttrs (old: {
-                patches = (if (old ? patches) then old.patches else [ ]) ++ [
-                  (final.fetchpatch {
-                    url =
-                      "https://github.com/openldap/openldap/commit/d7c0417bcfba5400c0be2ce83eaf43ec97c97edd.patch";
-                    sha256 =
-                      "sha256-l7b17j8Cm7zMotq7wBoNRNCaQgdoNAvf4h7XJ+Q1Le4=";
-                  })
-                ];
-              });
-            })
-          ];
-
-          home-manager.users.patrickod = { ... }: {
+          ({ pkgs, ... }: {
+            nix.extraOptions = "experimental-features = nix-command flakes";
+            nix.package = pkgs.nixFlakes;
+            nix.registry.nixpkgs.flake = inputs.nixpkgs;
             nixpkgs.config = { allowUnfree = true; };
-            imports = [ ./home-manager/prismo.nix ];
-          };
-        })
-      ];
-    };
+            nixpkgs.overlays = [
+              (final: prev: {
+                openldap = prev.openldap.overrideAttrs (old: {
+                  patches = (if (old ? patches) then old.patches else [ ]) ++ [
+                    (final.fetchpatch {
+                      url =
+                        "https://github.com/openldap/openldap/commit/d7c0417bcfba5400c0be2ce83eaf43ec97c97edd.patch";
+                      sha256 =
+                        "sha256-l7b17j8Cm7zMotq7wBoNRNCaQgdoNAvf4h7XJ+Q1Le4=";
+                    })
+                  ];
+                });
+              })
+            ];
 
-    nixosConfigurations.finn = inputs.nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        inputs.home-manager.nixosModules.home-manager
-        inputs.sops-nix.nixosModules.sops
+            home-manager.users.patrickod = { ... }: {
+              nixpkgs.config = { allowUnfree = true; };
+              imports = [ ./home-manager/prismo.nix ];
+            };
+          })
+        ];
+      };
 
-        ({ pkgs, ... }: {
-          nix.extraOptions = "experimental-features = nix-command flakes";
-          nix.package = pkgs.nixFlakes;
-          nix.registry.nixpkgs.flake = inputs.nixpkgs;
-          nixpkgs.config = { allowUnfree = true; };
-          home-manager.useGlobalPkgs = true;
-        })
+      nixosConfigurations.finn = inputs.nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs; };
+        modules = [
+          inputs.home-manager.nixosModules.home-manager
+          inputs.sops-nix.nixosModules.sops
 
-        ./machines/finn.nix
-        ({ pkgs, ... }: {
-          home-manager.users.patrickod = { pkgs, ... }: {
-            imports = [ ./home-manager/finn.nix ];
-          };
-        })
-      ];
-    };
+          ({ pkgs, ... }: {
+            nix.extraOptions = "experimental-features = nix-command flakes";
+            nix.package = pkgs.nixFlakes;
+            nix.registry.nixpkgs.flake = inputs.nixpkgs;
+            nixpkgs.config = { allowUnfree = true; };
+            home-manager.useGlobalPkgs = true;
+          })
 
-    nixosConfigurations.kimkilwhan = inputs.nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        inputs.home-manager.nixosModules.home-manager
+          ./machines/finn.nix
+          ({ pkgs, ... }: {
+            home-manager.users.patrickod = { pkgs, ... }: {
+              imports = [ ./home-manager/finn.nix ];
+            };
+          })
+        ];
+      };
 
-        ({ pkgs, ... }: {
-          nix.extraOptions = "experimental-features = nix-command flakes";
-          nix.package = pkgs.nixFlakes;
-          nix.registry.nixpkgs.flake = inputs.nixpkgs;
-          nixpkgs.config = { allowUnfree = true; };
-          home-manager.useGlobalPkgs = true;
-        })
-
-        ./machines/kimkilwhan.nix
-
-        ({ pkgs, ... }: {
-          home-manager.users.patrickod = { pkgs, ... }: {
-            imports = [ ./home-manager/kimkilwhan.nix ];
-          };
-        })
-      ];
-    };
-
-    homeConfigurations = {
-      "patrickod@kimkilwhan" =
+      homeConfigurations."patrickod@kimkilwhan" =
         inputs.home-manager.lib.homeManagerConfiguration {
-          system = "x86_64-linux";
+          inherit system;
+          inherit pkgs;
           homeDirectory = "/home/patrickod";
           username = "patrickod";
           stateVersion = "22.05";
@@ -121,5 +101,4 @@
           };
         };
     };
-  };
 }
