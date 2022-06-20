@@ -13,6 +13,7 @@
     pkgs.discord
     pkgs.obs-studio
     pkgs.prusa-slicer
+    pkgs.zeal
   ];
 
   # prismo specific i3 configuration
