@@ -66,7 +66,7 @@
     pkgs.urxvt_font_size
     pkgs.vlc
     pkgs.weechat
-    pkgs.wireguard-tools
+    # pkgs.wireguard-tools
     pkgs.xclip
     pkgs.yarn
     pkgs.zoxide
