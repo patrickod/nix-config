@@ -7,7 +7,7 @@
   home.sessionVariables = {
     "BROWSER" = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
   };
-  home.stateVersion = "22.05";
+  home.stateVersion = "22.11";
 
   # dotfiles
   home.file.".spacemacs".source = ../dotfiles/spacemacs;

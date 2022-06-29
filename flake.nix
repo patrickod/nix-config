@@ -85,20 +85,26 @@
 
       homeConfigurations."patrickod@kimkilwhan" =
         inputs.home-manager.lib.homeManagerConfiguration {
-          inherit system;
           inherit pkgs;
-          homeDirectory = "/home/patrickod";
-          username = "patrickod";
-          stateVersion = "22.05";
-          configuration = { config, lib, pkgs, ... }: {
-            nixpkgs.config = { allowUnfree = true; };
-            nixpkgs.overlays = [
-              (self: super: {
-                nix-direnv = super.nix-direnv.override { enableFlakes = true; };
-              })
-            ];
-            imports = [ ./home-manager/kimkilwhan.nix ];
-          };
+          modules = [
+            ./home-manager/kimkilwhan.nix
+            {
+              home = {
+                homeDirectory = "/home/patrickod";
+                username = "patrickod";
+              };
+            }
+            ({ config, lib, pkgs, ... }: {
+              nixpkgs.config = { allowUnfree = true; };
+              nixpkgs.overlays = [
+                (self: super: {
+                  nix-direnv =
+                    super.nix-direnv.override { enableFlakes = true; };
+                })
+              ];
+              imports = [ ./home-manager/kimkilwhan.nix ];
+            })
+          ];
         };
     };
 }
