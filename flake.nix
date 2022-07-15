@@ -32,20 +32,6 @@
           nix.package = pkgs.nixFlakes;
           nix.registry.nixpkgs.flake = inputs.nixpkgs;
           nixpkgs.config = { allowUnfree = true; };
-          nixpkgs.overlays = [
-            (final: prev: {
-              openldap = prev.openldap.overrideAttrs (old: {
-                patches = (if (old ? patches) then old.patches else [ ]) ++ [
-                  (final.fetchpatch {
-                    url =
-                      "https://github.com/openldap/openldap/commit/d7c0417bcfba5400c0be2ce83eaf43ec97c97edd.patch";
-                    sha256 =
-                      "sha256-l7b17j8Cm7zMotq7wBoNRNCaQgdoNAvf4h7XJ+Q1Le4=";
-                  })
-                ];
-              });
-            })
-          ];
 
           home-manager.users.patrickod = { ... }: {
             nixpkgs.config = { allowUnfree = true; };
