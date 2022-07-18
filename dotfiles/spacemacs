@@ -20,6 +20,7 @@ This function should only modify configuration layer settings."
      git
      (go :variables go-backend 'lsp
                     go-format-before-save t)
+     graphviz
      html
      java
      javascript
