@@ -69,6 +69,14 @@
 
     inputClassSections = [
       ''
+        Identifier "atreus"
+        MatchIsKeyboard "on"
+        MatchProduct "Atreus"
+        Driver "evdev"
+
+        Option "XkbLayout" "us"
+      ''
+      ''
         Identifier "keyboardio"
         MatchIsKeyboard "on"
         MatchProduct "Keyboardio"
