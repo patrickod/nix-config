@@ -71,18 +71,10 @@
       ''
         Identifier "atreus"
         MatchIsKeyboard "on"
-        MatchProduct "Atreus"
-        Driver "evdev"
+        MatchProduct "Keyboardio Atreus"
+        DriveR "evdev"
 
         Option "XkbLayout" "us"
-      ''
-      ''
-        Identifier "keyboardio"
-        MatchIsKeyboard "on"
-        MatchProduct "Keyboardio"
-        Driver "evdev"
-
-        Option "XkbLayout" "dvorak"
       ''
       ''
         Identifier "advantage"

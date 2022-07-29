@@ -22,8 +22,8 @@
   home.packages = [
     pkgs.act
     pkgs.age
-    # pkgs.discord
     pkgs.cascadia-code
+    # pkgs.discord
     pkgs.exa
     pkgs.fd
     pkgs.feh
@@ -31,9 +31,9 @@
     pkgs.gdb
     pkgs.gist
     pkgs.git-history
+    pkgs.glslang
     pkgs.go
     pkgs.google-chrome-beta
-    pkgs.glslang
     pkgs.htop
     pkgs.httpie
     pkgs.hub
@@ -56,8 +56,12 @@
     pkgs.pcmanfm
     pkgs.pigz
     pkgs.probe-run
+    pkgs.python310Packages.python-pushover
     pkgs.rage
     pkgs.restic
+    pkgs.rofi-emoji
+    pkgs.rofi-file-browser
+    pkgs.rofi-pulse-select
     pkgs.rustup
     pkgs.scrot
     pkgs.signal-desktop
@@ -71,7 +75,6 @@
     pkgs.xclip
     pkgs.yarn
     pkgs.zoxide
-    pkgs.python310Packages.python-pushover
     # (pkgs.vscode-with-extensions.override {
     #  vscodeExtensions = [pkgs.vscode-extensions.ms-vsliveshare.vsliveshare] ++ map
     #    (extension: pkgs.vscode-utils.buildVscodeMarketplaceExtension {
@@ -220,6 +223,14 @@
   programs.home-manager.enable = true;
   programs.i3status-rust.enable = true;
   programs.autorandr.enable = true;
+
+  services.flameshot.enable = true;
+  services.flameshot.settings = {
+    General = {
+      savePath = "/home/patrickod/screenshots";
+      startupLaunch = true;
+    };
+  };
 
   services.dunst.enable = true;
   services.dunst.settings = {
