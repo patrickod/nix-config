@@ -7,7 +7,7 @@
   home.sessionVariables = {
     "BROWSER" = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
   };
-  home.stateVersion = "22.05";
+  home.stateVersion = "22.11";
 
   # dotfiles
   home.file.".spacemacs".source = ../dotfiles/spacemacs;
@@ -71,19 +71,11 @@
     pkgs.urxvt_font_size
     pkgs.vlc
     pkgs.weechat
-    pkgs.wireguard-tools
+    # pkgs.wireguard-tools
     pkgs.xclip
     pkgs.yarn
     pkgs.zoxide
-    # (pkgs.vscode-with-extensions.override {
-    #  vscodeExtensions = [pkgs.vscode-extensions.ms-vsliveshare.vsliveshare] ++ map
-    #    (extension: pkgs.vscode-utils.buildVscodeMarketplaceExtension {
-    #      mktplcRef = {
-    #       inherit (extension) name publisher version sha256;
-    #      };
-    #    })
-    #    (import ./extensions.nix).extensions;
-    # })
+    pkgs.python310Packages.python-pushover
     pkgs.vscode
   ];
 

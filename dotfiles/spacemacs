@@ -20,6 +20,7 @@ This function should only modify configuration layer settings."
      git
      (go :variables go-backend 'lsp
                     go-format-before-save t)
+     graphviz
      html
      java
      javascript
@@ -111,8 +112,8 @@ It should only modify the values of Spacemacs settings."
 
    dotspacemacs-colorize-cursor-according-to-state t
 
-   dotspacemacs-default-font '("Cascadia Mono Light"
-                               :size 13
+   dotspacemacs-default-font '("Jetbrains Mono Light"
+                               :size 12
                                :weight normal
                                :width normal
                                :anti-alias nil
