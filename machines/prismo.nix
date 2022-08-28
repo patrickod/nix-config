@@ -23,6 +23,8 @@
     ];
   };
 
+  services.udisks2.enable = true;
+
   services.mpd = {
     enable = true;
     user = "patrickod";
