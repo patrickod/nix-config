@@ -12,7 +12,6 @@
     pkgs.slack
     pkgs.discord
     pkgs.obs-studio
-    pkgs.prusa-slicer
     pkgs.zeal
   ];
 

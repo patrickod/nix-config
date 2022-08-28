@@ -23,6 +23,9 @@
     ];
   };
 
+  services.printing.enable = true;
+  services.printing.drivers = [ pkgs.brlaser ];
+
   services.udisks2.enable = true;
 
   services.mpd = {
