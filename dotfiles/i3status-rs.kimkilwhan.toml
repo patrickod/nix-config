@@ -45,19 +45,19 @@ format = "{1m}"
 block = "time"
 interval = 5
 timezone = "US/Pacific"
-format = "SFO: %R" # month/day/year w/ 24H
+format = "%R" # month/day/year w/ 24H
 
 [[block]]
 block = "time"
 interval = 5
 timezone = "US/Eastern"
-format = "NYC: %R"
+format = "NY: %R"
 
 [[block]]
 block = "time"
 interval = 5
-timezone = "Europe/Dublin"
-format = "DUB: %R" # month/day/year w/ 24H
+timezone = "UTC"
+format = "UTC: %R" # month/day/year w/ 24H
 
 [[block]]
 block = "time"

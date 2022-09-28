@@ -9,10 +9,12 @@
   };
   home.stateVersion = "22.11";
 
+  programs.home-manager.enable = true;
+
   # dotfiles
   home.file.".spacemacs".source = ../dotfiles/spacemacs;
   home.file.".urxvt/ext/font-size".source =
-    "${pkgs.urxvt_font_size}/lib/urxvt/perl/font-size";
+    "${pkgs.rxvt-unicode-plugins.font-size}/lib/urxvt/perl/font-size";
   home.file.".config/nix/nix.conf".source = ../dotfiles/nix.conf;
 
   # restic common backup exclusions
@@ -49,6 +51,7 @@
     pkgs.mdbook
     pkgs.ncmpcpp
     pkgs.nixfmt
+    pkgs.nixpkgs-fmt
     pkgs.obs-studio
     pkgs.paperwork
     pkgs.patchelf
@@ -68,7 +71,7 @@
     pkgs.silver-searcher
     pkgs.sops
     pkgs.unzip
-    pkgs.urxvt_font_size
+    pkgs.rxvt-unicode-plugins.font-size
     pkgs.vlc
     pkgs.weechat
     # pkgs.wireguard-tools
@@ -172,6 +175,14 @@
 
       # use exa instead of ls
       alias ls="exa"
+
+      # bump the history size to stop it truncating
+      HISTSIZE=500000
+      SAVEHIST=500000
+      # write history entries immediately not at shell termination
+      setopt appendhistory
+      setopt INC_APPEND_HISTORY
+      setopt SHARE_HISTORY
     '';
   };
 
@@ -179,6 +190,7 @@
     enable = true;
     transparent = true;
     shading = 20;
+    package = pkgs.rxvt-unicode-unwrapped;
     extraConfig = {
       "font" = "xft:JetBrains Mono:pixelsize=12";
       "perl-ext-common" = "font-size";
@@ -212,7 +224,10 @@
     enableZshIntegration = true;
   };
 
-  programs.home-manager.enable = true;
+  # directory navigation with history
+  programs.zoxide.enable = true;
+  programs.zoxide.enableZshIntegration = true;
+
   programs.i3status-rust.enable = true;
   programs.autorandr.enable = true;
 
@@ -234,6 +249,12 @@
     };
   };
 
-  programs.zoxide.enable = true;
-  programs.zoxide.enableZshIntegration = true;
+  services.flameshot.enable = true;
+  services.flameshot.settings = {
+    General = {
+      savePath = "/home/patrickod/screenshots";
+      startupLaunch = true;
+    };
+  };
+
 }

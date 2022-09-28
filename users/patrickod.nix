@@ -109,6 +109,9 @@
       package = pkgs.i3-gaps;
       extraPackages = with pkgs; [
         rofi
+        rofi-file-browser
+        rofi-emoji
+        rofi-calc
         i3status-rust
         i3lock-fancy
         i3-gaps

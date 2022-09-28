@@ -37,6 +37,9 @@ bindsym $mod+Shift+apostrophe kill
 # start dmenu (a program launcher)
 bindsym $mod+e exec "rofi -combi-mode window,drun -show combi -modi combi"
 
+# take a screenshot with flameshot
+bindsym $mod+Shift+r exec "flameshot gui"
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+t focus down
