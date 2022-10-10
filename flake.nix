@@ -88,24 +88,28 @@
         })
       ];
     };
-
-    homeConfigurations = {
-      "patrickod@kimkilwhan" =
-        inputs.home-manager.lib.homeManagerConfiguration {
-          system = "x86_64-linux";
-          homeDirectory = "/home/patrickod";
-          username = "patrickod";
-          stateVersion = "22.05";
-          configuration = { config, lib, pkgs, ... }: {
+    homeConfigurations."patrickod@kimkilwhan" =
+      inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+        modules = [
+          ./home-manager/kimkilwhan.nix
+          {
+            home = {
+              homeDirectory = "/home/patrickod";
+              username = "patrickod";
+            };
+          }
+          ({ config, lib, pkgs, ... }: {
             nixpkgs.config = { allowUnfree = true; };
             nixpkgs.overlays = [
               (self: super: {
-                nix-direnv = super.nix-direnv.override { enableFlakes = true; };
+                nix-direnv =
+                  super.nix-direnv.override { enableFlakes = true; };
               })
             ];
             imports = [ ./home-manager/kimkilwhan.nix ];
-          };
-        };
-    };
+          })
+        ];
+      };
   };
 }

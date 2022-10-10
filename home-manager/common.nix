@@ -59,7 +59,6 @@
     pkgs.pcmanfm
     pkgs.pigz
     pkgs.probe-run
-    pkgs.python310Packages.python-pushover
     pkgs.rage
     pkgs.restic
     pkgs.rofi-emoji
@@ -78,8 +77,8 @@
     pkgs.xclip
     pkgs.yarn
     pkgs.zoxide
-    pkgs.python310Packages.python-pushover
     pkgs.vscode
+    pkgs.noisetorch
   ];
 
   services.redshift = {
@@ -230,14 +229,6 @@
 
   programs.i3status-rust.enable = true;
   programs.autorandr.enable = true;
-
-  services.flameshot.enable = true;
-  services.flameshot.settings = {
-    General = {
-      savePath = "/home/patrickod/screenshots";
-      startupLaunch = true;
-    };
-  };
 
   services.dunst.enable = true;
   services.dunst.settings = {
