@@ -29,7 +29,7 @@
 
         ({ pkgs, ... }: {
           nix.extraOptions = "experimental-features = nix-command flakes";
-          nix.package = pkgs.nixFlakes;
+          nix.package = pkgs.nixVersions.stable;
           nix.registry.nixpkgs.flake = inputs.nixpkgs;
           nixpkgs.config = { allowUnfree = true; };
 
@@ -50,7 +50,7 @@
 
         ({ pkgs, ... }: {
           nix.extraOptions = "experimental-features = nix-command flakes";
-          nix.package = pkgs.nixFlakes;
+          nix.package = pkgs.nixVersions.stable;
           nix.registry.nixpkgs.flake = inputs.nixpkgs;
           nixpkgs.config = { allowUnfree = true; };
           home-manager.useGlobalPkgs = true;
@@ -73,7 +73,7 @@
 
         ({ pkgs, ... }: {
           nix.extraOptions = "experimental-features = nix-command flakes";
-          nix.package = pkgs.nixFlakes;
+          nix.package = pkgs.nixVersions.stable;
           nix.registry.nixpkgs.flake = inputs.nixpkgs;
           nixpkgs.config = { allowUnfree = true; };
           home-manager.useGlobalPkgs = true;
