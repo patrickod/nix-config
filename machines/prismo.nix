@@ -113,17 +113,17 @@
 
   # Configure NFS mounts for backups & photos
   fileSystems."/mnt/backups" = {
-    device = "172.30.42.20:/mnt/alexandria/backups";
+    device = "192.168.4.37:/mnt/alexandria/backups";
     fsType = "nfs";
     options = [ "x-systemd.automount" "noauto" ];
   };
   fileSystems."/mnt/photos" = {
-    device = "172.30.42.20:/mnt/alexandria/photos";
+    device = "192.168.4.37:/mnt/alexandria/photos";
     fsType = "nfs";
     options = [ "x-systemd.automount" "noauto" ];
   };
   fileSystems."/mnt/media" = {
-    device = "172.30.42.20:/mnt/alexandria/media";
+    device = "192.168.4.37:/mnt/alexandria/media";
     fsType = "nfs";
     options = [ "x-systemd.automount" "noauto" ];
   };
