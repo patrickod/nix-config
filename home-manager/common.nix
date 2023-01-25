@@ -151,6 +151,10 @@
       pull.ff = "only";
       init.defaultBranch = "main";
       core.editor = "vim";
+      commit.gpgsign = true;
+      gpg.format = "ssh";
+      gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
+      user.signingKey = "~/.ssh/id_ed25519.pub";
     };
   };
 

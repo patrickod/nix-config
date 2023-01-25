@@ -15,12 +15,10 @@
   services.postgresql = {
     enable = true;
     ensureDatabases = [ "control" ];
-    ensureUsers = [
-      {
-        name = "patrickod";
-        ensurePermissions = { "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES"; };
-      }
-    ];
+    ensureUsers = [{
+      name = "patrickod";
+      ensurePermissions = { "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES"; };
+    }];
   };
 
   services.printing.enable = true;
