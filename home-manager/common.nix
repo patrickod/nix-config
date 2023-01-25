@@ -53,7 +53,7 @@
     pkgs.nixfmt
     pkgs.nixpkgs-fmt
     pkgs.obs-studio
-    # pkgs.paperwork
+    pkgs.paperwork
     pkgs.patchelf
     pkgs.pavucontrol
     pkgs.pcmanfm
