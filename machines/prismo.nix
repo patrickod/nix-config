@@ -52,13 +52,11 @@
 
   environment.systemPackages = [ pkgs.xfce.thunar pkgs.nodejs ];
 
-  # sops secret import for encrypted backups
-  sops.defaultSopsFile = ../secrets/prismo.yml;
-  sops.age.keyFile = "/etc/sops/age/keys.txt";
-  sops.secrets.restic_backup_password = {
-    mode = "0440";
+  age.secrets.restic_backup_password = {
+    file = ../secrets/restic_backup_password.age;
     owner = "patrickod";
     group = "wheel";
+    mode = "0440";
   };
 
   services.restic.backups.home = {
@@ -66,7 +64,7 @@
     repository = "/mnt/backups/prismo/restic";
     paths = [ "/home" ];
     initialize = true;
-    passwordFile = "/run/secrets/restic_backup_password";
+    passwordFile = "/run/agenix/restic_backup_password";
     extraBackupArgs =
       [ "--exclude-file=/home/patrickod/.restic-backup-exclude" ];
     timerConfig = {

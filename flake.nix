@@ -13,9 +13,8 @@
   inputs.home-manager.url = "github:nix-community/home-manager";
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-  ## sops-nix for secrets encryption
-  inputs.sops-nix.url = "github:Mic92/sops-nix";
-  inputs.sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+  # agenix for secrets encryption
+  inputs.agenix.url = "github:ryantm/agenix";
 
   outputs = inputs: {
     nixosConfigurations.prismo = inputs.nixpkgs.lib.nixosSystem {
@@ -23,7 +22,7 @@
       specialArgs = { inherit inputs; };
       modules = [
         inputs.home-manager.nixosModules.home-manager
-        inputs.sops-nix.nixosModules.sops
+        inputs.agenix.nixosModule
 
         ./machines/prismo.nix
 
@@ -46,7 +45,6 @@
       specialArgs = { inherit inputs; };
       modules = [
         inputs.home-manager.nixosModules.home-manager
-        inputs.sops-nix.nixosModules.sops
 
         ({ pkgs, ... }: {
           nix.extraOptions = "experimental-features = nix-command flakes";
