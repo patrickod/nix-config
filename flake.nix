@@ -22,7 +22,7 @@
       specialArgs = { inherit inputs; };
       modules = [
         inputs.home-manager.nixosModules.home-manager
-        inputs.agenix.nixosModule
+        inputs.agenix.nixosModules.default
 
         ./machines/prismo.nix
 
