@@ -33,13 +33,15 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10 # decrease screen
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+Shift+apostrophe kill
 
-# start dmenu (a program launcher)
-bindsym $mod+e exec "rofi -combi-mode window,drun -show combi -modi combi"
+# start rofi (a program launcher)
+bindsym $mod+e exec "rofi -combi-mode window,drun,run,emoji -show combi"
+# emoji picker
+bindsym $mod+Shift+e exec "rofi -modi emoji -show emoji -emoji-mode insert"
 
 # change focus
 bindsym $mod+h focus left

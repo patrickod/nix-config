@@ -27,6 +27,7 @@
     pkgs.cascadia-code
     # pkgs.discord
     pkgs.exa
+    pkgs.emoji-picker
     pkgs.fd
     pkgs.feh
     pkgs.fzf
@@ -61,8 +62,6 @@
     pkgs.probe-run
     pkgs.rage
     pkgs.restic
-    pkgs.rofi-emoji
-    pkgs.rofi-file-browser
     pkgs.rofi-pulse-select
     pkgs.rustup
     pkgs.scrot
@@ -73,7 +72,6 @@
     pkgs.rxvt-unicode-plugins.font-size
     pkgs.vlc
     pkgs.weechat
-    # pkgs.wireguard-tools
     pkgs.xclip
     pkgs.yarn
     pkgs.zoxide
@@ -91,32 +89,6 @@
     longitude = "-122.4194";
     temperature.night = 3900;
     tray = true;
-  };
-
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      font = {
-        size = 5;
-        normal = {
-          family = "JetBrains Mono";
-          style = "Regular";
-        };
-        bold = {
-          family = "JetBrains Mono";
-          style = "Bold";
-        };
-        italic = {
-          family = "JetBrains Mono";
-          style = "Italic";
-        };
-        bold_italic = {
-          family = "JetBrains Mono";
-          style = "Bold Italic";
-        };
-      };
-      window.opacity = 0.2;
-    };
   };
 
   xresources.properties = {
@@ -164,7 +136,7 @@
     oh-my-zsh = {
       enable = true;
       theme = "dieter";
-      plugins = [ "git" ];
+      plugins = [ "git" "fzf" "zoxide" "1password" "dotenv" ];
     };
     initExtra = ''
       export TERM=xterm-256color
@@ -189,35 +161,19 @@
     '';
   };
 
-  programs.urxvt = {
-    enable = true;
-    transparent = true;
-    shading = 20;
-    package = pkgs.rxvt-unicode-unwrapped;
-    extraConfig = {
-      "font" = "xft:JetBrains Mono:pixelsize=12";
-      "perl-ext-common" = "font-size";
-      "keysym.C-Up" = "font-size:increase";
-      "keysym.C-Down" = "font-size:decrease";
-      "keysym.C-S-Up" = "font-size:incglobal";
-      "keysym.C-S-Down" = "font-size:decglobal";
-      "keysym.C-equal" = "font-size:reset";
-      "keysym.C-slash" = "font-size:show";
-    };
-  };
+  services.picom.enable = true;
 
-  programs.ssh = {
+  programs.kitty = {
     enable = true;
-    matchBlocks = {
-      "betty" = { user = "root"; };
-      "neptr" = { user = "root"; };
-      "pb" = { user = "root"; };
-      "100.*" = { user = "ubuntu"; };
-      "g1-*" = {
-        user = "root";
-        certificateFile = "~/.ssh/iocoop-cert.pub";
-        proxyCommand = "ssh -i iocoop manage1.scl.iocoop.org nc %h %p";
-      };
+    font = {
+      name = "JetBrains Mono";
+      size = 9;
+    };
+    theme = "Blazer";
+    settings = {
+      enable_audio_bell = false;
+      background_opacity = "0.7";
+      confirm_os_window_clase = -1;
     };
   };
 
@@ -225,6 +181,15 @@
     enable = true;
     nix-direnv.enable = true;
     enableZshIntegration = true;
+  };
+
+  programs.rofi = {
+    enable = true;
+    extraConfig = {
+      modi = "drun,emoji";
+    };
+    plugins = [ pkgs.rofi-emoji pkgs.rofi-file-browser ];
+    font = "JetBrains Mono 13";
   };
 
   # directory navigation with history

@@ -59,6 +59,7 @@
     font-awesome
     jetbrains-mono
     arkpandora_ttf
+    noto-fonts-emoji
   ];
 
   # Enable the X11 windowing system.
