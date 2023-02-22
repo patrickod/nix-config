@@ -172,7 +172,7 @@
     theme = "Blazer";
     settings = {
       enable_audio_bell = false;
-      background_opacity = "0.7";
+      background_opacity = "0.8";
       confirm_os_window_clase = -1;
     };
   };
