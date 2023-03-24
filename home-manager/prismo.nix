@@ -13,10 +13,11 @@
     pkgs.discord
     pkgs.obs-studio
     pkgs.zeal
+    pkgs.gnome.nautilus
   ];
 
   # prismo specific i3 configuration
-  xdg.configFile."i3/status.toml".source = ../dotfiles/i3status-rs.toml.prismo;
+  xdg.configFile."i3/status.toml".source = ../dotfiles/i3status-rs.prismo.toml;
   xdg.configFile."i3/config".source = ../dotfiles/i3-config;
 
   home.file.".ssh/allowed_signers".text =

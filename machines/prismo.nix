@@ -25,6 +25,8 @@
   services.printing.drivers = [ pkgs.brlaser ];
 
   services.udisks2.enable = true;
+  # services.gvfs.enable = true;
+  # services.gnome.sushi.enable = true;
 
   services.mpd = {
     enable = true;
@@ -54,6 +56,20 @@
 
   age.secrets.restic_backup_password = {
     file = ../secrets/restic_backup_password.age;
+    owner = "patrickod";
+    group = "wheel";
+    mode = "0440";
+  };
+
+  age.secrets.r2_access_key_id = {
+    file = ../secrets/prismo_r2_access_key_id.age;
+    owner = "patrickod";
+    group = "wheel";
+    mode = "0440";
+  };
+
+  age.secrets.r2_secret_access_key = {
+    file = ../secrets/prismo_r2_secret_access_key.age;
     owner = "patrickod";
     group = "wheel";
     mode = "0440";
@@ -106,6 +122,8 @@
       EndSubSection
     '';
   };
+
+  programs.steam.enable = true;
 
   # Configure NFS mounts for backups & photos
   fileSystems."/mnt/backups" = {

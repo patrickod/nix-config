@@ -7,7 +7,10 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMOySIKvmBCMcc2m2igWSALqppumHTDakZu2DTWFbYYB";
   hosts = [ prismo_host ];
 
-in {
+in
+{
   "restic_backup_password.age".publicKeys = hosts ++ users;
   "github_oauth_token.age".publicKeys = hosts ++ users;
+  "prismo_r2_access_key_id.age".publicKeys = hosts ++ users;
+  "prismo_r2_secret_access_key.age".publicKeys = hosts ++ users;
 }
