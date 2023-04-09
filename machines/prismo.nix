@@ -10,7 +10,7 @@
     ../modules/defaults.nix
   ];
 
-  nix.trustedUsers = [ "@wheel" ];
+  nix.settings.trusted-users = [ "@wheel" ];
 
   services.postgresql = {
     enable = true;
@@ -25,8 +25,10 @@
   services.printing.drivers = [ pkgs.brlaser ];
 
   services.udisks2.enable = true;
-  # services.gvfs.enable = true;
-  # services.gnome.sushi.enable = true;
+  services.gvfs.enable = true;
+  services.gnome.sushi.enable = true;
+  services.gnome.tracker.enable = true;
+  services.gnome.tracker-miners.enable = true;
 
   services.mpd = {
     enable = true;
@@ -61,18 +63,33 @@
     mode = "0440";
   };
 
-  age.secrets.r2_access_key_id = {
-    file = ../secrets/prismo_r2_access_key_id.age;
+  age.secrets.restic_r2_environment = {
+    file = ../secrets/prismo_restic_r2_environment.age;
     owner = "patrickod";
     group = "wheel";
     mode = "0440";
   };
 
-  age.secrets.r2_secret_access_key = {
-    file = ../secrets/prismo_r2_secret_access_key.age;
-    owner = "patrickod";
-    group = "wheel";
-    mode = "0440";
+  services.restic.backups.home_r2 = {
+    user = "patrickod";
+    s3CredentialsFile = "/run/agenix/restic_r2_environment";
+    repository = "s3:https://e69c83c6e2f046b0a79045a27333ffb4.r2.cloudflarestorage.com/restic";
+    initialize = true;
+    passwordFile = "/run/agenix/restic_backup_password";
+    extraBackupArgs =
+      [ "--exclude-file=/home/patrickod/.restic-backup-exclude" ];
+    paths = [ "/home" ];
+
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
+    };
+    pruneOpts = [
+      "--keep-daily 90"
+      "--keep-weekly 52"
+      "--keep-monthly 60"
+      "--keep-yearly 50"
+    ];
   };
 
   services.restic.backups.home = {

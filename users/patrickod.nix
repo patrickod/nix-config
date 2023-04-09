@@ -3,6 +3,7 @@
 {
   imports = [ ../modules/polkit-allow-mount.nix ];
 
+  programs.zsh.enable = true;
   users.users.patrickod = {
     isNormalUser = true;
     extraGroups = [ "wheel" "libvirtd" "docker" "dialout" "audio" ];
