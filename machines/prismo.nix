@@ -72,7 +72,7 @@
 
   services.restic.backups.home_r2 = {
     user = "patrickod";
-    s3CredentialsFile = "/run/agenix/restic_r2_environment";
+    environmentFile = "/run/agenix/restic_r2_environment";
     repository = "s3:https://e69c83c6e2f046b0a79045a27333ffb4.r2.cloudflarestorage.com/restic";
     initialize = true;
     passwordFile = "/run/agenix/restic_backup_password";
