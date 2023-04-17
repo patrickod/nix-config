@@ -30,6 +30,7 @@
     pkgs.emoji-picker
     pkgs.fd
     pkgs.feh
+    pkgs.firefox
     pkgs.fzf
     pkgs.gdb
     pkgs.gist
@@ -38,7 +39,7 @@
     pkgs.go
     pkgs.google-chrome-beta
     pkgs.htop
-    # pkgs.httpie
+    pkgs.httpie
     pkgs.hub
     pkgs.hwloc
     pkgs.iftop
