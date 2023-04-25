@@ -25,9 +25,8 @@
     pkgs.act
     pkgs.age
     pkgs.cascadia-code
-    # pkgs.discord
-    pkgs.exa
     pkgs.emoji-picker
+    pkgs.exa
     pkgs.fd
     pkgs.feh
     pkgs.firefox
@@ -54,6 +53,8 @@
     pkgs.ncmpcpp
     pkgs.nixfmt
     pkgs.nixpkgs-fmt
+    pkgs.noisetorch
+    pkgs.obsidian
     pkgs.obs-studio
     pkgs.paperwork
     pkgs.patchelf
@@ -65,19 +66,18 @@
     pkgs.restic
     pkgs.rofi-pulse-select
     pkgs.rustup
+    pkgs.rxvt-unicode-plugins.font-size
     pkgs.scrot
     pkgs.signal-desktop
     pkgs.silver-searcher
     pkgs.sops
     pkgs.unzip
-    pkgs.rxvt-unicode-plugins.font-size
     pkgs.vlc
+    pkgs.vscode
     pkgs.weechat
     pkgs.xclip
     pkgs.yarn
     pkgs.zoxide
-    pkgs.vscode
-    pkgs.noisetorch
   ];
 
   services.redshift = {

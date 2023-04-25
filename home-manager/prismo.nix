@@ -23,5 +23,9 @@
   home.file.".ssh/allowed_signers".text =
     "* ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILnVbaP3o6F5ri9NMS+oAoZ6GlEq7h5XRAe9pgGJBnsg patrickod@prismo";
 
+  home.file.".gnupg/gpg-agent.conf".text = ''
+    pinentry-program /run/current-system/sw/bin/pinentry
+  '';
+
 }
 
