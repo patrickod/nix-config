@@ -35,7 +35,6 @@
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     brightnessctl
-    dhcp
     emacs
     git
     hwloc
@@ -66,7 +65,8 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    layout = "dvorak";
+    layout = "us";
+    xkbVariant = "dvorak";
     xkbOptions = "caps:escape";
 
     inputClassSections = [
@@ -148,6 +148,10 @@
 
     # RTL-SDR
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="2832", ENV{ID_SOFTWARE_RADIO}="1", MODE="0660", OWNER="patrickod"
+
+    # 8BitDo Pro 2; Bluetooth; USB
+    SUBSYSTEM=="input", ATTRS{name}=="8BitDo Pro 2", ENV{ID_INPUT_JOYSTICK}="1", TAG+="uaccess", OWNER="patrickod", GROUP="users"
+    SUBSYSTEM=="input", ATTR{id/vendor}=="2dc8", ATTR{id/product}=="6003", ENV{ID_INPUT_JOYSTICK}="1", TAG+="uaccess", OWNER="patrickod", GROUP="users"
   '';
 
 }

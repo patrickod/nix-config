@@ -24,8 +24,10 @@
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.brlaser ];
 
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
-  environment.systemPackages = [ pkgs.pinentry pkgs.xfce.thunar pkgs.nodejs ];
+  environment.systemPackages = with pkgs; [ pinentry xfce.thunar nodejs libimobiledevice ifuse ];
   services.udisks2.enable = true;
   services.gvfs.enable = true;
   services.gnome.sushi.enable = true;
@@ -158,13 +160,22 @@
     fsType = "nfs";
     options = [ "x-systemd.automount" "noauto" ];
   };
+  fileSystems."/mnt/torrents" = {
+    device = "192.168.4.37:/mnt/alexandria/torrents";
+    fsType = "nfs";
+    options = [ "x-systemd.automount" "noauto" ];
+  };
 
   virtualisation.docker.enable = true;
+  xdg.portal.enable = true;
 
   programs.gnupg.agent = {
     enable = true;
   };
-  # services.resolved.enable = true;
+
+  services.usbmuxd.enable = true;
+  services.flatpak.enable = true;
+
 
   system.stateVersion = "22.11"; # Did you read the comment?
 }

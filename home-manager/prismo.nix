@@ -6,7 +6,7 @@
   home.packages = [
     pkgs._1password-gui
     pkgs.zoom-us
-    pkgs.beets
+    # pkgs.beets
     pkgs.kid3
     pkgs.picard
     pkgs.slack
@@ -14,6 +14,8 @@
     pkgs.obs-studio
     pkgs.zeal
     pkgs.gnome.nautilus
+    pkgs.retroarchFull
+    pkgs.xarchiver
   ];
 
   # prismo specific i3 configuration
