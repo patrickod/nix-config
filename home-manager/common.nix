@@ -46,6 +46,7 @@
     pkgs.iotop
     pkgs.jq
     pkgs.keychain
+    pkgs.libreoffice
     pkgs.light
     pkgs.magic-wormhole
     pkgs.maim
