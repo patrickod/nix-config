@@ -26,7 +26,7 @@
     pkgs.age
     pkgs.cascadia-code
     pkgs.emoji-picker
-    pkgs.exa
+    pkgs.eza
     pkgs.fd
     pkgs.feh
     pkgs.firefox
@@ -151,7 +151,7 @@
       export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 
       # use exa instead of ls
-      alias ls="exa"
+      alias ls="eza"
 
       # bump the history size to stop it truncating
       HISTSIZE=500000
