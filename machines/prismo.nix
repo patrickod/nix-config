@@ -24,6 +24,7 @@
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.brlaser ];
 
+  hardware.xpadneo.enable = true;
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
@@ -167,6 +168,7 @@
   };
 
   virtualisation.docker.enable = true;
+  virtualisation.docker.enableNvidia = true;
   xdg.portal.enable = true;
 
   programs.gnupg.agent = {

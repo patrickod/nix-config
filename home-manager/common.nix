@@ -33,7 +33,7 @@
     pkgs.fzf
     pkgs.gdb
     pkgs.gist
-    pkgs.git-history
+    # pkgs.git-history
     pkgs.glslang
     pkgs.go
     pkgs.google-chrome-beta
