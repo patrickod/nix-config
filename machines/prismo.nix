@@ -24,6 +24,7 @@
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.brlaser ];
 
+  hardware.xpadneo.enable = true;
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
