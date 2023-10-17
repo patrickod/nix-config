@@ -24,6 +24,7 @@
   home.packages = [
     pkgs.act
     pkgs.age
+    pkgs.asdf-vm
     pkgs.cascadia-code
     pkgs.emoji-picker
     pkgs.eza
@@ -160,6 +161,8 @@
       setopt appendhistory
       setopt INC_APPEND_HISTORY
       setopt SHARE_HISTORY
+
+      . "$HOME/.nix-profile/share/asdf-vm/asdf.zsh"
     '';
   };
 
