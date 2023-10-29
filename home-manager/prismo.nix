@@ -14,7 +14,7 @@
     pkgs.obs-studio
     pkgs.zeal
     pkgs.gnome.nautilus
-    pkgs.retroarchFull
+    # pkgs.retroarchFull
     pkgs.xarchiver
   ];
 

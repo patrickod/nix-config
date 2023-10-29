@@ -162,11 +162,13 @@
       setopt INC_APPEND_HISTORY
       setopt SHARE_HISTORY
 
-      . "$HOME/.nix-profile/share/asdf-vm/asdf.zsh"
+      . "$HOME/.nix-profile/share/asdf-vm/asdf.sh"
     '';
   };
 
   services.picom.enable = true;
+
+  manual.manpages.enable = false;
 
   programs.kitty = {
     enable = true;
