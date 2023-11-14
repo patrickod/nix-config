@@ -5,7 +5,7 @@
   home.username = "patrickod";
   home.homeDirectory = "/home/patrickod";
   home.sessionVariables = {
-    "BROWSER" = "${pkgs.google-chrome-beta}/bin/google-chrome-beta";
+    "BROWSER" = "${pkgs.google-chrome}/bin/google-chrome";
   };
   home.stateVersion = "22.11";
 
@@ -37,7 +37,7 @@
     # pkgs.git-history
     pkgs.glslang
     pkgs.go
-    pkgs.google-chrome-beta
+    pkgs.google-chrome
     pkgs.htop
     pkgs.httpie
     pkgs.hub
@@ -169,6 +169,8 @@
   services.picom.enable = true;
 
   manual.manpages.enable = false;
+
+  services.darkman.enable = true;
 
   programs.kitty = {
     enable = true;
