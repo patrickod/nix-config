@@ -170,8 +170,6 @@
 
   manual.manpages.enable = false;
 
-  services.darkman.enable = true;
-
   programs.kitty = {
     enable = true;
     font = {
