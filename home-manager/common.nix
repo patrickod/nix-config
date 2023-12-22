@@ -57,7 +57,6 @@
     pkgs.noisetorch
     pkgs.obsidian
     pkgs.obs-studio
-    pkgs.paperwork
     pkgs.patchelf
     pkgs.pavucontrol
     pkgs.pcmanfm
