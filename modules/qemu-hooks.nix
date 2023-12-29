@@ -69,7 +69,8 @@ let
     echo "Released hugepages"
     vfio-isolate restore /tmp/vfio-isolate-undo
   '';
-in {
+in
+{
 
   systemd.services.swtpm = {
     description = "SWTPM implementation for QEMU VM";

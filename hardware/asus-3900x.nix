@@ -56,7 +56,8 @@
   };
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/6791871d-b2cc-482b-b711-3cace57bab08";
+    device = "/dev/prismo-root-vg/root";
+    # device = "/dev/disk/by-uuid/6791871d-b2cc-482b-b711-3cace57bab08";
     fsType = "btrfs";
   };
 

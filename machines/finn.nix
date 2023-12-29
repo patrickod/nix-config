@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ../hardware/x260.nix
     ../modules/defaults.nix
     ../users/patrickod.nix

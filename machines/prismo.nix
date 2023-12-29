@@ -5,7 +5,7 @@
 
   imports = [
     ../hardware/asus-3900x.nix
-    ../modules/remote-luks-unlock.nix
+    # ../modules/remote-luks-unlock.nix
     ../users/patrickod.nix
     ../modules/defaults.nix
   ];
