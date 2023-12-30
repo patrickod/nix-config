@@ -5,7 +5,6 @@
 
   imports = [
     ../hardware/asus-3900x.nix
-    # ../modules/remote-luks-unlock.nix
     ../users/patrickod.nix
     ../modules/defaults.nix
   ];
@@ -156,16 +155,16 @@
     fsType = "nfs";
     options = [ "x-systemd.automount" "noauto" ];
   };
-  fileSystems."/mnt/photos" = {
-    device = "192.168.4.37:/mnt/alexandria/photos";
-    fsType = "nfs";
-    options = [ "x-systemd.automount" "noauto" ];
-  };
-  fileSystems."/mnt/media" = {
-    device = "192.168.4.37:/mnt/alexandria/media";
-    fsType = "nfs";
-    options = [ "x-systemd.automount" "noauto" ];
-  };
+  # fileSystems."/mnt/photos" = {
+  #   device = "192.168.4.37:/mnt/alexandria/photos";
+  #   fsType = "nfs";
+  #   options = [ "x-systemd.automount" "noauto" ];
+  # };
+  # fileSystems."/mnt/media" = {
+  #   device = "192.168.4.37:/mnt/alexandria/media";
+  #   fsType = "nfs";
+  #   options = [ "x-systemd.automount" "noauto" ];
+  # };
   fileSystems."/mnt/torrents" = {
     device = "192.168.4.37:/mnt/alexandria/torrents";
     fsType = "nfs";
