@@ -39,23 +39,23 @@
   services.gnome.tracker.enable = true;
   services.gnome.tracker-miners.enable = true;
 
-  services.mpd = {
-    enable = true;
-    user = "patrickod";
-    musicDirectory = "/mnt/media/audio/beets-export";
-    extraConfig = ''
-      audio_output {
-        type "pipewire"
-        name "pipewire"
-      }
+  # services.mpd = {
+  #   enable = true;
+  #   user = "patrickod";
+  #   musicDirectory = "/mnt/media/audio/beets-export";
+  #   extraConfig = ''
+  #     audio_output {
+  #       type "pipewire"
+  #       name "pipewire"
+  #     }
 
-      # Enable replay gain.
-      replaygain          "track"
-    '';
-  };
+  #     # Enable replay gain.
+  #     replaygain          "track"
+  #   '';
+  # };
 
   ## necessary to resolve permissions issues between MPD & pipewire
-  systemd.services.mpd.environment = { XDG_RUNTIME_DIR = "/run/user/1000"; };
+  # systemd.services.mpd.environment = { XDG_RUNTIME_DIR = "/run/user/1000"; };
 
   services.pipewire = {
     enable = true;
@@ -92,7 +92,7 @@
       Persistent = true;
     };
     pruneOpts = [
-      "--keep-daily 90"
+      "--keep-daily 30"
       "--keep-weekly 52"
       "--keep-monthly 60"
       "--keep-yearly 50"
@@ -101,7 +101,7 @@
 
   services.restic.backups.home = {
     user = "patrickod";
-    repository = "/mnt/backups/prismo/restic";
+    repository = "/mnt/neptr/backups/prismo/restic";
     paths = [ "/home" ];
     initialize = true;
     passwordFile = "/run/agenix/restic_backup_password";
@@ -112,7 +112,6 @@
       Persistent = true;
     };
     pruneOpts = [
-      "--keep-hourly 72"
       "--keep-daily 90"
       "--keep-weekly 52"
       "--keep-monthly 60"
@@ -150,8 +149,14 @@
   programs.steam.enable = true;
 
   # Configure NFS mounts for backups & photos
-  fileSystems."/mnt/backups" = {
-    device = "192.168.4.37:/mnt/alexandria/backups";
+  fileSystems."/mnt/neptr/backups" = {
+    device = "neptr:/neptr/backups";
+    fsType = "nfs";
+    options = [ "x-systemd.automount" "noauto" ];
+  };
+
+  fileSystems."/mnt/neptr/torrents" = {
+    device = "neptr:/neptr/torrents";
     fsType = "nfs";
     options = [ "x-systemd.automount" "noauto" ];
   };
@@ -165,11 +170,6 @@
   #   fsType = "nfs";
   #   options = [ "x-systemd.automount" "noauto" ];
   # };
-  fileSystems."/mnt/torrents" = {
-    device = "192.168.4.37:/mnt/alexandria/torrents";
-    fsType = "nfs";
-    options = [ "x-systemd.automount" "noauto" ];
-  };
 
   virtualisation.docker.enable = true;
   virtualisation.docker.enableNvidia = true;
