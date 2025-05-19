@@ -34,7 +34,6 @@
     pkgs.fzf
     pkgs.gdb
     pkgs.gist
-    # pkgs.git-history
     pkgs.glslang
     pkgs.go
     pkgs.google-chrome
@@ -49,15 +48,9 @@
     pkgs.keychain
     pkgs.light
     pkgs.magic-wormhole
-    pkgs.maim
-    pkgs.mdbook
     pkgs.ncmpcpp
-    pkgs.nixfmt
-    pkgs.nixpkgs-fmt
-    pkgs.noisetorch
     pkgs.obsidian
     pkgs.obs-studio
-    pkgs.patchelf
     pkgs.pavucontrol
     pkgs.pcmanfm
     pkgs.pigz
@@ -65,9 +58,6 @@
     pkgs.rage
     pkgs.restic
     pkgs.rofi-pulse-select
-    pkgs.rustup
-    pkgs.rxvt-unicode-plugins.font-size
-    pkgs.scrot
     pkgs.signal-desktop
     pkgs.silver-searcher
     pkgs.sops
@@ -159,8 +149,6 @@
       setopt appendhistory
       setopt INC_APPEND_HISTORY
       setopt SHARE_HISTORY
-
-      . "$HOME/.nix-profile/share/asdf-vm/asdf.sh"
     '';
   };
 
