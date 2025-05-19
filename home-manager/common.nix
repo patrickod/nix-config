@@ -61,7 +61,7 @@
     pkgs.pavucontrol
     pkgs.pcmanfm
     pkgs.pigz
-    pkgs.probe-run
+    pkgs.probe-rs
     pkgs.rage
     pkgs.restic
     pkgs.rofi-pulse-select

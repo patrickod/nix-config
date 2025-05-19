@@ -13,7 +13,7 @@
     pkgs.discord
     pkgs.obs-studio
     pkgs.zeal
-    pkgs.gnome.nautilus
+    pkgs.nautilus
     # pkgs.retroarchFull
     pkgs.xarchiver
   ];

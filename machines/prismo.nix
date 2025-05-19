@@ -4,7 +4,7 @@
   nixpkgs.overlays = [ (import ../overlays/systemd.nix) ];
 
   imports = [
-    ../hardware/asus-3900x.nix
+    ../hardware/x570-tuf-wifi.nix
     ../users/patrickod.nix
     ../modules/defaults.nix
   ];
@@ -16,16 +16,12 @@
     ensureDatabases = [ "control" ];
     ensureUsers = [{
       name = "patrickod";
-      ensurePermissions = { "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES"; };
     }];
   };
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
-
-  services.printing.enable = true;
-  services.printing.drivers = [ pkgs.brlaser ];
 
   hardware.xone.enable = true;
   hardware.xpadneo.enable = true;
@@ -125,41 +121,42 @@
   # hostname + networking setup
   networking.hostName = "prismo";
   networking.useDHCP = false;
-  networking.interfaces.enp6s0.useDHCP = true;
-  networking.interfaces.enp6s0.wakeOnLan.enable = true;
+  networking.interfaces.en01.useDHCP = true;
 
   # Enable the X11 windowing system.
+  hardware.nvidia.open = true;
   services.xserver = {
     videoDrivers = [ "nvidia" ];
-    monitorSection = ''
-      DisplaySize 598 366
-      Option "PreferredMode" "2560x1440"
-    '';
-    deviceSection = ''
-      Option	"UseEdidDpi" "false"
-    '';
-    screenSection = ''
-      Option         "metamodes" "2560x1440 +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
-      SubSection "Display"
-      Modes "2560x1440"
-      EndSubSection
-    '';
+    # monitorSection = ''
+    #   DisplaySize 598 366
+    #   Option "PreferredMode" "2560x1440"
+    # '';
+    # deviceSection = ''
+    #   Option	"UseEdidDpi" "false"
+    # '';
+    # screenSection = ''
+    #   Option         "metamodes" "2560x1440 +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
+    #   SubSection "Display"
+    #   Modes "2560x1440"
+    #   EndSubSection
+    # '';
   };
 
   programs.steam.enable = true;
 
-  # Configure NFS mounts for backups & photos
-  fileSystems."/mnt/neptr/backups" = {
-    device = "neptr:/neptr/backups";
-    fsType = "nfs";
-    options = [ "x-systemd.automount" "noauto" ];
-  };
+  # # Configure NFS mounts for backups & photos
+  # fileSystems."/mnt/neptr/backups" = {
+  #   device = "neptr:/neptr/backups";
+  #   fsType = "nfs";
+  #   options = [ "x-systemd.automount" "noauto" ];
+  # };
 
-  fileSystems."/mnt/neptr/torrents" = {
-    device = "neptr:/neptr/torrents";
-    fsType = "nfs";
-    options = [ "x-systemd.automount" "noauto" ];
-  };
+  # fileSystems."/mnt/neptr/torrents" = {
+  #   device = "neptr:/neptr/torrents";
+  #   fsType = "nfs";
+  #   options = [ "x-systemd.automount" "noauto" ];
+  # };
+  #
   # fileSystems."/mnt/photos" = {
   #   device = "192.168.4.37:/mnt/alexandria/photos";
   #   fsType = "nfs";
