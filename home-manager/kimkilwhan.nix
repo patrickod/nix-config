@@ -2,7 +2,7 @@
 
 {
   imports = [ ./common.nix ../modules/home-manager/restic ];
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = ''
     # pyenv initialization
     export PATH="$HOME/.pyenv/bin:$PATH"
     eval "$(pyenv init --path)"

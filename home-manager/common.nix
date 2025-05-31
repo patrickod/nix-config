@@ -24,7 +24,7 @@
   home.packages = [
     pkgs.act
     pkgs.age
-    pkgs.asdf-vm
+    pkgs.mise
     pkgs.cascadia-code
     pkgs.emoji-picker
     pkgs.eza
@@ -47,15 +47,14 @@
     pkgs.jq
     pkgs.keychain
     pkgs.light
-    pkgs.magic-wormhole
     pkgs.ncmpcpp
     pkgs.obsidian
     pkgs.obs-studio
     pkgs.pavucontrol
     pkgs.pcmanfm
     pkgs.pigz
-    pkgs.probe-rs
     pkgs.rage
+    pkgs.ripgrep
     pkgs.restic
     pkgs.rofi-pulse-select
     pkgs.signal-desktop
@@ -129,7 +128,7 @@
       theme = "dieter";
       plugins = [ "git" "fzf" "zoxide" "1password" "dotenv" ];
     };
-    initExtra = ''
+    initContent = ''
       export TERM=xterm-256color
       eval `keychain --eval id_ed25519`
 

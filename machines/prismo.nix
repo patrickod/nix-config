@@ -4,6 +4,7 @@
   nixpkgs.overlays = [ (import ../overlays/systemd.nix) ];
 
   imports = [
+    # ../hardware/asus-3900x.nix
     ../hardware/x570-tuf-wifi.nix
     ../users/patrickod.nix
     ../modules/defaults.nix
@@ -16,6 +17,7 @@
     ensureDatabases = [ "control" ];
     ensureUsers = [{
       name = "patrickod";
+      # ensurePermissions = { "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES"; };
     }];
   };
 
@@ -121,7 +123,7 @@
   # hostname + networking setup
   networking.hostName = "prismo";
   networking.useDHCP = false;
-  networking.interfaces.en01.useDHCP = true;
+  networking.interfaces.eno1.useDHCP = true;
 
   # Enable the X11 windowing system.
   hardware.nvidia.open = true;

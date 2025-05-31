@@ -9,7 +9,7 @@ player = "mpd"
 
 [[block]]
 block = "nvidia_gpu"
-format = "$icon RTX 3090 $utilization $temperature $clocks "
+format = "$icon RTX 5080 $utilization $temperature $clocks "
 
 [[block]]
 block = "net"
