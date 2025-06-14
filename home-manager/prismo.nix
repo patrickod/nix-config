@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [ ./common.nix ];
 
   home.packages = [
+    pkgs._1password-cli
     pkgs._1password-gui
     pkgs.zoom-us
     # pkgs.beets

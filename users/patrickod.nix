@@ -152,6 +152,9 @@
     # 8BitDo Pro 2; Bluetooth; USB
     SUBSYSTEM=="input", ATTRS{name}=="8BitDo Pro 2", ENV{ID_INPUT_JOYSTICK}="1", TAG+="uaccess", OWNER="patrickod", GROUP="users"
     SUBSYSTEM=="input", ATTR{id/vendor}=="2dc8", ATTR{id/product}=="6003", ENV{ID_INPUT_JOYSTICK}="1", TAG+="uaccess", OWNER="patrickod", GROUP="users"
+
+    # Tigard (FT2232H)
+    SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6010", MODE="0666", GROUP="dialout"
   '';
 
 }

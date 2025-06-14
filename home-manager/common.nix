@@ -24,7 +24,6 @@
   home.packages = [
     pkgs.act
     pkgs.age
-    pkgs.mise
     pkgs.cascadia-code
     pkgs.emoji-picker
     pkgs.eza
@@ -32,10 +31,14 @@
     pkgs.feh
     pkgs.firefox
     pkgs.fzf
+    pkgs.claude-code
     pkgs.gdb
+    pkgs.ghidra
+    pkgs.ghostty
     pkgs.gist
     pkgs.glslang
     pkgs.go
+    pkgs.gokrazy
     pkgs.google-chrome
     pkgs.htop
     pkgs.httpie
@@ -47,6 +50,7 @@
     pkgs.jq
     pkgs.keychain
     pkgs.light
+    pkgs.mise
     pkgs.ncmpcpp
     pkgs.obsidian
     pkgs.obs-studio
@@ -54,11 +58,12 @@
     pkgs.pcmanfm
     pkgs.pigz
     pkgs.rage
-    pkgs.ripgrep
     pkgs.restic
+    pkgs.ripgrep
     pkgs.rofi-pulse-select
     pkgs.signal-desktop
     pkgs.silver-searcher
+    pkgs.screen
     pkgs.sops
     pkgs.unzip
     pkgs.vlc
