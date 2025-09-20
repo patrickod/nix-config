@@ -28,7 +28,15 @@
   hardware.xone.enable = true;
   hardware.xpadneo.enable = true;
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
+
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
 
   environment.systemPackages = with pkgs; [ pinentry xfce.thunar nodejs libimobiledevice ifuse ];
   services.udisks2.enable = true;
